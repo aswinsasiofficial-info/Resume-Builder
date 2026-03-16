@@ -1,0 +1,436 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Profile - Resume Builder</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Google Fonts - Datatype -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Datatype:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body,
+        html {
+            font-family: 'Datatype', sans-serif;
+        }
+
+        .profile-page {
+            min-height: 100vh;
+            background-image: url("{% static 'img/bg.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        /* Navbar */
+        .navbar {
+            padding: 20px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .nav-right {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-right a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .btn-nav {
+            padding: 10px 24px;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-nav:hover {
+            background: rgba(255, 255, 255, 0.25);
+            color: #fff;
+        }
+
+        .profile-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 40px 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page-title {
+            color: #fff;
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
+
+        /* Profile Grid */
+        .profile-grid {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 30px;
+        }
+
+        /* Sidebar */
+        .profile-sidebar {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 16px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            height: fit-content;
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 700;
+            font-size: 48px;
+            margin: 0 auto 20px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .profile-name {
+            color: #fff;
+            font-size: 22px;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 5px;
+        }
+
+        .profile-email {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-menu {
+            list-style: none;
+            padding: 0;
+        }
+
+        .profile-menu li {
+            margin-bottom: 10px;
+        }
+
+        .profile-menu a {
+            display: block;
+            padding: 12px 16px;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .profile-menu a:hover,
+        .profile-menu a.active {
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+        }
+
+        /* Content Cards */
+        .content-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 16px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 30px;
+        }
+
+        .card-title {
+            color: #fff;
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .form-control {
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            width: 100%;
+            font-family: 'Datatype', sans-serif;
+        }
+
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .form-control:focus {
+            border-color: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+            outline: none;
+        }
+
+        .btn-primary {
+            padding: 12px 30px;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Datatype', sans-serif;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-danger {
+            padding: 12px 30px;
+            border-radius: 50px;
+            background: rgba(220, 53, 69, 0.8);
+            color: #fff;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Datatype', sans-serif;
+        }
+
+        .btn-danger:hover {
+            background: rgba(220, 53, 69, 1);
+            transform: translateY(-2px);
+        }
+
+        .alert {
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-bottom: 20px;
+        }
+
+        .alert-success {
+            background: rgba(40, 167, 69, 0.2);
+            border: 1px solid rgba(40, 167, 69, 0.3);
+            color: #fff;
+        }
+
+        .alert-error {
+            background: rgba(220, 53, 69, 0.2);
+            border: 1px solid rgba(220, 53, 69, 0.3);
+            color: #fff;
+        }
+
+        .text-muted-custom {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .profile-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .navbar {
+                padding: 20px 30px;
+            }
+
+            .main-content {
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="profile-page">
+        <!-- Navbar -->
+        <nav class="navbar">
+            <a href="{% url 'home' %}" class="logo">Resume Builder</a>
+            <div class="nav-right">
+                <a href="{% url 'home' %}">Templates</a>
+                <a href="{% url 'builder' %}">Builder</a>
+                <a href="{% url 'profile' %}">
+                    <div class="profile-icon">{{ request.user.first_name|first|upper }}{{
+                        request.user.last_name|first|upper }}</div>
+                </a>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <h1 class="page-title">Profile Settings</h1>
+
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+            {% endif %}
+
+            <div class="profile-grid">
+                <!-- Sidebar -->
+                <div class="profile-sidebar">
+                    <div class="profile-avatar">{{ request.user.first_name|first|upper }}{{
+                        request.user.last_name|first|upper }}</div>
+                    <div class="profile-name">{{ request.user.get_full_name|default:request.user.username }}</div>
+                    <div class="profile-email">{{ request.user.email }}</div>
+
+                    <ul class="profile-menu">
+                        <li><a href="#personal" class="active">Personal Information</a></li>
+                        <li><a href="#security">Login & Security</a></li>
+                        <li><a href="#danger">Delete Account</a></li>
+                    </ul>
+                </div>
+
+                <!-- Content -->
+                <div class="profile-content">
+                    <!-- Personal Information -->
+                    <div id="personal" class="content-card">
+                        <h2 class="card-title">Personal Information</h2>
+                        <form method="post" action="{% url 'profile' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="action" value="update_profile">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label">First Name</label>
+                                        <input type="text" class="form-control" name="first_name"
+                                            value="{{ request.user.first_name }}" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label">Last Name</label>
+                                        <input type="text" class="form-control" name="last_name"
+                                            value="{{ request.user.last_name }}" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Email Address</label>
+                                <input type="email" class="form-control" value="{{ request.user.email }}" disabled>
+                                <small class="text-muted-custom">Email cannot be changed</small>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Mobile Number</label>
+                                <input type="tel" class="form-control" name="mobile" value="{{ mobile|default:'' }}"
+                                    placeholder="Enter your mobile number">
+                            </div>
+                            <button type="submit" class="btn-primary">Save Changes</button>
+                        </form>
+                    </div>
+
+                    <!-- Login & Security -->
+                    <div id="security" class="content-card">
+                        <h2 class="card-title">Login & Security</h2>
+                        <form method="post" action="{% url 'profile' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="action" value="change_password">
+                            <div class="form-group">
+                                <label class="form-label">Current Password</label>
+                                <input type="password" class="form-control" name="current_password"
+                                    placeholder="Enter current password" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">New Password</label>
+                                <input type="password" class="form-control" name="new_password"
+                                    placeholder="Enter new password" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Confirm New Password</label>
+                                <input type="password" class="form-control" name="confirm_password"
+                                    placeholder="Confirm new password" required>
+                            </div>
+                            <button type="submit" class="btn-primary">Change Password</button>
+                        </form>
+                    </div>
+
+                    <!-- Delete Account -->
+                    <div id="danger" class="content-card">
+                        <h2 class="card-title" style="color: #ff6b6b;">Delete Account</h2>
+                        <p style="color: rgba(255,255,255,0.8); margin-bottom: 20px;">
+                            Once you delete your account, there is no going back. Please be certain.
+                        </p>
+                        <form method="post" action="{% url 'profile' %}"
+                            onsubmit="return confirm('Are you sure you want to delete your account? This action cannot be undone.');">
+                            {% csrf_token %}
+                            <input type="hidden" name="action" value="delete_account">
+                            <div class="form-group">
+                                <label class="form-label">Enter your password to confirm</label>
+                                <input type="password" class="form-control" name="password"
+                                    placeholder="Enter your password" required>
+                            </div>
+                            <button type="submit" class="btn-danger">Delete My Account</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

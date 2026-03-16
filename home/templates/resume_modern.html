@@ -1,0 +1,489 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Generated Resume - Modern</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f3f4f6;
+            font-family: 'Inter', Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .resume-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .resume-sheet {
+            background: #ffffff;
+            color: #1a1a1a;
+            display: flex;
+            min-height: 1100px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 35%;
+            background: #2d3748;
+            color: #ffffff;
+            padding: 40px 30px;
+        }
+
+        .main-content {
+            width: 65%;
+            padding: 40px;
+        }
+
+        /* Sidebar Content */
+        .profile-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .profile-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 48px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .sidebar h1 {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 0 0 8px 0;
+            letter-spacing: 1px;
+        }
+
+        .sidebar .job-title {
+            font-size: 14px;
+            color: #a0aec0;
+            margin-bottom: 25px;
+        }
+
+        .sidebar-section {
+            margin-bottom: 30px;
+        }
+
+        .sidebar-title {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #667eea;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #667eea;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .contact-icon {
+            width: 20px;
+            margin-right: 10px;
+            color: #667eea;
+        }
+
+        .skill-tag {
+            display: inline-block;
+            background: rgba(102, 126, 234, 0.2);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin: 3px;
+        }
+
+        .language-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 13px;
+        }
+
+        .language-level {
+            color: #a0aec0;
+        }
+
+        /* Main Content */
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .section-icon {
+            width: 36px;
+            height: 36px;
+            background: #667eea;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            color: #fff;
+            font-size: 16px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #2d3748;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .experience-item,
+        .education-item,
+        .project-item {
+            margin-bottom: 25px;
+            padding-left: 15px;
+            border-left: 3px solid #e2e8f0;
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+
+        .item-title {
+            font-weight: 600;
+            font-size: 15px;
+            color: #2d3748;
+        }
+
+        .item-date {
+            font-size: 12px;
+            color: #667eea;
+            font-weight: 500;
+            background: rgba(102, 126, 234, 0.1);
+            padding: 3px 10px;
+            border-radius: 12px;
+        }
+
+        .item-subtitle {
+            font-size: 13px;
+            color: #718096;
+            margin-bottom: 8px;
+        }
+
+        .item-description {
+            font-size: 13px;
+            line-height: 1.6;
+            color: #4a5568;
+        }
+
+        .summary-text {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #4a5568;
+        }
+
+        /* DOWNLOAD BUTTON */
+        .download-btn-container {
+            text-align: center;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+
+        .download-btn {
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            border: none;
+            background: #667eea;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .download-btn:hover {
+            background: #5a67d8;
+        }
+
+        @media print {
+            body {
+                background: none;
+                padding: 0;
+            }
+
+            .resume-sheet {
+                box-shadow: none;
+            }
+
+            .download-btn-container {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="resume-wrapper">
+        <div id="mn" class="resume-sheet">
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="profile-section">
+                    <div class="profile-image">{{ name|default:"JD"|slice:":2"|upper }}</div>
+                    <h1>{{ name|default:"John Doe" }}</h1>
+                    <div class="job-title">{{ title|default:"Professional Title" }}</div>
+                </div>
+
+                <!-- Contact -->
+                <div class="sidebar-section">
+                    <div class="sidebar-title">Contact</div>
+                    {% if phone %}
+                    <div class="contact-item">
+                        <span class="contact-icon">📱</span>
+                        <span>{{ phone }}</span>
+                    </div>
+                    {% endif %}
+                    {% if email %}
+                    <div class="contact-item">
+                        <span class="contact-icon">✉️</span>
+                        <span>{{ email }}</span>
+                    </div>
+                    {% endif %}
+                    {% if location %}
+                    <div class="contact-item">
+                        <span class="contact-icon">📍</span>
+                        <span>{{ location }}</span>
+                    </div>
+                    {% endif %}
+                    {% if linkedin %}
+                    <div class="contact-item">
+                        <span class="contact-icon">💼</span>
+                        <span>{{ linkedin }}</span>
+                    </div>
+                    {% endif %}
+                    {% if github %}
+                    <div class="contact-item">
+                        <span class="contact-icon">💻</span>
+                        <span>{{ github }}</span>
+                    </div>
+                    {% endif %}
+                    {% if portfolio %}
+                    <div class="contact-item">
+                        <span class="contact-icon">🌐</span>
+                        <span>{{ portfolio }}</span>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <!-- Skills -->
+                {% if prog_langs or frameworks or databases or dev_tools or web_tech %}
+                <div class="sidebar-section">
+                    <div class="sidebar-title">Skills</div>
+                    {% if prog_langs %}
+                    {% for skill in prog_langs.split %}
+                    <span class="skill-tag">{{ skill|cut:"," }}</span>
+                    {% endfor %}
+                    {% endif %}
+                    {% if frameworks %}
+                    {% for skill in frameworks.split %}
+                    <span class="skill-tag">{{ skill|cut:"," }}</span>
+                    {% endfor %}
+                    {% endif %}
+                    {% if databases %}
+                    {% for skill in databases.split %}
+                    <span class="skill-tag">{{ skill|cut:"," }}</span>
+                    {% endfor %}
+                    {% endif %}
+                    {% if dev_tools %}
+                    {% for skill in dev_tools.split %}
+                    <span class="skill-tag">{{ skill|cut:"," }}</span>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+                {% endif %}
+
+                <!-- Languages -->
+                {% if languages %}
+                <div class="sidebar-section">
+                    <div class="sidebar-title">Languages</div>
+                    {% for lang in languages.splitlines %}
+                    {% if lang.strip %}
+                    <div class="language-item">
+                        <span>{{ lang|cut:"-"|cut:":"|truncatewords:1 }}</span>
+                        <span class="language-level">{{ lang|cut:"-"|cut:":"|slice:"2:" }}</span>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                <!-- Certifications -->
+                {% if certifications %}
+                <div class="sidebar-section">
+                    <div class="sidebar-title">Certifications</div>
+                    {% for cert in certifications.splitlines %}
+                    {% if cert.strip %}
+                    <div class="contact-item" style="margin-bottom: 8px;">
+                        <span style="color: #667eea; margin-right: 8px;">✓</span>
+                        <span style="font-size: 12px;">{{ cert|cut:"-"|cut:"•" }}</span>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Main Content -->
+            <div class="main-content">
+                <!-- Summary -->
+                {% if about %}
+                <div class="section">
+                    <div class="section-header">
+                        <div class="section-icon">👤</div>
+                        <div class="section-title">Profile</div>
+                    </div>
+                    <p class="summary-text">{{ about }}</p>
+                </div>
+                {% endif %}
+
+                <!-- Experience -->
+                {% if company1 or post1 %}
+                <div class="section">
+                    <div class="section-header">
+                        <div class="section-icon">💼</div>
+                        <div class="section-title">Experience</div>
+                    </div>
+                    <div class="experience-item">
+                        <div class="item-header">
+                            <div class="item-title">{{ post1|default:"Position" }}</div>
+                            <div class="item-date">{{ duration1|default:"Date" }}</div>
+                        </div>
+                        <div class="item-subtitle">{{ company1|default:"Company" }}</div>
+                        {% if lin11 %}<p class="item-description">{{ lin11|linebreaksbr }}</p>{% endif %}
+                    </div>
+                    {% if company2 %}
+                    <div class="experience-item">
+                        <div class="item-header">
+                            <div class="item-title">{{ post2|default:"Position" }}</div>
+                            <div class="item-date">{{ duration2|default:"Date" }}</div>
+                        </div>
+                        <div class="item-subtitle">{{ company2 }}</div>
+                        {% if lin21 %}<p class="item-description">{{ lin21|linebreaksbr }}</p>{% endif %}
+                    </div>
+                    {% endif %}
+                </div>
+                {% endif %}
+
+                <!-- Projects -->
+                {% if project1 %}
+                <div class="section">
+                    <div class="section-header">
+                        <div class="section-icon">🚀</div>
+                        <div class="section-title">Projects</div>
+                    </div>
+                    <div class="project-item">
+                        <div class="item-header">
+                            <div class="item-title">{{ project1 }}</div>
+                            <div class="item-date">{{ durat1|default:"" }}</div>
+                        </div>
+                        {% if desc1 %}<p class="item-description">{{ desc1|linebreaksbr }}</p>{% endif %}
+                        {% if project_url1 %}
+                        <p style="font-size: 12px; color: #667eea; margin-top: 5px;">🔗 {{ project_url1 }}</p>
+                        {% endif %}
+                    </div>
+                    {% if project2 %}
+                    <div class="project-item">
+                        <div class="item-header">
+                            <div class="item-title">{{ project2 }}</div>
+                            <div class="item-date">{{ durat2|default:"" }}</div>
+                        </div>
+                        {% if desc2 %}<p class="item-description">{{ desc2|linebreaksbr }}</p>{% endif %}
+                        {% if project_url2 %}
+                        <p style="font-size: 12px; color: #667eea; margin-top: 5px;">🔗 {{ project_url2 }}</p>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                </div>
+                {% endif %}
+
+                <!-- Education -->
+                {% if degree1 or college1 %}
+                <div class="section">
+                    <div class="section-header">
+                        <div class="section-icon">🎓</div>
+                        <div class="section-title">Education</div>
+                    </div>
+                    <div class="education-item">
+                        <div class="item-header">
+                            <div class="item-title">{{ degree1|default:"Degree" }}</div>
+                            <div class="item-date">{{ year1|default:"" }}</div>
+                        </div>
+                        <div class="item-subtitle">{{ college1|default:"Institution" }}</div>
+                        {% if gpa1 %}<p class="item-description">GPA: {{ gpa1 }}</p>{% endif %}
+                    </div>
+                    {% if degree2 %}
+                    <div class="education-item">
+                        <div class="item-header">
+                            <div class="item-title">{{ degree2 }}</div>
+                            <div class="item-date">{{ year2|default:"" }}</div>
+                        </div>
+                        <div class="item-subtitle">{{ college2 }}</div>
+                        {% if gpa2 %}<p class="item-description">GPA: {{ gpa2 }}</p>{% endif %}
+                    </div>
+                    {% endif %}
+                </div>
+                {% endif %}
+
+                <!-- Interests -->
+                {% if interests %}
+                <div class="section">
+                    <div class="section-header">
+                        <div class="section-icon">⭐</div>
+                        <div class="section-title">Interests</div>
+                    </div>
+                    <p class="item-description">{{ interests }}</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="download-btn-container">
+            <button onclick="generatePDF('mn')" class="download-btn">Download PDF</button>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+    <script>
+        function generatePDF(containerId) {
+            const element = document.getElementById(containerId);
+            const name = document.querySelector('.sidebar h1')?.textContent?.trim() || 'Resume';
+            html2pdf().from(element).set({
+                margin: 0,
+                filename: name.replace(/\s+/g, '_') + '_Resume.pdf',
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            }).save();
+        }
+    </script>
+</body>
+
+</html>

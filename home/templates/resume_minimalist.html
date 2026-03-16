@@ -1,0 +1,431 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Generated Resume - Minimalist</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            background-color: #f3f4f6;
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .resume-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .resume-sheet {
+            background: #ffffff;
+            color: #2c3e50;
+            padding: 60px 70px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Header */
+        .resume-header {
+            text-align: left;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .resume-header h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 42px;
+            font-weight: 400;
+            margin: 0 0 10px 0;
+            color: #1a1a1a;
+            letter-spacing: 2px;
+        }
+
+        .resume-header .subtitle {
+            font-size: 14px;
+            font-weight: 300;
+            color: #7f8c8d;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .contact-line {
+            font-size: 12px;
+            color: #95a5a6;
+            letter-spacing: 1px;
+        }
+
+        .contact-line span {
+            margin-right: 20px;
+        }
+
+        /* Sections */
+        .section {
+            margin-bottom: 35px;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #1a1a1a;
+            display: inline-block;
+        }
+
+        .summary {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 16px;
+            line-height: 1.8;
+            color: #555;
+            font-style: italic;
+        }
+
+        /* Items */
+        .item {
+            margin-bottom: 25px;
+        }
+
+        .item:last-child {
+            margin-bottom: 0;
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 6px;
+        }
+
+        .item-title {
+            font-size: 14px;
+            font-weight: 500;
+            color: #1a1a1a;
+            letter-spacing: 1px;
+        }
+
+        .item-date {
+            font-size: 11px;
+            color: #95a5a6;
+            font-weight: 300;
+        }
+
+        .item-subtitle {
+            font-size: 12px;
+            color: #7f8c8d;
+            font-weight: 400;
+            margin-bottom: 8px;
+            font-style: italic;
+        }
+
+        .item-description {
+            font-size: 13px;
+            line-height: 1.7;
+            color: #555;
+        }
+
+        /* Skills */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .skill-category {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .skill-category-title {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+        }
+
+        .skill-list {
+            font-size: 13px;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        /* Two Column Layout */
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        /* References */
+        .reference {
+            font-size: 12px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .reference-name {
+            font-weight: 500;
+            color: #1a1a1a;
+        }
+
+        /* DOWNLOAD BUTTON */
+        .download-btn-container {
+            text-align: center;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+
+        .download-btn {
+            padding: 12px 30px;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 0;
+            border: 1px solid #1a1a1a;
+            background: transparent;
+            color: #1a1a1a;
+            cursor: pointer;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.3s;
+        }
+
+        .download-btn:hover {
+            background: #1a1a1a;
+            color: #fff;
+        }
+
+        @media print {
+            body {
+                background: none;
+                padding: 0;
+            }
+
+            .resume-sheet {
+                box-shadow: none;
+                padding: 40px;
+            }
+
+            .download-btn-container {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="resume-wrapper">
+        <div id="mn" class="resume-sheet">
+            <!-- Header -->
+            <div class="resume-header">
+                <h1>{{ name|default:"Your Name" }}</h1>
+                <div class="subtitle">{{ title|default:"Professional Title" }}</div>
+                <div class="contact-line">
+                    {% if email %}<span>{{ email }}</span>{% endif %}
+                    {% if phone %}<span>{{ phone }}</span>{% endif %}
+                    {% if location %}<span>{{ location }}</span>{% endif %}
+                    {% if linkedin %}<span>{{ linkedin }}</span>{% endif %}
+                </div>
+            </div>
+
+            <!-- Summary -->
+            {% if about %}
+            <div class="section">
+                <div class="section-title">About</div>
+                <p class="summary">{{ about }}</p>
+            </div>
+            {% endif %}
+
+            <!-- Experience -->
+            {% if company1 or post1 %}
+            <div class="section">
+                <div class="section-title">Experience</div>
+                <div class="item">
+                    <div class="item-header">
+                        <div class="item-title">{{ post1|default:"Position" }}</div>
+                        <div class="item-date">{{ duration1|default:"" }}</div>
+                    </div>
+                    <div class="item-subtitle">{{ company1|default:"Company" }}</div>
+                    {% if lin11 %}<p class="item-description">{{ lin11|linebreaksbr }}</p>{% endif %}
+                </div>
+                {% if company2 %}
+                <div class="item">
+                    <div class="item-header">
+                        <div class="item-title">{{ post2|default:"Position" }}</div>
+                        <div class="item-date">{{ duration2|default:"" }}</div>
+                    </div>
+                    <div class="item-subtitle">{{ company2 }}</div>
+                    {% if lin21 %}<p class="item-description">{{ lin21|linebreaksbr }}</p>{% endif %}
+                </div>
+                {% endif %}
+                {% if company3 %}
+                <div class="item">
+                    <div class="item-header">
+                        <div class="item-title">{{ post3|default:"Position" }}</div>
+                        <div class="item-date">{{ duration3|default:"" }}</div>
+                    </div>
+                    <div class="item-subtitle">{{ company3 }}</div>
+                    {% if lin31 %}<p class="item-description">{{ lin31|linebreaksbr }}</p>{% endif %}
+                </div>
+                {% endif %}
+            </div>
+            {% endif %}
+
+            <!-- Education -->
+            {% if degree1 or college1 %}
+            <div class="section">
+                <div class="section-title">Education</div>
+                <div class="item">
+                    <div class="item-header">
+                        <div class="item-title">{{ degree1|default:"Degree" }}</div>
+                        <div class="item-date">{{ year1|default:"" }}</div>
+                    </div>
+                    <div class="item-subtitle">{{ college1|default:"Institution" }}{% if gpa1 %} — GPA: {{ gpa1 }}{%
+                        endif %}</div>
+                    {% if honors1 %}<p class="item-description">{{ honors1 }}</p>{% endif %}
+                </div>
+                {% if degree2 %}
+                <div class="item">
+                    <div class="item-header">
+                        <div class="item-title">{{ degree2 }}</div>
+                        <div class="item-date">{{ year2|default:"" }}</div>
+                    </div>
+                    <div class="item-subtitle">{{ college2 }}{% if gpa2 %} — GPA: {{ gpa2 }}{% endif %}</div>
+                    {% if honors2 %}<p class="item-description">{{ honors2 }}</p>{% endif %}
+                </div>
+                {% endif %}
+            </div>
+            {% endif %}
+
+            <!-- Projects -->
+            {% if project1 %}
+            <div class="section">
+                <div class="section-title">Selected Projects</div>
+                <div class="item">
+                    <div class="item-header">
+                        <div class="item-title">{{ project1 }}</div>
+                        <div class="item-date">{{ durat1|default:"" }}</div>
+                    </div>
+                    {% if desc1 %}<p class="item-description">{{ desc1|linebreaksbr }}</p>{% endif %}
+                </div>
+                {% if project2 %}
+                <div class="item">
+                    <div class="item-header">
+                        <div class="item-title">{{ project2 }}</div>
+                        <div class="item-date">{{ durat2|default:"" }}</div>
+                    </div>
+                    {% if desc2 %}<p class="item-description">{{ desc2|linebreaksbr }}</p>{% endif %}
+                </div>
+                {% endif %}
+            </div>
+            {% endif %}
+
+            <!-- Skills -->
+            {% if prog_langs or frameworks or databases or dev_tools %}
+            <div class="section">
+                <div class="section-title">Skills</div>
+                <div class="skills-container">
+                    {% if prog_langs %}
+                    <div class="skill-category">
+                        <div class="skill-category-title">Languages</div>
+                        <div class="skill-list">{{ prog_langs }}</div>
+                    </div>
+                    {% endif %}
+                    {% if frameworks %}
+                    <div class="skill-category">
+                        <div class="skill-category-title">Frameworks</div>
+                        <div class="skill-list">{{ frameworks }}</div>
+                    </div>
+                    {% endif %}
+                    {% if databases %}
+                    <div class="skill-category">
+                        <div class="skill-category-title">Databases</div>
+                        <div class="skill-list">{{ databases }}</div>
+                    </div>
+                    {% endif %}
+                    {% if dev_tools %}
+                    <div class="skill-category">
+                        <div class="skill-category-title">Tools</div>
+                        <div class="skill-list">{{ dev_tools }}</div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Two Column: Languages & Interests -->
+            {% if languages or interests %}
+            <div class="section">
+                <div class="two-column">
+                    {% if languages %}
+                    <div>
+                        <div class="section-title">Languages</div>
+                        <p class="item-description">{{ languages }}</p>
+                    </div>
+                    {% endif %}
+                    {% if interests %}
+                    <div>
+                        <div class="section-title">Interests</div>
+                        <p class="item-description">{{ interests }}</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- References -->
+            {% if reference_name1 %}
+            <div class="section">
+                <div class="section-title">References</div>
+                <div class="two-column">
+                    <div class="reference">
+                        <div class="reference-name">{{ reference_name1 }}</div>
+                        {% if reference_title1 %}<div>{{ reference_title1 }}</div>{% endif %}
+                        {% if reference_contact1 %}<div style="color: #7f8c8d;">{{ reference_contact1 }}</div>{% endif
+                        %}
+                    </div>
+                    {% if reference_name2 %}
+                    <div class="reference">
+                        <div class="reference-name">{{ reference_name2 }}</div>
+                        {% if reference_title2 %}<div>{{ reference_title2 }}</div>{% endif %}
+                        {% if reference_contact2 %}<div style="color: #7f8c8d;">{{ reference_contact2 }}</div>{% endif
+                        %}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="download-btn-container">
+            <button onclick="generatePDF('mn')" class="download-btn">Download PDF</button>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+    <script>
+        function generatePDF(containerId) {
+            const element = document.getElementById(containerId);
+            const name = document.querySelector('.resume-header h1')?.textContent?.trim() || 'Resume';
+            html2pdf().from(element).set({
+                margin: 10,
+                filename: name.replace(/\s+/g, '_') + '_Resume.pdf',
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            }).save();
+        }
+    </script>
+</body>
+
+</html>

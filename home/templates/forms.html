@@ -16,8 +16,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static '\css\style.css' %}">
     <style>
-        body,
-        html {
+        body, html {
             font-family: 'Datatype', sans-serif;
         }
 
@@ -99,7 +98,7 @@
 
         .templates-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
         }
 
@@ -123,21 +122,21 @@
             display: none;
         }
 
-        .template-box input:checked+.template-preview {
+        .template-box input:checked + .template-preview {
             border-color: #667eea;
         }
 
-        .template-box input:checked~.selected-indicator {
+        .template-box input:checked ~ .selected-indicator {
             opacity: 1;
             transform: translateY(0);
         }
 
-        .template-box input:checked~.template-info {
+        .template-box input:checked ~ .template-info {
             background: rgba(102, 126, 234, 0.1);
         }
 
         .template-preview {
-            height: 160px;
+            height: 140px;
             background: #fff;
             border: 3px solid transparent;
             border-radius: 14px 14px 0 0;
@@ -150,259 +149,56 @@
         .preview-header-classic {
             background: #2c3e50;
             color: #fff;
-            padding: 20px;
+            padding: 15px;
             text-align: center;
         }
-
-        .ph-name {
-            font-size: 14px;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-
-        .ph-title {
-            font-size: 9px;
-            opacity: 0.8;
-            margin-top: 3px;
-        }
-
-        .ph-line {
-            height: 8px;
-            background: #ecf0f1;
-            margin: 15px 20px;
-            border-radius: 2px;
-        }
-
-        .ph-line.short {
-            width: 60%;
-        }
-
-        .ph-section-title {
-            font-size: 9px;
-            font-weight: bold;
-            margin: 15px 20px 8px;
-            color: #2c3e50;
-            border-bottom: 1px solid #2c3e50;
-            padding-bottom: 3px;
-        }
-
-        .ph-box {
-            height: 30px;
-            background: #ecf0f1;
-            margin: 0 20px;
-            border-radius: 2px;
-        }
+        .ph-name { font-size: 12px; font-weight: bold; letter-spacing: 1px; }
+        .ph-title { font-size: 8px; opacity: 0.8; margin-top: 2px; }
+        .ph-line { height: 6px; background: #ecf0f1; margin: 10px 15px; border-radius: 2px; }
+        .ph-line.short { width: 60%; }
+        .ph-section-title { font-size: 8px; font-weight: bold; margin: 10px 15px 5px; color: #2c3e50; border-bottom: 1px solid #2c3e50; padding-bottom: 2px; }
+        .ph-box { height: 25px; background: #ecf0f1; margin: 0 15px; border-radius: 2px; }
 
         /* Modern Preview */
-        .preview-layout-modern {
-            display: flex;
-            height: 100%;
-        }
-
-        .pm-sidebar {
-            width: 35%;
-            background: #34495e;
-            height: 100%;
-        }
-
-        .pm-content {
-            flex: 1;
-            padding: 20px;
-        }
-
-        .pm-name {
-            font-size: 11px;
-            font-weight: bold;
-            color: #2c3e50;
-            margin-bottom: 15px;
-        }
-
-        .pm-bar {
-            height: 6px;
-            background: #bdc3c7;
-            margin-bottom: 8px;
-            border-radius: 3px;
-        }
-
-        .pm-bar.short {
-            width: 70%;
-        }
+        .preview-layout-modern { display: flex; height: 100%; }
+        .pm-sidebar { width: 35%; background: #34495e; height: 100%; }
+        .pm-content { flex: 1; padding: 15px; }
+        .pm-name { font-size: 10px; font-weight: bold; color: #2c3e50; margin-bottom: 10px; }
+        .pm-bar { height: 5px; background: #bdc3c7; margin-bottom: 6px; border-radius: 3px; }
+        .pm-bar.short { width: 70%; }
 
         /* Minimalist Preview */
-        .preview-header-min {
-            padding: 25px 20px;
-            border-bottom: 2px solid #3498db;
-        }
-
-        .pmin-name {
-            font-size: 16px;
-            font-weight: 300;
-            color: #2c3e50;
-            letter-spacing: 2px;
-            font-family: 'Cormorant Garamond', serif;
-        }
-
-        .pmin-line {
-            width: 40px;
-            height: 2px;
-            background: #3498db;
-            margin-top: 10px;
-        }
-
-        .pmin-content {
-            padding: 20px;
-        }
-
-        .pmin-text-line {
-            height: 5px;
-            background: #ecf0f1;
-            margin-bottom: 10px;
-            border-radius: 2px;
-        }
-
-        .pmin-text-line.short {
-            width: 70%;
-        }
+        .preview-header-min { padding: 20px 15px; border-bottom: 2px solid #3498db; }
+        .pmin-name { font-size: 14px; font-weight: 300; color: #2c3e50; letter-spacing: 1px; }
+        .pmin-line { width: 30px; height: 2px; background: #3498db; margin-top: 8px; }
+        .pmin-content { padding: 15px; }
+        .pmin-text-line { height: 4px; background: #ecf0f1; margin-bottom: 8px; border-radius: 2px; }
+        .pmin-text-line.short { width: 70%; }
 
         /* Creative Preview */
-        .preview-layout-creative {
-            display: flex;
-            height: 100%;
-        }
-
-        .pc-accent {
-            width: 25%;
-            background: linear-gradient(180deg, #ff6b6b 0%, #feca57 50%, #48dbfb 100%);
-            height: 100%;
-        }
-
-        .pc-main {
-            flex: 1;
-            padding: 25px 15px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .pc-name {
-            font-size: 13px;
-            font-weight: 600;
-            color: #764ba2;
-        }
-
-        .pc-dots {
-            display: flex;
-            gap: 5px;
-            margin-top: 12px;
-        }
-
-        .pc-dots span {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: #667eea;
-        }
+        .preview-layout-creative { display: flex; height: 100%; }
+        .pc-accent { width: 25%; background: linear-gradient(180deg, #ff6b6b 0%, #feca57 50%, #48dbfb 100%); height: 100%; }
+        .pc-main { flex: 1; padding: 20px 10px; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        .pc-name { font-size: 11px; font-weight: 600; color: #764ba2; }
+        .pc-dots { display: flex; gap: 4px; margin-top: 10px; }
+        .pc-dots span { width: 5px; height: 5px; border-radius: 50%; background: #667eea; }
 
         /* Executive Preview */
-        .preview-header-exec {
-            background: #1a1a2e;
-            color: #fff;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .pe-name {
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            color: #fff;
-        }
-
-        .pe-title {
-            font-size: 8px;
-            color: #c9a227;
-            margin-top: 4px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .pe-number {
-            position: absolute;
-            bottom: 45px;
-            left: 15px;
-            width: 25px;
-            height: 25px;
-            background: #c9a227;
-            color: #1a1a2e;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 10px;
-            font-weight: 700;
-        }
-
-        .pe-section {
-            position: absolute;
-            bottom: 50px;
-            left: 50px;
-            font-size: 10px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            color: #1a1a2e;
-        }
+        .preview-header-exec { background: #1a1a2e; color: #fff; padding: 15px; text-align: center; }
+        .pe-name { font-size: 10px; font-weight: 700; letter-spacing: 1px; color: #fff; }
+        .pe-title { font-size: 7px; color: #c9a227; margin-top: 3px; text-transform: uppercase; letter-spacing: 1px; }
+        .pe-number { position: absolute; bottom: 40px; left: 10px; width: 20px; height: 20px; background: #c9a227; color: #1a1a2e; display: flex; align-items: center; justify-content: center; font-size: 8px; font-weight: 700; }
+        .pe-section { position: absolute; bottom: 45px; left: 35px; font-size: 8px; font-weight: 700; letter-spacing: 1px; color: #1a1a2e; }
 
         /* Template Info */
-        .template-info {
-            padding: 18px;
-            background: rgba(255, 255, 255, 0.03);
-            transition: all 0.3s;
-        }
-
-        .template-name {
-            font-size: 15px;
-            font-weight: 600;
-            color: #fff;
-            margin-bottom: 6px;
-        }
-
-        .template-desc {
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.6);
-            line-height: 1.5;
-            margin-bottom: 12px;
-        }
-
-        .template-tags {
-            display: flex;
-            gap: 6px;
-            flex-wrap: wrap;
-        }
-
-        .tag {
-            padding: 4px 10px;
-            background: rgba(102, 126, 234, 0.2);
-            border-radius: 20px;
-            font-size: 10px;
-            color: #a5b4fc;
-            font-weight: 500;
-        }
+        .template-info { padding: 15px; background: rgba(255, 255, 255, 0.03); transition: all 0.3s; }
+        .template-name { font-size: 14px; font-weight: 600; color: #fff; margin-bottom: 4px; }
+        .template-desc { font-size: 11px; color: rgba(255, 255, 255, 0.6); line-height: 1.4; margin-bottom: 10px; }
+        .template-tags { display: flex; gap: 5px; flex-wrap: wrap; }
+        .tag { padding: 3px 8px; background: rgba(102, 126, 234, 0.2); border-radius: 20px; font-size: 9px; color: #a5b4fc; font-weight: 500; }
 
         /* Selected Indicator */
-        .selected-indicator {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: #667eea;
-            color: #fff;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 600;
-            opacity: 0;
-            transform: translateY(-10px);
-            transition: all 0.3s;
-        }
+        .selected-indicator { position: absolute; top: 8px; right: 8px; background: #667eea; color: #fff; padding: 4px 10px; border-radius: 20px; font-size: 10px; font-weight: 600; opacity: 0; transform: translateY(-10px); transition: all 0.3s; }
     </style>
 </head>
 
@@ -412,8 +208,7 @@
         <a href="{% url 'home' %}" class="logo">Resume Builder</a>
         <div class="nav-right">
             <a href="{% url 'home' %}">Templates</a>
-            <a href="{% url 'profile' %}" class="profile-icon">{{ request.user.first_name|first|upper }}{{
-                request.user.last_name|first|upper }}</a>
+            <a href="{% url 'profile' %}" class="profile-icon">{{ request.user.first_name|first|upper }}{{ request.user.last_name|first|upper }}</a>
         </div>
     </nav>
 
@@ -452,8 +247,7 @@
                         </div>
                         <div class="template-info">
                             <div class="template-name">Classic Professional</div>
-                            <div class="template-desc">Clean, traditional layout perfect for conservative industries
-                            </div>
+                            <div class="template-desc">Clean, traditional layout perfect for conservative industries</div>
                             <div class="template-tags">
                                 <span class="tag">Corporate</span>
                                 <span class="tag">Traditional</span>
@@ -594,8 +388,7 @@
                     </div>
 
                     <div class="col-12">
-                        <textarea class="form-control" rows="3" name="about"
-                            placeholder="Professional summary"></textarea>
+                        <textarea class="form-control" rows="3" name="about" placeholder="Professional summary"></textarea>
                     </div>
                 </div>
             </div>
@@ -623,8 +416,7 @@
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Languages</label>
-                        <input class="form-control" name="languages"
-                            placeholder="e.g. English (Native), Spanish (Fluent)">
+                        <input class="form-control" name="languages" placeholder="e.g. English (Native), Spanish (Fluent)">
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Interests</label>
@@ -639,9 +431,7 @@
 
                 <!-- Experience 1 -->
                 <div class="row g-3 mb-4">
-                    <div class="col-12">
-                        <h6 style="color: #fff;">Experience 1</h6>
-                    </div>
+                    <div class="col-12"><h6 style="color: #fff;">Experience 1</h6></div>
                     <div class="col-md-4">
                         <input class="form-control" name="company1" placeholder="Company name">
                     </div>
@@ -658,16 +448,13 @@
                         <textarea class="form-control" rows="2" name="lin11" placeholder="Responsibilities"></textarea>
                     </div>
                     <div class="col-12">
-                        <textarea class="form-control" rows="2" name="achievements1"
-                            placeholder="Key achievements (one per line)"></textarea>
+                        <textarea class="form-control" rows="2" name="achievements1" placeholder="Key achievements (one per line)"></textarea>
                     </div>
                 </div>
 
                 <!-- Experience 2 -->
                 <div class="row g-3">
-                    <div class="col-12">
-                        <h6 style="color: #fff;">Experience 2 (Optional)</h6>
-                    </div>
+                    <div class="col-12"><h6 style="color: #fff;">Experience 2 (Optional)</h6></div>
                     <div class="col-md-4">
                         <input class="form-control" name="company2" placeholder="Company name">
                     </div>
@@ -684,8 +471,7 @@
                         <textarea class="form-control" rows="2" name="lin21" placeholder="Responsibilities"></textarea>
                     </div>
                     <div class="col-12">
-                        <textarea class="form-control" rows="2" name="achievements2"
-                            placeholder="Key achievements (one per line)"></textarea>
+                        <textarea class="form-control" rows="2" name="achievements2" placeholder="Key achievements (one per line)"></textarea>
                     </div>
                 </div>
             </div>
@@ -696,9 +482,7 @@
 
                 <!-- Project 1 -->
                 <div class="row g-3 mb-4">
-                    <div class="col-12">
-                        <h6 style="color: #fff;">Project 1</h6>
-                    </div>
+                    <div class="col-12"><h6 style="color: #fff;">Project 1</h6></div>
                     <div class="col-md-6">
                         <input class="form-control" name="project1" placeholder="Project name">
                     </div>
@@ -718,9 +502,7 @@
 
                 <!-- Project 2 -->
                 <div class="row g-3">
-                    <div class="col-12">
-                        <h6 style="color: #fff;">Project 2 (Optional)</h6>
-                    </div>
+                    <div class="col-12"><h6 style="color: #fff;">Project 2 (Optional)</h6></div>
                     <div class="col-md-6">
                         <input class="form-control" name="project2" placeholder="Project name">
                     </div>
@@ -745,9 +527,7 @@
 
                 <!-- Education 1 -->
                 <div class="row g-3 mb-4">
-                    <div class="col-12">
-                        <h6 style="color: #fff;">Education 1</h6>
-                    </div>
+                    <div class="col-12"><h6 style="color: #fff;">Education 1</h6></div>
                     <div class="col-md-5">
                         <input class="form-control" name="degree1" placeholder="Degree">
                     </div>
@@ -767,9 +547,7 @@
 
                 <!-- Education 2 -->
                 <div class="row g-3">
-                    <div class="col-12">
-                        <h6 style="color: #fff;">Education 2 (Optional)</h6>
-                    </div>
+                    <div class="col-12"><h6 style="color: #fff;">Education 2 (Optional)</h6></div>
                     <div class="col-md-5">
                         <input class="form-control" name="degree2" placeholder="Degree">
                     </div>
@@ -793,8 +571,7 @@
                 <div class="section-title">Certifications (Optional)</div>
                 <div class="row g-3">
                     <div class="col-12">
-                        <textarea class="form-control" rows="3" name="certifications"
-                            placeholder="List certifications (one per line)"></textarea>
+                        <textarea class="form-control" rows="3" name="certifications" placeholder="List certifications (one per line)"></textarea>
                     </div>
                 </div>
             </div>
