@@ -1,8 +1,11 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.template.loader import get_template
+from django.conf import settings
+import os
 
 
 def landing(request):
@@ -17,6 +20,12 @@ def home(request):
     """Render the home page with template selection."""
     template = request.GET.get('template', 'classic')
     return render(request, 'home.html', {'selected_template': template})
+
+
+@login_required
+def templates_gallery(request):
+    """Render the templates gallery page showing all available resume templates."""
+    return render(request, 'templates_gallery.html')
 
 
 @login_required
@@ -231,6 +240,470 @@ def gen_resume(request):
         template_name = template_map.get(template_type, 'resume.html')
         return render(request, template_name, context)
     return render(request, 'index.html')
+
+
+@login_required
+def export_resume_pdf(request):
+    """Export resume as PDF."""
+    if request.method == 'POST':
+        # Get all form data
+        context = get_resume_context(request.POST)
+        template_type = request.POST.get('template_type', 'classic')
+        
+        # Render the resume template
+        template_map = {
+            'classic': 'resume.html',
+            'modern': 'resume_modern.html',
+            'minimalist': 'resume_minimalist.html',
+            'creative': 'resume_creative.html',
+            'executive': 'resume_executive.html',
+        }
+        template_name = template_map.get(template_type, 'resume.html')
+        template = get_template(template_name)
+        html = template.render(context)
+        
+        # Note: For production, you'll need to install weasyprint or xhtml2pdf
+        # Example with weasyprint:
+        # from weasyprint import HTML
+        # pdf = HTML(string=html).write_pdf()
+        # response = HttpResponse(pdf, content_type='application/pdf')
+        # response['Content-Disposition'] = 'attachment; filename="resume.pdf"'
+        # return response
+        
+        # For now, return HTML that can be printed as PDF
+        response = HttpResponse(html, content_type='text/html')
+        return response
+    return redirect('builder')
+
+
+@login_required
+def export_resume_docx(request):
+    """Export resume as DOCX/Word document."""
+    if request.method == 'POST':
+        # Get all form data
+        context = get_resume_context(request.POST)
+        name = context.get('name', 'resume').replace(' ', '_')
+        
+        # Create simple DOCX using python-docx
+        try:
+            from docx import Document
+            doc = Document()
+            
+            # Add name and title
+            doc.add_heading(context.get('name', ''), 0)
+            if context.get('title'):
+                doc.add_paragraph(context.get('title'), style='Subtitle')
+            
+            # Contact info
+            contact_parts = []
+            if context.get('email'):
+                contact_parts.append(context.get('email'))
+            if context.get('phone'):
+                contact_parts.append(context.get('phone'))
+            if context.get('location'):
+                contact_parts.append(context.get('location'))
+            if context.get('linkedin'):
+                contact_parts.append(f"LinkedIn: {context.get('linkedin')}")
+            if context.get('github'):
+                contact_parts.append(f"GitHub: {context.get('github')}")
+            if context.get('portfolio'):
+                contact_parts.append(f"Portfolio: {context.get('portfolio')}")
+            if contact_parts:
+                doc.add_paragraph(' | '.join(contact_parts))
+            
+            # About
+            if context.get('about'):
+                doc.add_heading('Professional Summary', level=1)
+                doc.add_paragraph(context.get('about'))
+            
+            # Experience
+            for i in range(1, 4):
+                company = context.get(f'company{i}', '')
+                if company:
+                    post = context.get(f'post{i}', '')
+                    duration = context.get(f'duration{i}', '')
+                    location_val = context.get(f'location{i}', '')
+                    
+                    heading = f'{post}' if post else ''
+                    if company:
+                        heading += f' at {company}' if heading else company
+                    if heading:
+                        doc.add_heading(heading, level=2)
+                    if duration or location_val:
+                        parts = []
+                        if duration:
+                            parts.append(duration)
+                        if location_val:
+                            parts.append(location_val)
+                        doc.add_paragraph(' | '.join(parts))
+                    
+                    responsibilities = context.get(f'lin{i}1', '')
+                    if responsibilities:
+                        doc.add_paragraph(responsibilities)
+                    
+                    achievements = context.get(f'achievements{i}', '')
+                    if achievements:
+                        doc.add_paragraph('Key Achievements:')
+                        for achievement in achievements.split('\n'):
+                            if achievement.strip():
+                                doc.add_paragraph(achievement.strip(), style='List Bullet')
+            
+            # Projects
+            for i in range(1, 3):
+                project = context.get(f'project{i}', '')
+                if project:
+                    desc = context.get(f'desc{i}', '')
+                    tech = context.get(f'project_tech{i}', '')
+                    url = context.get(f'project_url{i}', '')
+                    durat = context.get(f'durat{i}', '')
+                    
+                    doc.add_heading(project, level=2)
+                    if durat:
+                        doc.add_paragraph(f'Duration: {durat}')
+                    if desc:
+                        doc.add_paragraph(desc)
+                    if tech:
+                        doc.add_paragraph(f'Technologies: {tech}')
+                    if url:
+                        doc.add_paragraph(f'URL: {url}')
+            
+            # Education
+            for i in range(1, 3):
+                degree = context.get(f'degree{i}', '')
+                if degree:
+                    college = context.get(f'college{i}', '')
+                    year = context.get(f'year{i}', '')
+                    gpa = context.get(f'gpa{i}', '')
+                    honors = context.get(f'honors{i}', '')
+                    
+                    education_text = f'{degree}'
+                    if college:
+                        education_text += f' - {college}'
+                    if year:
+                        education_text += f' ({year})'
+                    
+                    doc.add_heading(education_text, level=2)
+                    if gpa:
+                        doc.add_paragraph(f'GPA: {gpa}')
+                    if honors:
+                        doc.add_paragraph(honors)
+            
+            # Skills
+            skills_section = False
+            skill_fields = [
+                ('Programming Languages', 'prog_langs'),
+                ('Frameworks & Libraries', 'frameworks'),
+                ('Databases', 'databases'),
+                ('Development Tools', 'dev_tools'),
+                ('Web Technologies', 'web_tech'),
+            ]
+            
+            for label, field in skill_fields:
+                if context.get(field):
+                    if not skills_section:
+                        doc.add_heading('Skills', level=1)
+                        skills_section = True
+                    doc.add_paragraph(f'{label}: {context.get(field)}')
+            
+            # Additional sections
+            if context.get('languages'):
+                doc.add_heading('Languages', level=1)
+                doc.add_paragraph(context.get('languages'))
+            
+            if context.get('certifications'):
+                doc.add_heading('Certifications', level=1)
+                for cert in context.get('certifications').split('\n'):
+                    if cert.strip():
+                        doc.add_paragraph(cert.strip(), style='List Bullet')
+            
+            if context.get('interests'):
+                doc.add_heading('Interests', level=1)
+                doc.add_paragraph(context.get('interests'))
+            
+            # References
+            has_references = False
+            for i in range(1, 3):
+                ref_name = context.get(f'reference_name{i}', '')
+                if ref_name:
+                    if not has_references:
+                        doc.add_heading('References', level=1)
+                        has_references = True
+                    ref_title = context.get(f'reference_title{i}', '')
+                    ref_contact = context.get(f'reference_contact{i}', '')
+                    ref_text = ref_name
+                    if ref_title:
+                        ref_text += f' - {ref_title}'
+                    if ref_contact:
+                        ref_text += f' ({ref_contact})'
+                    doc.add_paragraph(ref_text)
+            
+            # Board Positions
+            for i in range(1, 3):
+                board = context.get(f'board{i}', '')
+                if board:
+                    role = context.get(f'board_role{i}', '')
+                    year = context.get(f'board_year{i}', '')
+                    
+                    if not has_references:
+                        doc.add_heading('Board Positions', level=1)
+                        has_references = True  # Reuse flag
+                    
+                    board_text = f'{board}'
+                    if role:
+                        board_text += f' - {role}'
+                    if year:
+                        board_text += f' ({year})'
+                    doc.add_paragraph(board_text)
+            
+            # Awards
+            for i in range(1, 3):
+                award = context.get(f'award{i}', '')
+                if award:
+                    year = context.get(f'award_year{i}', '')
+                    
+                    doc.add_heading('Awards & Honors', level=1)
+                    award_text = award
+                    if year:
+                        award_text += f' ({year})'
+                    doc.add_paragraph(award_text)
+            
+            # Save to response
+            from io import BytesIO
+            buffer = BytesIO()
+            doc.save(buffer)
+            buffer.seek(0)
+            
+            response = HttpResponse(buffer.read(), content_type='application/vnd.openxmlformats-officedocument.wordprocessingml.document')
+            response['Content-Disposition'] = f'attachment; filename="{name}_resume.docx"'
+            return response
+            
+        except ImportError:
+            messages.error(request, 'DOCX export requires python-docx package. Install with: pip install python-docx')
+            return redirect('builder')
+    
+    return redirect('builder')
+
+
+@login_required
+def export_resume_txt(request):
+    """Export resume as plain text."""
+    if request.method == 'POST':
+        context = get_resume_context(request.POST)
+        name = context.get('name', 'resume').replace(' ', '_')
+        
+        # Build text content
+        lines = []
+        lines.append('=' * 80)
+        lines.append(context.get('name', '').upper())
+        lines.append('=' * 80)
+        
+        if context.get('title'):
+            lines.append(context.get('title'))
+        lines.append('')
+        
+        # Contact
+        contact_parts = []
+        if context.get('email'):
+            contact_parts.append(f"Email: {context.get('email')}")
+        if context.get('phone'):
+            contact_parts.append(f"Phone: {context.get('phone')}")
+        if context.get('location'):
+            contact_parts.append(f"Location: {context.get('location')}")
+        if context.get('linkedin'):
+            contact_parts.append(f"LinkedIn: {context.get('linkedin')}")
+        if context.get('github'):
+            contact_parts.append(f"GitHub: {context.get('github')}")
+        if contact_parts:
+            lines.extend(contact_parts)
+        lines.append('')
+        
+        # About
+        if context.get('about'):
+            lines.append('PROFESSIONAL SUMMARY')
+            lines.append('-' * 80)
+            lines.append(context.get('about'))
+            lines.append('')
+        
+        # Experience
+        for i in range(1, 4):
+            company = context.get(f'company{i}', '')
+            if company:
+                post = context.get(f'post{i}', '')
+                duration = context.get(f'duration{i}', '')
+                location = context.get(f'location{i}', '')
+                
+                lines.append('')
+                lines.append(f'EXPERIENCE: {post} at {company}')
+                lines.append('-' * 80)
+                lines.append(f'{duration} | {location}')
+                lines.append('')
+                
+                if context.get(f'lin{i}1'):
+                    lines.append('Responsibilities:')
+                    lines.append(context.get(f'lin{i}1'))
+                
+                if context.get(f'achievements{i}'):
+                    lines.append('')
+                    lines.append('Key Achievements:')
+                    for achievement in context.get(f'achievements{i}').split('\n'):
+                        if achievement.strip():
+                            lines.append(f'  • {achievement.strip()}')
+        
+        # Projects
+        for i in range(1, 3):
+            project = context.get(f'project{i}', '')
+            if project:
+                lines.append('')
+                lines.append(f'PROJECT: {project}')
+                lines.append('-' * 80)
+                if context.get(f'durat{i}'):
+                    lines.append(f'Duration: {context.get(f"durat{i}")}')
+                if context.get(f'desc{i}'):
+                    lines.append(context.get(f'desc{i}'))
+                if context.get(f'project_tech{i}'):
+                    lines.append(f'Technologies: {context.get(f"project_tech{i}")}')
+                if context.get(f'project_url{i}'):
+                    lines.append(f'URL: {context.get(f"project_url{i}")}')
+        
+        # Education
+        for i in range(1, 3):
+            degree = context.get(f'degree{i}', '')
+            if degree:
+                lines.append('')
+                lines.append(f'EDUCATION: {degree}')
+                lines.append('-' * 80)
+                if context.get(f'college{i}'):
+                    lines.append(f'{context.get(f"college{i}")}')
+                if context.get(f'year{i}'):
+                    lines.append(f'Year: {context.get(f"year{i}")}')
+                if context.get(f'gpa{i}'):
+                    lines.append(f'GPA: {context.get(f"gpa{i}")}')
+                if context.get(f'honors{i}'):
+                    lines.append(f'Honors: {context.get(f"honors{i}")}')
+        
+        # Skills
+        skill_fields = [
+            ('Programming Languages', 'prog_langs'),
+            ('Frameworks', 'frameworks'),
+            ('Databases', 'databases'),
+            ('Development Tools', 'dev_tools'),
+            ('Web Technologies', 'web_tech'),
+        ]
+        
+        has_skills = any(context.get(field) for _, field in skill_fields)
+        if has_skills:
+            lines.append('')
+            lines.append('SKILLS')
+            lines.append('-' * 80)
+            for label, field in skill_fields:
+                if context.get(field):
+                    lines.append(f'{label}: {context.get(field)}')
+        
+        # Additional sections
+        if context.get('languages'):
+            lines.append('')
+            lines.append('LANGUAGES')
+            lines.append('-' * 80)
+            lines.append(context.get('languages'))
+        
+        if context.get('certifications'):
+            lines.append('')
+            lines.append('CERTIFICATIONS')
+            lines.append('-' * 80)
+            lines.append(context.get('certifications'))
+        
+        if context.get('interests'):
+            lines.append('')
+            lines.append('INTERESTS')
+            lines.append('-' * 80)
+            lines.append(context.get('interests'))
+        
+        lines.append('')
+        lines.append('=' * 80)
+        
+        # Create response
+        text_content = '\n'.join(lines)
+        response = HttpResponse(text_content, content_type='text/plain')
+        response['Content-Disposition'] = f'attachment; filename="{name}_resume.txt"'
+        return response
+    
+    return redirect('builder')
+
+
+def get_resume_context(post_data):
+    """Helper function to extract resume context from POST data."""
+    return {
+        'name': post_data.get('name', ''),
+        'title': post_data.get('title', ''),
+        'email': post_data.get('email', ''),
+        'phone': post_data.get('phone', ''),
+        'about': post_data.get('about', ''),
+        'location': post_data.get('location', ''),
+        'linkedin': post_data.get('linkedin', ''),
+        'github': post_data.get('github', ''),
+        'portfolio': post_data.get('portfolio', ''),
+        'prog_langs': post_data.get('prog_langs', ''),
+        'frameworks': post_data.get('frameworks', ''),
+        'databases': post_data.get('databases', ''),
+        'dev_tools': post_data.get('dev_tools', ''),
+        'web_tech': post_data.get('web_tech', ''),
+        'company1': post_data.get('company1', ''),
+        'post1': post_data.get('post1', ''),
+        'duration1': post_data.get('duration1', ''),
+        'location1': post_data.get('location1', ''),
+        'lin11': post_data.get('lin11', ''),
+        'achievements1': post_data.get('achievements1', ''),
+        'company2': post_data.get('company2', ''),
+        'post2': post_data.get('post2', ''),
+        'duration2': post_data.get('duration2', ''),
+        'location2': post_data.get('location2', ''),
+        'lin21': post_data.get('lin21', ''),
+        'achievements2': post_data.get('achievements2', ''),
+        'company3': post_data.get('company3', ''),
+        'post3': post_data.get('post3', ''),
+        'duration3': post_data.get('duration3', ''),
+        'location3': post_data.get('location3', ''),
+        'lin31': post_data.get('lin31', ''),
+        'project1': post_data.get('project1', ''),
+        'durat1': post_data.get('durat1', ''),
+        'desc1': post_data.get('desc1', ''),
+        'project_tech1': post_data.get('project_tech1', ''),
+        'project_url1': post_data.get('project_url1', ''),
+        'project2': post_data.get('project2', ''),
+        'durat2': post_data.get('durat2', ''),
+        'desc2': post_data.get('desc2', ''),
+        'project_tech2': post_data.get('project_tech2', ''),
+        'project_url2': post_data.get('project_url2', ''),
+        'degree1': post_data.get('degree1', ''),
+        'college1': post_data.get('college1', ''),
+        'year1': post_data.get('year1', ''),
+        'gpa1': post_data.get('gpa1', ''),
+        'honors1': post_data.get('honors1', ''),
+        'degree2': post_data.get('degree2', ''),
+        'college2': post_data.get('college2', ''),
+        'year2': post_data.get('year2', ''),
+        'gpa2': post_data.get('gpa2', ''),
+        'honors2': post_data.get('honors2', ''),
+        'languages': post_data.get('languages', ''),
+        'certifications': post_data.get('certifications', ''),
+        'interests': post_data.get('interests', ''),
+        'reference_name1': post_data.get('reference_name1', ''),
+        'reference_title1': post_data.get('reference_title1', ''),
+        'reference_contact1': post_data.get('reference_contact1', ''),
+        'reference_name2': post_data.get('reference_name2', ''),
+        'reference_title2': post_data.get('reference_title2', ''),
+        'reference_contact2': post_data.get('reference_contact2', ''),
+        'board1': post_data.get('board1', ''),
+        'board_role1': post_data.get('board_role1', ''),
+        'board_year1': post_data.get('board_year1', ''),
+        'board2': post_data.get('board2', ''),
+        'board_role2': post_data.get('board_role2', ''),
+        'board_year2': post_data.get('board_year2', ''),
+        'award1': post_data.get('award1', ''),
+        'award_year1': post_data.get('award_year1', ''),
+        'award2': post_data.get('award2', ''),
+        'award_year2': post_data.get('award_year2', ''),
+    }
 
 
 def login_view(request):

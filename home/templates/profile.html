@@ -3,12 +3,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Profile - Resume Builder</title>
+    <title>Profile - CareerCraft</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Google Fonts - Google Sans & DM Sans -->
+    <!-- Google Fonts - DM Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         * {
@@ -107,73 +107,9 @@
 
         /* Profile Grid */
         .profile-grid {
-            display: grid;
-            grid-template-columns: 300px 1fr;
-            gap: 30px;
-        }
-
-        /* Sidebar */
-        .profile-sidebar {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            border-radius: 16px;
-            padding: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            height: fit-content;
-        }
-
-        .profile-avatar {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-weight: 700;
-            font-size: 48px;
-            margin: 0 auto 20px;
-            border: 4px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .profile-name {
-            color: #fff;
-            font-size: 22px;
-            font-weight: 600;
-            text-align: center;
-            margin-bottom: 5px;
-        }
-
-        .profile-email {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 14px;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .profile-menu {
-            list-style: none;
-            padding: 0;
-        }
-
-        .profile-menu li {
-            margin-bottom: 10px;
-        }
-
-        .profile-menu a {
             display: block;
-            padding: 12px 16px;
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            border-radius: 8px;
-            transition: all 0.3s;
-        }
-
-        .profile-menu a:hover,
-        .profile-menu a.active {
-            background: rgba(255, 255, 255, 0.15);
-            color: #fff;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
         /* Content Cards */
@@ -213,7 +149,7 @@
             background: rgba(255, 255, 255, 0.1);
             color: #fff;
             width: 100%;
-            font-family: 'Datatype', sans-serif;
+            font-family: 'DM Sans', sans-serif;
         }
 
         .form-control::placeholder {
@@ -237,7 +173,7 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
-            font-family: 'Datatype', sans-serif;
+            font-family: 'DM Sans', sans-serif;
         }
 
         .btn-primary:hover {
@@ -254,7 +190,7 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
-            font-family: 'Datatype', sans-serif;
+            font-family: 'DM Sans', sans-serif;
         }
 
         .btn-danger:hover {
@@ -287,14 +223,14 @@
 
         /* Responsive */
         @media (max-width: 768px) {
-            .profile-grid {
-                grid-template-columns: 1fr;
-            }
             .navbar {
                 padding: 20px 30px;
             }
             .main-content {
                 padding: 30px;
+            }
+            .profile-grid {
+                padding: 0;
             }
         }
     </style>
@@ -326,24 +262,9 @@
             {% endif %}
 
             <div class="profile-grid">
-                <!-- Sidebar -->
-                <div class="profile-sidebar">
-                    <div class="profile-avatar">{{ request.user.first_name|first|upper }}{{ request.user.last_name|first|upper }}</div>
-                    <div class="profile-name">{{ request.user.get_full_name|default:request.user.username }}</div>
-                    <div class="profile-email">{{ request.user.email }}</div>
-
-                    <ul class="profile-menu">
-                        <li><a href="#personal" class="active">Personal Information</a></li>
-                        <li><a href="#security">Login & Security</a></li>
-                        <li><a href="#danger">Delete Account</a></li>
-                    </ul>
-                </div>
-
-                <!-- Content -->
-                <div class="profile-content">
-                    <!-- Personal Information -->
-                    <div id="personal" class="content-card">
-                        <h2 class="card-title">Personal Information</h2>
+                <!-- Personal Information -->
+                <div id="personal" class="content-card">
+                    <h2 class="card-title">Personal Information</h2>
                         <form method="post" action="{% url 'profile' %}">
                             {% csrf_token %}
                             <input type="hidden" name="action" value="update_profile">
@@ -372,11 +293,11 @@
                             </div>
                             <button type="submit" class="btn-primary">Save Changes</button>
                         </form>
-                    </div>
+                </div>
 
-                    <!-- Login & Security -->
-                    <div id="security" class="content-card">
-                        <h2 class="card-title">Login & Security</h2>
+                <!-- Login & Security -->
+                <div id="security" class="content-card">
+                    <h2 class="card-title">Login & Security</h2>
                         <form method="post" action="{% url 'profile' %}">
                             {% csrf_token %}
                             <input type="hidden" name="action" value="change_password">
@@ -394,11 +315,11 @@
                             </div>
                             <button type="submit" class="btn-primary">Change Password</button>
                         </form>
-                    </div>
+                </div>
 
-                    <!-- Delete Account -->
-                    <div id="danger" class="content-card">
-                        <h2 class="card-title" style="color: #ff6b6b;">Delete Account</h2>
+                <!-- Delete Account -->
+                <div id="danger" class="content-card">
+                    <h2 class="card-title" style="color: #ff6b6b;">Delete Account</h2>
                         <p style="color: rgba(255,255,255,0.8); margin-bottom: 20px;">
                             Once you delete your account, there is no going back. Please be certain.
                         </p>
@@ -411,10 +332,8 @@
                             </div>
                             <button type="submit" class="btn-danger">Delete My Account</button>
                         </form>
-                    </div>
                 </div>
             </div>
-        </div>
     </div>
 </body>
 </html>
