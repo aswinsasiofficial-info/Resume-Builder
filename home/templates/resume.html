@@ -1,7 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <title>Generated Resume</title>
@@ -102,7 +101,7 @@
             margin-top: 30px;
             margin-bottom: 30px;
         }
-
+        
         .download-btn {
             padding: 12px 30px;
             font-size: 16px;
@@ -134,13 +133,12 @@
                 display: none;
             }
         }
-
+        
         .skills-list p {
             margin-bottom: 4px;
         }
     </style>
 </head>
-
 <body>
 
     <div class="resume-wrapper">
@@ -150,12 +148,10 @@
                 <h1>{{ name|default:"YOUR NAME"|upper }}</h1>
                 <div class="subtitle">{{ title|default:"Professional Title" }}</div>
                 <div class="contact-info">
-                    {% if phone %}{{ phone }}{% endif %}{% if phone and email %} | {% endif %}{% if email %}{{ email
-                    }}{% endif %}{% if email and location %} | {% endif %}{% if location %}{{ location }}{% endif %}
+                    {% if phone %}{{ phone }}{% endif %}{% if phone and email %} | {% endif %}{% if email %}{{ email }}{% endif %}{% if email and location %} | {% endif %}{% if location %}{{ location }}{% endif %}
                 </div>
                 <div class="contact-info">
-                    {% if linkedin %}LinkedIn : {{ linkedin }}{% endif %}{% if linkedin and github %} | {% endif %}{% if
-                    github %}GitHub : {{ github }}{% endif %}
+                    {% if linkedin %}LinkedIn : {{ linkedin }}{% endif %}{% if linkedin and github %} | {% endif %}{% if github %}GitHub : {{ github }}{% endif %}
                 </div>
             </div>
 
@@ -171,9 +167,8 @@
             {% if degree1 or college1 %}
             <div class="resume-section">
                 <div class="section-title">EDUCATION</div>
-                <p><span class="bold-text">{{ degree1|default:"Degree" }}</span>{% if year1 %} <span
-                        style="float:right;">{{ year1 }}</span>{% endif %}<br>
-                    {{ college1|default:"Institution" }}</p>
+                <p><span class="bold-text">{{ degree1|default:"Degree" }}</span>{% if year1 %} <span style="float:right;">{{ year1 }}</span>{% endif %}<br>
+                {{ college1|default:"Institution" }}</p>
             </div>
             {% endif %}
 
@@ -181,9 +176,8 @@
             {% if company1 or post1 %}
             <div class="resume-section">
                 <div class="section-title">EXPERIENCE</div>
-                <p><span class="bold-text">{{ post1|default:"Role" }}</span>{% if duration1 %} <span
-                        style="float:right;">{{ duration1 }}</span>{% endif %}<br>
-                    {{ company1|default:"Company" }}</p>
+                <p><span class="bold-text">{{ post1|default:"Role" }}</span>{% if duration1 %} <span style="float:right;">{{ duration1 }}</span>{% endif %}<br>
+                {{ company1|default:"Company" }}</p>
                 {% if lin11 %}<p>{{ lin11|linebreaksbr }}</p>{% endif %}
             </div>
             {% endif %}
@@ -192,14 +186,13 @@
             {% if project1 %}
             <div class="resume-section">
                 <div class="section-title">PROJECTS</div>
-                <p><span class="bold-text">{{ project1 }}</span>{% if durat1 %} <span style="float:right;">{{ durat1
-                        }}</span>{% endif %}</p>
+                <p><span class="bold-text">{{ project1 }}</span>{% if durat1 %} <span style="float:right;">{{ durat1 }}</span>{% endif %}</p>
                 {% if desc1 %}
                 <ul>
                     {% for line in desc1.splitlines %}
-                    {% if line.strip %}
-                    <li>{{ line|cut:"- "|cut:"• " }}</li>
-                    {% endif %}
+                        {% if line.strip %}
+                        <li>{{ line|cut:"- "|cut:"• " }}</li>
+                        {% endif %}
                     {% endfor %}
                 </ul>
                 {% endif %}
@@ -210,10 +203,8 @@
             {% if prog_langs or frameworks or databases or dev_tools or web_tech %}
             <div class="resume-section skills-list">
                 <div class="section-title">SKILLS</div>
-                {% if prog_langs %}<p><span class="bold-text">Programming Languages :</span> {{ prog_langs }}</p>{%
-                endif %}
-                {% if frameworks %}<p><span class="bold-text">Frameworks & Libraries :</span> {{ frameworks }}</p>{%
-                endif %}
+                {% if prog_langs %}<p><span class="bold-text">Programming Languages :</span> {{ prog_langs }}</p>{% endif %}
+                {% if frameworks %}<p><span class="bold-text">Frameworks & Libraries :</span> {{ frameworks }}</p>{% endif %}
                 {% if databases %}<p><span class="bold-text">Databases :</span> {{ databases }}</p>{% endif %}
                 {% if dev_tools %}<p><span class="bold-text">Development Tools:</span> {{ dev_tools }}</p>{% endif %}
                 {% if web_tech %}<p><span class="bold-text">Web Technologies:</span> {{ web_tech }}</p>{% endif %}
@@ -240,5 +231,4 @@
         }
     </script>
 </body>
-
 </html>

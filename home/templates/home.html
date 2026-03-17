@@ -1,15 +1,14 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <title>Home - Resume Builder</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Google Fonts - Datatype -->
+    <!-- Google Fonts - Google Sans & DM Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Datatype:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <style>
@@ -19,9 +18,8 @@
             box-sizing: border-box;
         }
 
-        body,
-        html {
-            font-family: 'Datatype', sans-serif;
+        body, html {
+            font-family: 'DM Sans', sans-serif;
         }
 
         .home-page {
@@ -92,6 +90,26 @@
             cursor: pointer;
             border: 2px solid rgba(255, 255, 255, 0.3);
             text-decoration: none;
+        }
+
+        .btn-logout {
+            padding: 10px 24px;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .btn-logout:hover {
+            background: rgba(231, 76, 60, 0.3);
+            border-color: rgba(231, 76, 60, 0.5);
+            color: #fff;
         }
 
         /* Main Content */
@@ -191,15 +209,8 @@
         }
 
         @keyframes pulse-arrow {
-
-            0%,
-            100% {
-                transform: translateX(0);
-            }
-
-            50% {
-                transform: translateX(-3px);
-            }
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(-3px); }
         }
 
         .carousel-arrow.next svg {
@@ -207,15 +218,8 @@
         }
 
         @keyframes pulse-arrow-next {
-
-            0%,
-            100% {
-                transform: translateX(0);
-            }
-
-            50% {
-                transform: translateX(3px);
-            }
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(3px); }
         }
 
         .template-card {
@@ -270,19 +274,16 @@
             padding: 25px;
             text-align: center;
         }
-
         .template-1 .mini-name {
             font-size: 16px;
             font-weight: bold;
             letter-spacing: 1px;
         }
-
         .template-1 .mini-title {
             font-size: 11px;
             opacity: 0.9;
             margin-top: 4px;
         }
-
         .template-1 .mini-section {
             height: 50px;
             margin: 20px;
@@ -293,25 +294,21 @@
         .template-2 {
             display: flex;
         }
-
         .template-2 .mini-sidebar {
             width: 35%;
             background: #34495e;
             height: 100%;
         }
-
         .template-2 .mini-content {
             flex: 1;
             padding: 25px;
         }
-
         .template-2 .mini-name {
             font-size: 14px;
             font-weight: bold;
             color: #2c3e50;
             margin-bottom: 20px;
         }
-
         .template-2 .mini-bar {
             height: 10px;
             background: #bdc3c7;
@@ -323,18 +320,15 @@
             padding: 30px 25px;
             border-bottom: 2px solid #3498db;
         }
-
         .template-3 .mini-name {
             font-size: 18px;
             font-weight: 300;
             color: #2c3e50;
             letter-spacing: 2px;
         }
-
         .template-3 .mini-body {
             padding: 25px;
         }
-
         .template-3 .mini-line {
             height: 8px;
             background: #ecf0f1;
@@ -345,13 +339,11 @@
         .template-4 {
             display: flex;
         }
-
         .template-4 .mini-accent {
             width: 30%;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             height: 100%;
         }
-
         .template-4 .mini-main {
             flex: 1;
             padding: 25px;
@@ -360,19 +352,16 @@
             justify-content: center;
             align-items: center;
         }
-
         .template-4 .mini-name {
             font-size: 16px;
             font-weight: bold;
             color: #764ba2;
         }
-
         .template-4 .mini-dots {
             display: flex;
             gap: 8px;
             margin-top: 20px;
         }
-
         .template-4 .mini-dots span {
             width: 10px;
             height: 10px;
@@ -385,7 +374,6 @@
             padding: 30px;
             text-align: center;
         }
-
         .template-5 .mini-avatar {
             width: 60px;
             height: 60px;
@@ -393,21 +381,18 @@
             border-radius: 50%;
             margin: 0 auto 12px;
         }
-
         .template-5 .mini-name {
             color: #fff;
             font-size: 14px;
             font-weight: 600;
             letter-spacing: 1px;
         }
-
         .template-5 .mini-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 12px;
             padding: 20px;
         }
-
         .template-5 .mini-grid div {
             height: 70px;
             background: #f8f9fa;
@@ -426,6 +411,87 @@
             font-size: 14px;
             line-height: 1.5;
             margin-bottom: 20px;
+        }
+
+        /* Profession-Specific Section */
+        .profession-section {
+            margin-top: 80px;
+        }
+
+        .profession-section .section-subtitle {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 18px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .profession-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 0 20px;
+        }
+
+        .profession-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .profession-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .profession-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .profession-card h3 {
+            color: #fff;
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .profession-card p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .profession-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .profession-tags span {
+            padding: 5px 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.8);
         }
 
         .btn-select {
@@ -612,28 +678,22 @@
             .navbar {
                 padding: 20px 30px;
             }
-
             .main-content {
                 padding: 40px 30px;
             }
-
             .welcome-section h1 {
                 font-size: 32px;
             }
-
             .templates-section {
                 padding: 0 40px;
             }
-
             .footer {
                 padding: 40px 30px 20px;
             }
-
             .footer-content {
                 grid-template-columns: 1fr;
                 gap: 30px;
             }
-
             .footer-bottom {
                 flex-direction: column;
                 gap: 20px;
@@ -642,7 +702,6 @@
         }
     </style>
 </head>
-
 <body>
     <div class="home-page">
         <!-- Navbar -->
@@ -651,8 +710,11 @@
             <div class="nav-right">
                 <span class="user-name">Hi, {{ request.user.first_name|default:request.user.username }}!</span>
                 <a href="{% url 'builder' %}" class="btn-nav">Builder</a>
-                <a href="{% url 'profile' %}" class="profile-icon">{{ request.user.first_name|first|upper }}{{
-                    request.user.last_name|first|upper }}</a>
+                <a href="{% url 'profile' %}" class="profile-icon">{{ request.user.first_name|first|upper }}{{ request.user.last_name|first|upper }}</a>
+                <form action="{% url 'account_logout' %}" method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-logout">Logout</button>
+                </form>
             </div>
         </nav>
 
@@ -669,9 +731,7 @@
                 <h2>5 Modern Resume Templates</h2>
                 <div class="carousel-container">
                     <button class="carousel-arrow prev" onclick="moveCarousel(-1)">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
-                        </svg>
+                        <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
                     </button>
 
                     <div class="templates-carousel" id="templatesCarousel">
@@ -686,8 +746,7 @@
                                 <div class="mini-section"></div>
                             </div>
                             <h3>Classic Professional</h3>
-                            <p>Clean and timeless design perfect for traditional industries like finance, law, and
-                                healthcare</p>
+                            <p>Clean and timeless design perfect for traditional industries like finance, law, and healthcare</p>
                             <a href="{% url 'builder' %}?template=classic" class="btn-select">Use This Template</a>
                         </div>
 
@@ -749,10 +808,8 @@
                                     <div class="mini-name">MIKE ROSS</div>
                                 </div>
                                 <div class="mini-grid">
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
+                                    <div></div><div></div>
+                                    <div></div><div></div>
                                 </div>
                             </div>
                             <h3>Executive</h3>
@@ -762,10 +819,81 @@
                     </div>
 
                     <button class="carousel-arrow next" onclick="moveCarousel(1)">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
-                        </svg>
+                        <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
                     </button>
+                </div>
+            </div>
+
+            <!-- Profession-Specific Templates Section -->
+            <div class="templates-section profession-section">
+                <h2>Profession-Specific Resume Builders</h2>
+                <p class="section-subtitle">Choose a builder tailored to your career path with pre-filled skills and industry-specific fields</p>
+
+                <div class="profession-grid">
+                    <!-- Full Stack Developer -->
+                    <div class="profession-card">
+                        <div class="profession-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">⚡</div>
+                        <h3>Full Stack Developer</h3>
+                        <p>Tech-focused resume with modern split layout. Includes programming languages, frameworks, and project showcases.</p>
+                        <div class="profession-tags">
+                            <span>React</span>
+                            <span>Node.js</span>
+                            <span>Python</span>
+                        </div>
+                        <a href="{% url 'builder_fullstack' %}" class="btn-select">Build Resume</a>
+                    </div>
+
+                    <!-- 3D Generalist -->
+                    <div class="profession-card">
+                        <div class="profession-icon" style="background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);">🎨</div>
+                        <h3>3D Generalist</h3>
+                        <p>Creative resume with colorful accent design. Features software skills, portfolio highlights, and specializations.</p>
+                        <div class="profession-tags">
+                            <span>Maya</span>
+                            <span>Blender</span>
+                            <span>ZBrush</span>
+                        </div>
+                        <a href="{% url 'builder_3d' %}" class="btn-select">Build Resume</a>
+                    </div>
+
+                    <!-- Data Scientist -->
+                    <div class="profession-card">
+                        <div class="profession-icon" style="background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);">📊</div>
+                        <h3>Data Scientist</h3>
+                        <p>Professional resume with classic layout. Highlights ML frameworks, statistical analysis, and research publications.</p>
+                        <div class="profession-tags">
+                            <span>Python</span>
+                            <span>TensorFlow</span>
+                            <span>SQL</span>
+                        </div>
+                        <a href="{% url 'builder_data' %}" class="btn-select">Build Resume</a>
+                    </div>
+
+                    <!-- UX/UI Designer -->
+                    <div class="profession-card">
+                        <div class="profession-icon" style="background: linear-gradient(135deg, #9b59b6 0%, #e74c3c 100%);">✨</div>
+                        <h3>UX/UI Designer</h3>
+                        <p>Elegant resume with minimalist design. Features design tools, case studies, and user research expertise.</p>
+                        <div class="profession-tags">
+                            <span>Figma</span>
+                            <span>Sketch</span>
+                            <span>Adobe XD</span>
+                        </div>
+                        <a href="{% url 'builder_ux' %}" class="btn-select">Build Resume</a>
+                    </div>
+
+                    <!-- Executive -->
+                    <div class="profession-card">
+                        <div class="profession-icon" style="background: linear-gradient(135deg, #1a1a2e 0%, #c9a227 100%);">👔</div>
+                        <h3>Executive</h3>
+                        <p>Premium resume with sophisticated styling. Includes leadership metrics, board positions, and strategic achievements.</p>
+                        <div class="profession-tags">
+                            <span>Leadership</span>
+                            <span>Strategy</span>
+                            <span>P&L</span>
+                        </div>
+                        <a href="{% url 'builder_executive' %}" class="btn-select">Build Resume</a>
+                    </div>
                 </div>
             </div>
 
@@ -782,8 +910,7 @@
             <div class="footer-content">
                 <div class="footer-brand">
                     <h3>Resume Builder</h3>
-                    <p>Create stunning, professional resumes in minutes with our easy-to-use builder. Stand out from the
-                        crowd and land your dream job.</p>
+                    <p>Create stunning, professional resumes in minutes with our easy-to-use builder. Stand out from the crowd and land your dream job.</p>
                     <div class="footer-social">
                         <a href="#" aria-label="Facebook">f</a>
                         <a href="#" aria-label="Twitter">X</a>
@@ -867,5 +994,4 @@
         });
     </script>
 </body>
-
 </html>

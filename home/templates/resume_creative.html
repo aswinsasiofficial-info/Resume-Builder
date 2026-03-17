@@ -1,14 +1,11 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <title>Generated Resume - Creative</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             background-color: #f3f4f6;
@@ -160,7 +157,7 @@
             border-radius: 12px;
             padding: 20px;
             margin-bottom: 15px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             border-left: 4px solid #48dbfb;
         }
 
@@ -251,7 +248,7 @@
             padding: 15px;
             background: #fff;
             border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
 
         .edu-degree {
@@ -286,7 +283,7 @@
             font-size: 11px;
             color: #636e72;
             text-decoration: none;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
 
         /* DOWNLOAD BUTTON */
@@ -314,22 +311,12 @@
         }
 
         @media print {
-            body {
-                background: none;
-                padding: 0;
-            }
-
-            .resume-sheet {
-                box-shadow: none;
-            }
-
-            .download-btn-container {
-                display: none;
-            }
+            body { background: none; padding: 0; }
+            .resume-sheet { box-shadow: none; }
+            .download-btn-container { display: none; }
         }
     </style>
 </head>
-
 <body>
     <div class="resume-wrapper">
         <div id="mn" class="resume-sheet">
@@ -384,8 +371,7 @@
                         {% if project2 %}
                         <div class="project-card" style="border-left-color: #ff9ff3;">
                             <div class="project-name">{{ project2 }}</div>
-                            {% if project_tech2 %}<div class="project-tech" style="color: #ff9ff3;">{{ project_tech2 }}
-                            </div>{% endif %}
+                            {% if project_tech2 %}<div class="project-tech" style="color: #ff9ff3;">{{ project_tech2 }}</div>{% endif %}
                             {% if desc2 %}<div class="project-desc">{{ desc2|linebreaksbr }}</div>{% endif %}
                         </div>
                         {% endif %}
@@ -425,25 +411,19 @@
                         {% if prog_langs %}
                         <div class="skill-item">
                             <div class="skill-name">Programming</div>
-                            <div class="skill-bar">
-                                <div class="skill-fill" style="width: 90%;"></div>
-                            </div>
+                            <div class="skill-bar"><div class="skill-fill" style="width: 90%;"></div></div>
                         </div>
                         {% endif %}
                         {% if frameworks %}
                         <div class="skill-item">
                             <div class="skill-name">Frameworks</div>
-                            <div class="skill-bar">
-                                <div class="skill-fill" style="width: 85%;"></div>
-                            </div>
+                            <div class="skill-bar"><div class="skill-fill" style="width: 85%;"></div></div>
                         </div>
                         {% endif %}
                         {% if dev_tools %}
                         <div class="skill-item">
                             <div class="skill-name">Tools</div>
-                            <div class="skill-bar">
-                                <div class="skill-fill" style="width: 80%;"></div>
-                            </div>
+                            <div class="skill-bar"><div class="skill-fill" style="width: 80%;"></div></div>
                         </div>
                         {% endif %}
                     </div>
@@ -510,5 +490,4 @@
         }
     </script>
 </body>
-
 </html>

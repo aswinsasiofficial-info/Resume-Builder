@@ -1,15 +1,14 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <title>Resume Builder - Create Professional Resumes</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Google Fonts - Datatype -->
+    <!-- Google Fonts - Google Sans & DM Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Datatype:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <style>
@@ -19,9 +18,8 @@
             box-sizing: border-box;
         }
 
-        body,
-        html {
-            font-family: 'Datatype', sans-serif;
+        body, html {
+            font-family: 'DM Sans', sans-serif;
         }
 
         .landing-page {
@@ -205,19 +203,16 @@
             padding: 20px;
             text-align: center;
         }
-
         .template-1 .mini-name {
             font-size: 14px;
             font-weight: bold;
             letter-spacing: 1px;
         }
-
         .template-1 .mini-title {
             font-size: 10px;
             opacity: 0.9;
             margin-top: 4px;
         }
-
         .template-1 .mini-section {
             height: 40px;
             margin: 15px;
@@ -229,25 +224,21 @@
         .template-2 {
             display: flex;
         }
-
         .template-2 .mini-sidebar {
             width: 35%;
             background: #34495e;
             height: 100%;
         }
-
         .template-2 .mini-content {
             flex: 1;
             padding: 20px;
         }
-
         .template-2 .mini-name {
             font-size: 12px;
             font-weight: bold;
             color: #2c3e50;
             margin-bottom: 15px;
         }
-
         .template-2 .mini-bar {
             height: 8px;
             background: #bdc3c7;
@@ -260,18 +251,15 @@
             padding: 25px 20px;
             border-bottom: 2px solid #3498db;
         }
-
         .template-3 .mini-name {
             font-size: 16px;
             font-weight: 300;
             color: #2c3e50;
             letter-spacing: 2px;
         }
-
         .template-3 .mini-body {
             padding: 20px;
         }
-
         .template-3 .mini-line {
             height: 6px;
             background: #ecf0f1;
@@ -283,13 +271,11 @@
         .template-4 {
             display: flex;
         }
-
         .template-4 .mini-accent {
             width: 30%;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             height: 100%;
         }
-
         .template-4 .mini-main {
             flex: 1;
             padding: 20px;
@@ -298,19 +284,16 @@
             justify-content: center;
             align-items: center;
         }
-
         .template-4 .mini-name {
             font-size: 14px;
             font-weight: bold;
             color: #764ba2;
         }
-
         .template-4 .mini-dots {
             display: flex;
             gap: 6px;
             margin-top: 15px;
         }
-
         .template-4 .mini-dots span {
             width: 8px;
             height: 8px;
@@ -324,7 +307,6 @@
             padding: 25px;
             text-align: center;
         }
-
         .template-5 .mini-avatar {
             width: 50px;
             height: 50px;
@@ -332,21 +314,18 @@
             border-radius: 50%;
             margin: 0 auto 10px;
         }
-
         .template-5 .mini-name {
             color: #fff;
             font-size: 12px;
             font-weight: 600;
             letter-spacing: 1px;
         }
-
         .template-5 .mini-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 10px;
             padding: 15px;
         }
-
         .template-5 .mini-grid div {
             height: 60px;
             background: #f8f9fa;
@@ -468,7 +447,6 @@
         }
     </style>
 </head>
-
 <body>
     <div class="landing-page">
         <!-- Navbar -->
@@ -484,8 +462,7 @@
         <section class="hero">
             <div class="hero-content">
                 <h1>Create Professional Resumes in Minutes</h1>
-                <p>Build a clean, modern resume that stands out. Our easy-to-use builder helps you create a professional
-                    resume tailored to your career goals.</p>
+                <p>Build a clean, modern resume that stands out. Our easy-to-use builder helps you create a professional resume tailored to your career goals.</p>
                 <a href="{% url 'signup' %}" class="btn-primary">Create Your Resume</a>
             </div>
         </section>
@@ -494,8 +471,7 @@
         <section class="templates-section">
             <div class="templates-container">
                 <h2>Choose From 5 Professional Templates</h2>
-                <p class="templates-subtitle">Stand out with modern, eye-catching designs tailored for every industry
-                </p>
+                <p class="templates-subtitle">Stand out with modern, eye-catching designs tailored for every industry</p>
                 <div class="templates-grid">
                     <div class="template-card">
                         <div class="template-preview template-1">
@@ -555,8 +531,7 @@
                                 <div class="mini-name">MIKE ROSS</div>
                             </div>
                             <div class="mini-grid">
-                                <div></div>
-                                <div></div>
+                                <div></div><div></div>
                             </div>
                         </div>
                         <h3>Executive</h3>
@@ -577,8 +552,7 @@
                     <div class="feature-card">
                         <div class="feature-icon">⚡</div>
                         <h3>Quick & Easy</h3>
-                        <p>Build your resume in minutes with our intuitive step-by-step process. No design skills
-                            needed.</p>
+                        <p>Build your resume in minutes with our intuitive step-by-step process. No design skills needed.</p>
                     </div>
                     <div class="feature-card">
                         <div class="feature-icon">🎯</div>
@@ -605,5 +579,4 @@
         </footer>
     </div>
 </body>
-
 </html>

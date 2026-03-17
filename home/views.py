@@ -24,6 +24,105 @@ def builder(request):
 
 
 @login_required
+def builder_fullstack(request):
+    """Render the resume builder form tailored for Full Stack Developers."""
+    context = {
+        'profession': 'Full Stack Developer',
+        'suggested_skills': [
+            'JavaScript', 'Python', 'React', 'Node.js', 'Django', 'MongoDB',
+            'PostgreSQL', 'Docker', 'AWS', 'Git', 'REST APIs', 'GraphQL'
+        ],
+        'suggested_projects': [
+            'E-commerce Platform', 'Social Media Dashboard', 'Task Management App',
+            'Real-time Chat Application', 'API Gateway Service'
+        ],
+        'template_type': 'modern',
+        'form_title': 'Full Stack Developer Resume Builder'
+    }
+    return render(request, 'builder_fullstack.html', context)
+
+
+@login_required
+def builder_3d_generalist(request):
+    """Render the resume builder form tailored for 3D Generalists."""
+    context = {
+        'profession': '3D Generalist',
+        'suggested_skills': [
+            'Maya', 'Blender', 'ZBrush', 'Substance Painter', 'Houdini',
+            'Arnold', 'V-Ray', 'Unity', 'Unreal Engine', 'Marvelous Designer',
+            'Rigging', 'Motion Capture'
+        ],
+        'suggested_projects': [
+            'Character Modeling Portfolio', 'Environment Design', 'Product Visualization',
+            'Animation Reel', 'VFX Simulation'
+        ],
+        'template_type': 'creative',
+        'form_title': '3D Generalist Resume Builder'
+    }
+    return render(request, 'builder_3d.html', context)
+
+
+@login_required
+def builder_data_scientist(request):
+    """Render the resume builder form tailored for Data Scientists."""
+    context = {
+        'profession': 'Data Scientist',
+        'suggested_skills': [
+            'Python', 'R', 'SQL', 'TensorFlow', 'PyTorch', 'Scikit-learn',
+            'Pandas', 'NumPy', 'Tableau', 'Power BI', 'Spark', 'Hadoop',
+            'Machine Learning', 'Deep Learning', 'Statistical Analysis'
+        ],
+        'suggested_projects': [
+            'Predictive Analytics Model', 'NLP Sentiment Analysis', 'Recommendation System',
+            'Computer Vision Project', 'Time Series Forecasting'
+        ],
+        'template_type': 'classic',
+        'form_title': 'Data Scientist Resume Builder'
+    }
+    return render(request, 'builder_data.html', context)
+
+
+@login_required
+def builder_ux_designer(request):
+    """Render the resume builder form tailored for UX/UI Designers."""
+    context = {
+        'profession': 'UX/UI Designer',
+        'suggested_skills': [
+            'Figma', 'Adobe XD', 'Sketch', 'InVision', 'Prototyping',
+            'User Research', 'Wireframing', 'Design Systems', 'HTML/CSS',
+            'Interaction Design', 'Usability Testing', 'Visual Design'
+        ],
+        'suggested_projects': [
+            'Mobile App Redesign', 'Design System Creation', 'E-commerce UX Overhaul',
+            'Dashboard Interface Design', 'User Research Study'
+        ],
+        'template_type': 'minimalist',
+        'form_title': 'UX/UI Designer Resume Builder'
+    }
+    return render(request, 'builder_ux.html', context)
+
+
+@login_required
+def builder_executive(request):
+    """Render the resume builder form tailored for Executives."""
+    context = {
+        'profession': 'Executive',
+        'suggested_skills': [
+            'Strategic Planning', 'Team Leadership', 'P&L Management',
+            'Business Development', 'Stakeholder Management', 'Change Management',
+            'M&A', 'Board Governance', 'Crisis Management', 'Investor Relations'
+        ],
+        'suggested_projects': [
+            'Company Turnaround', 'IPO Launch', 'Merger Integration',
+            'Digital Transformation', 'Market Expansion'
+        ],
+        'template_type': 'executive',
+        'form_title': 'Executive Resume Builder'
+    }
+    return render(request, 'builder_executive.html', context)
+
+
+@login_required
 def gen_resume(request):
     """Generate and display the resume page."""
     if request.method == 'POST':

@@ -1,14 +1,11 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <title>Generated Resume - Executive</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+Pro:wght@300;400;600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             background-color: #f3f4f6;
@@ -349,22 +346,12 @@
         }
 
         @media print {
-            body {
-                background: none;
-                padding: 0;
-            }
-
-            .resume-sheet {
-                box-shadow: none;
-            }
-
-            .download-btn-container {
-                display: none;
-            }
+            body { background: none; padding: 0; }
+            .resume-sheet { box-shadow: none; }
+            .download-btn-container { display: none; }
         }
     </style>
 </head>
-
 <body>
     <div class="resume-wrapper">
         <div id="mn" class="resume-sheet">
@@ -414,9 +401,9 @@
                         {% if achievements1 %}
                         <div class="exp-achievements">
                             {% for ach in achievements1.splitlines %}
-                            {% if ach.strip %}
-                            <div class="achievement">{{ ach|cut:"-"|cut:"•" }}</div>
-                            {% endif %}
+                                {% if ach.strip %}
+                                <div class="achievement">{{ ach|cut:"-"|cut:"•" }}</div>
+                                {% endif %}
                             {% endfor %}
                         </div>
                         {% endif %}
@@ -437,9 +424,9 @@
                         {% if achievements2 %}
                         <div class="exp-achievements">
                             {% for ach in achievements2.splitlines %}
-                            {% if ach.strip %}
-                            <div class="achievement">{{ ach|cut:"-"|cut:"•" }}</div>
-                            {% endif %}
+                                {% if ach.strip %}
+                                <div class="achievement">{{ ach|cut:"-"|cut:"•" }}</div>
+                                {% endif %}
                             {% endfor %}
                         </div>
                         {% endif %}
@@ -474,15 +461,13 @@
                         <div class="edu-item">
                             <div class="edu-degree">{{ degree1|default:"Degree" }}</div>
                             <div class="edu-school">{{ college1|default:"Institution" }}</div>
-                            <div class="edu-details">{{ year1|default:"" }}{% if gpa1 %} | GPA: {{ gpa1 }}{% endif %}
-                            </div>
+                            <div class="edu-details">{{ year1|default:"" }}{% if gpa1 %} | GPA: {{ gpa1 }}{% endif %}</div>
                         </div>
                         {% if degree2 %}
                         <div class="edu-item">
                             <div class="edu-degree">{{ degree2 }}</div>
                             <div class="edu-school">{{ college2 }}</div>
-                            <div class="edu-details">{{ year2|default:"" }}{% if gpa2 %} | GPA: {{ gpa2 }}{% endif %}
-                            </div>
+                            <div class="edu-details">{{ year2|default:"" }}{% if gpa2 %} | GPA: {{ gpa2 }}{% endif %}</div>
                         </div>
                         {% endif %}
                     </div>
@@ -495,9 +480,9 @@
                             <div class="section-title">Certifications</div>
                         </div>
                         {% for cert in certifications.splitlines %}
-                        {% if cert.strip %}
-                        <div class="achievement" style="margin-bottom: 10px;">{{ cert|cut:"-"|cut:"•" }}</div>
-                        {% endif %}
+                            {% if cert.strip %}
+                            <div class="achievement" style="margin-bottom: 10px;">{{ cert|cut:"-"|cut:"•" }}</div>
+                            {% endif %}
                         {% endfor %}
                     </div>
                     {% endif %}
@@ -600,5 +585,4 @@
         }
     </script>
 </body>
-
 </html>

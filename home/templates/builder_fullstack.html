@@ -1,0 +1,322 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{{ form_title }} - Resume Builder</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Google Fonts - Google Sans & DM Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static '\css\style.css' %}">
+    <style>
+        body, html {
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 60px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .top-nav .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .top-nav .nav-right {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .top-nav .nav-right a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .profile-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            text-decoration: none;
+        }
+
+        .profession-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50px;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .suggested-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .skill-tag {
+            padding: 6px 14px;
+            background: rgba(102, 126, 234, 0.2);
+            border: 1px solid rgba(102, 126, 234, 0.4);
+            border-radius: 20px;
+            font-size: 12px;
+            color: #a5b4fc;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .skill-tag:hover {
+            background: rgba(102, 126, 234, 0.4);
+            color: #fff;
+        }
+
+        .project-suggestions {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 15px;
+        }
+
+        .project-suggestions h6 {
+            color: #fff;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        .project-suggestions ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .project-suggestions li {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 13px;
+            padding: 6px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .project-suggestions li:last-child {
+            border-bottom: none;
+        }
+
+        .project-suggestions li:before {
+            content: "💻 ";
+            margin-right: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+        <a href="{% url 'home' %}" class="logo">Resume Builder</a>
+        <div class="nav-right">
+            <a href="{% url 'home' %}">Templates</a>
+            <a href="{% url 'profile' %}" class="profile-icon">{{ request.user.first_name|first|upper }}{{ request.user.last_name|first|upper }}</a>
+        </div>
+    </nav>
+
+    <div class="app-container">
+        <div class="app-header">
+            <span class="profession-badge">⚡ {{ profession }}</span>
+            <h1>{{ form_title }}</h1>
+            <p class="text-white">Build a resume that showcases your full stack expertise</p>
+        </div>
+
+        <form action="{% url 'resume' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="template_type" value="{{ template_type }}">
+
+            <!-- PROFILE -->
+            <div class="card p-4">
+                <div class="section-title">Profile</div>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <input class="form-control" name="name" placeholder="Full name" required>
+                    </div>
+                    <div class="col-md-6">
+                        <input class="form-control" name="title" placeholder="e.g. Senior Full Stack Developer" required>
+                    </div>
+                    <div class="col-md-6">
+                        <input class="form-control" name="email" placeholder="Email address" required>
+                    </div>
+                    <div class="col-md-6">
+                        <input class="form-control" name="phone" placeholder="Phone number">
+                    </div>
+                    <div class="col-12">
+                        <input class="form-control" name="location" placeholder="Location (City, Country)">
+                    </div>
+                    <div class="col-md-4">
+                        <input class="form-control" name="linkedin" placeholder="LinkedIn URL">
+                    </div>
+                    <div class="col-md-4">
+                        <input class="form-control" name="github" placeholder="GitHub URL">
+                    </div>
+                    <div class="col-md-4">
+                        <input class="form-control" name="portfolio" placeholder="Portfolio Website">
+                    </div>
+                    <div class="col-12">
+                        <textarea class="form-control" rows="3" name="about" placeholder="Full Stack Developer with X years of experience building scalable web applications..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TECHNICAL SKILLS -->
+            <div class="card p-4">
+                <div class="section-title">Technical Skills</div>
+                <p class="text-white-50 mb-3" style="font-size: 13px;">Click to add suggested skills:</p>
+                <div class="suggested-skills">
+                    {% for skill in suggested_skills %}
+                    <span class="skill-tag" onclick="addSkill(this)">{{ skill }}</span>
+                    {% endfor %}
+                </div>
+                <div class="row g-3 mt-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Programming Languages</label>
+                        <input class="form-control" name="prog_langs" id="prog_langs" placeholder="e.g. JavaScript, Python, TypeScript">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Frontend Frameworks</label>
+                        <input class="form-control" name="frameworks" placeholder="e.g. React, Vue, Angular">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Backend & Databases</label>
+                        <input class="form-control" name="databases" placeholder="e.g. Node.js, Django, PostgreSQL, MongoDB">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">DevOps & Tools</label>
+                        <input class="form-control" name="dev_tools" placeholder="e.g. Docker, AWS, Git, CI/CD">
+                    </div>
+                </div>
+            </div>
+
+            <!-- EXPERIENCE -->
+            <div class="card p-4">
+                <div class="section-title">Professional Experience</div>
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <input class="form-control" name="company1" placeholder="Company Name">
+                    </div>
+                    <div class="col-md-4">
+                        <input class="form-control" name="post1" placeholder="Job Title">
+                    </div>
+                    <div class="col-md-4">
+                        <input class="form-control" name="duration1" placeholder="Duration (e.g. Jan 2022 - Present)">
+                    </div>
+                    <div class="col-12">
+                        <textarea class="form-control" rows="3" name="lin11" placeholder="• Developed full-stack applications using React and Node.js
+• Implemented RESTful APIs serving 100K+ daily requests
+• Optimized database queries reducing load times by 40%"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PROJECTS -->
+            <div class="card p-4">
+                <div class="section-title">Projects</div>
+                <div class="project-suggestions">
+                    <h6>💡 Suggested Project Ideas:</h6>
+                    <ul>
+                        {% for project in suggested_projects %}
+                        <li>{{ project }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="row g-3 mt-3">
+                    <div class="col-md-6">
+                        <input class="form-control" name="project1" placeholder="Project Name">
+                    </div>
+                    <div class="col-md-3">
+                        <input class="form-control" name="durat1" placeholder="Duration">
+                    </div>
+                    <div class="col-md-3">
+                        <input class="form-control" name="project_tech1" placeholder="Tech Stack">
+                    </div>
+                    <div class="col-12">
+                        <textarea class="form-control" rows="2" name="desc1" placeholder="Project description and your contributions..."></textarea>
+                    </div>
+                    <div class="col-12">
+                        <input class="form-control" name="project_url1" placeholder="Live Demo / GitHub URL">
+                    </div>
+                </div>
+            </div>
+
+            <!-- EDUCATION -->
+            <div class="card p-4">
+                <div class="section-title">Education</div>
+                <div class="row g-3">
+                    <div class="col-md-5">
+                        <input class="form-control" name="degree1" placeholder="Degree (e.g. BS Computer Science)">
+                    </div>
+                    <div class="col-md-5">
+                        <input class="form-control" name="college1" placeholder="University/College">
+                    </div>
+                    <div class="col-md-2">
+                        <input class="form-control" name="year1" placeholder="Year">
+                    </div>
+                </div>
+            </div>
+
+            <!-- CERTIFICATIONS -->
+            <div class="card p-4">
+                <div class="section-title">Certifications</div>
+                <div class="row g-3">
+                    <div class="col-12">
+                        <textarea class="form-control" rows="2" name="certifications" placeholder="AWS Certified Developer, MongoDB Certified Developer, etc."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                <button class="btn primary-btn btn-lg">
+                    Generate Resume
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function addSkill(element) {
+            const input = document.getElementById('prog_langs');
+            const currentValue = input.value;
+            const skill = element.textContent;
+            if (currentValue) {
+                input.value = currentValue + ', ' + skill;
+            } else {
+                input.value = skill;
+            }
+            element.style.background = 'rgba(102, 126, 234, 0.6)';
+        }
+    </script>
+</body>
+
+</html>

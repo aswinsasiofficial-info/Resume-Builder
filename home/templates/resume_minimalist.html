@@ -1,14 +1,11 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <title>Generated Resume - Minimalist</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         body {
             background-color: #f3f4f6;
@@ -207,23 +204,12 @@
         }
 
         @media print {
-            body {
-                background: none;
-                padding: 0;
-            }
-
-            .resume-sheet {
-                box-shadow: none;
-                padding: 40px;
-            }
-
-            .download-btn-container {
-                display: none;
-            }
+            body { background: none; padding: 0; }
+            .resume-sheet { box-shadow: none; padding: 40px; }
+            .download-btn-container { display: none; }
         }
     </style>
 </head>
-
 <body>
     <div class="resume-wrapper">
         <div id="mn" class="resume-sheet">
@@ -291,8 +277,7 @@
                         <div class="item-title">{{ degree1|default:"Degree" }}</div>
                         <div class="item-date">{{ year1|default:"" }}</div>
                     </div>
-                    <div class="item-subtitle">{{ college1|default:"Institution" }}{% if gpa1 %} — GPA: {{ gpa1 }}{%
-                        endif %}</div>
+                    <div class="item-subtitle">{{ college1|default:"Institution" }}{% if gpa1 %} — GPA: {{ gpa1 }}{% endif %}</div>
                     {% if honors1 %}<p class="item-description">{{ honors1 }}</p>{% endif %}
                 </div>
                 {% if degree2 %}
@@ -392,15 +377,13 @@
                     <div class="reference">
                         <div class="reference-name">{{ reference_name1 }}</div>
                         {% if reference_title1 %}<div>{{ reference_title1 }}</div>{% endif %}
-                        {% if reference_contact1 %}<div style="color: #7f8c8d;">{{ reference_contact1 }}</div>{% endif
-                        %}
+                        {% if reference_contact1 %}<div style="color: #7f8c8d;">{{ reference_contact1 }}</div>{% endif %}
                     </div>
                     {% if reference_name2 %}
                     <div class="reference">
                         <div class="reference-name">{{ reference_name2 }}</div>
                         {% if reference_title2 %}<div>{{ reference_title2 }}</div>{% endif %}
-                        {% if reference_contact2 %}<div style="color: #7f8c8d;">{{ reference_contact2 }}</div>{% endif
-                        %}
+                        {% if reference_contact2 %}<div style="color: #7f8c8d;">{{ reference_contact2 }}</div>{% endif %}
                     </div>
                     {% endif %}
                 </div>
@@ -427,5 +410,4 @@
         }
     </script>
 </body>
-
 </html>
