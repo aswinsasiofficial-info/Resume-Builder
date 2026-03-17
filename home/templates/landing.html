@@ -46,6 +46,10 @@
             font-weight: 700;
             color: #fff;
             text-decoration: none;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .nav-links {
@@ -451,7 +455,7 @@
     <div class="landing-page">
         <!-- Navbar -->
         <nav class="navbar">
-            <a href="{% url 'landing' %}" class="logo">Resume Builder</a>
+            <a href="{% url 'landing' %}" class="logo">CareerCraft</a>
             <div class="nav-links">
                 <a href="{% url 'login' %}">Sign In</a>
                 <a href="{% url 'signup' %}" class="btn-nav">Get Started</a>
@@ -461,9 +465,9 @@
         <!-- Hero Section -->
         <section class="hero">
             <div class="hero-content">
-                <h1>Create Professional Resumes in Minutes</h1>
-                <p>Build a clean, modern resume that stands out. Our easy-to-use builder helps you create a professional resume tailored to your career goals.</p>
-                <a href="{% url 'signup' %}" class="btn-primary">Create Your Resume</a>
+                <h1>Craft Your Career Success Story</h1>
+                <p>Build a professional, job-winning resume in minutes with CareerCraft. Our AI-powered builder helps you create stunning resumes that land interviews.</p>
+                <a href="{% url 'signup' %}" class="btn-primary">Start Building for Free</a>
             </div>
         </section>
 
@@ -547,7 +551,7 @@
         <!-- Features Section -->
         <section class="features">
             <div class="features-container">
-                <h2>Why Job Seekers Love Us</h2>
+                <h2>Why Job Seekers Love CareerCraft</h2>
                 <div class="features-grid">
                     <div class="feature-card">
                         <div class="feature-icon">⚡</div>
@@ -575,7 +579,7 @@
 
         <!-- Footer -->
         <footer class="footer">
-            <p>&copy; 2026 Resume Builder. All rights reserved.</p>
+            <p>&copy; 2026 CareerCraft. All rights reserved.</p>
         </footer>
     </div>
 </body>

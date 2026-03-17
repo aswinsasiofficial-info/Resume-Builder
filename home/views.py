@@ -7,6 +7,8 @@ from django.contrib.auth.decorators import login_required
 
 def landing(request):
     """Render the landing page."""
+    if request.user.is_authenticated:
+        return redirect('home')
     return render(request, 'landing.html')
 
 

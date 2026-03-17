@@ -93,7 +93,7 @@
         }
 
         .btn-logout {
-            padding: 10px 24px;
+            padding: 8px 18px;
             border-radius: 50px;
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
@@ -101,7 +101,7 @@
             color: #fff;
             text-decoration: none;
             font-weight: 600;
-            font-size: 14px;
+            font-size: 13px;
             transition: all 0.3s;
             cursor: pointer;
         }
@@ -112,42 +112,365 @@
             color: #fff;
         }
 
-        /* Main Content */
+        /* Main Content - Updated for Hero */
         .main-content {
-            padding: 60px;
-            max-width: 1400px;
-            margin: 0 auto;
+            padding: 0;
+            max-width: 100%;
         }
 
-        .welcome-section {
+        /* Hero Section - Redesigned */
+        .hero-section {
+            position: relative;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 60px 80px;
+            overflow: hidden;
+        }
+
+        /* Animated Background Elements */
+        .hero-bg-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .hero-shape {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%);
+            animation: float 20s infinite ease-in-out;
+            filter: blur(60px);
+        }
+
+        .hero-shape-1 {
+            width: 400px;
+            height: 400px;
+            top: -100px;
+            left: -100px;
+            animation-delay: 0s;
+        }
+
+        .hero-shape-2 {
+            width: 300px;
+            height: 300px;
+            bottom: 10%;
+            right: -50px;
+            animation-delay: 7s;
+        }
+
+        .hero-shape-3 {
+            width: 250px;
+            height: 250px;
+            top: 50%;
+            left: 50%;
+            animation-delay: 14s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(30px, -30px) scale(1.1); }
+            50% { transform: translate(-20px, 20px) scale(0.9); }
+            75% { transform: translate(20px, 30px) scale(1.05); }
+        }
+
+        /* Hero Content */
+        .hero-content {
+            position: relative;
+            z-index: 1;
             text-align: center;
-            margin-bottom: 60px;
+            max-width: 1200px;
+            animation: fadeInUp 1s ease-out;
+            margin-top: -120px;
         }
 
-        .welcome-section h1 {
-            font-size: 48px;
-            font-weight: 700;
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Badge */
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 24px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
             color: #fff;
-            margin-bottom: 16px;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 30px;
+            animation: fadeInDown 0.8s ease-out;
         }
 
-        .welcome-section p {
-            font-size: 20px;
-            color: rgba(255, 255, 255, 0.8);
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(102, 126, 234, 0.7); }
+            50% { box-shadow: 0 0 0 10px rgba(102, 126, 234, 0); }
+        }
+
+        /* Hero Title */
+        .hero-title {
+            font-size: 64px;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -2px;
+            animation: slideInUp 0.8s ease-out 0.2s both;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(60px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-title-accent {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+        }
+
+        .hero-title-accent::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2px;
+            animation: expandWidth 1s ease-out 0.5s both;
+        }
+
+        @keyframes expandWidth {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        /* Hero Subtitle */
+        .hero-subtitle {
+            font-size: 22px;
+            color: rgba(255, 255, 255, 0.85);
+            max-width: 700px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+            animation: fadeIn 1.2s ease-out 0.4s both;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Hero CTA Buttons */
+        .hero-cta-group {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            animation: fadeInUp 1.4s ease-out 0.6s both;
+        }
+
+        .btn-hero-primary {
+            padding: 18px 48px;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 18px;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-hero-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 100%);
+            transition: left 0.5s;
+        }
+
+        .btn-hero-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-hero-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.6);
+            color: #fff;
+        }
+
+        .btn-hero-secondary {
+            padding: 18px 48px;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 18px;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-hero-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+            color: #fff;
+        }
+
+        .hero-btn-icon {
+            width: 20px;
+            height: 20px;
+            transition: transform 0.3s;
+        }
+
+        .btn-hero-primary:hover .hero-btn-icon {
+            transform: translateX(5px);
+        }
+
+        /* Hero Features */
+        .hero-features {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 60px;
+            animation: fadeIn 1.6s ease-out 0.8s both;
+        }
+
+        .hero-feature-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .hero-feature-check {
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+        }
+
+        /* Scroll Indicator */
+        .hero-scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 12px;
+            animation: bounce 2s infinite;
+            z-index: 1;
+        }
+
+        .hero-scroll-mouse {
+            width: 26px;
+            height: 40px;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            border-radius: 13px;
+            position: relative;
+        }
+
+        .hero-scroll-wheel {
+            width: 4px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 2px;
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: scroll 2s infinite;
+        }
+
+        @keyframes scroll {
+            0% { opacity: 1; top: 8px; }
+            100% { opacity: 0; top: 20px; }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
         }
 
         /* Templates Carousel */
         .templates-section {
             position: relative;
-            padding: 0 60px;
+            padding: 0px 60px;
+            z-index: 2;
         }
 
         .templates-section h2 {
             color: #fff;
-            font-size: 32px;
-            font-weight: 600;
-            margin-bottom: 40px;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 60px;
             text-align: center;
+            letter-spacing: -1px;
         }
 
         .carousel-container {
@@ -668,6 +991,20 @@
 
         /* Responsive */
         @media (max-width: 1024px) {
+            .hero-title {
+                font-size: 48px;
+            }
+            .hero-subtitle {
+                font-size: 18px;
+            }
+            .hero-cta-group {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .hero-features {
+                flex-wrap: wrap;
+                gap: 20px;
+            }
             .footer-content {
                 grid-template-columns: 1fr 1fr;
                 gap: 40px;
@@ -675,17 +1012,34 @@
         }
 
         @media (max-width: 768px) {
+            .hero-section {
+                padding: 100px 30px 60px;
+                min-height: auto;
+            }
+            .hero-title {
+                font-size: 36px;
+                letter-spacing: -1px;
+            }
+            .hero-subtitle {
+                font-size: 16px;
+            }
+            .hero-features {
+                flex-direction: column;
+                align-items: center;
+            }
+            .btn-hero-primary,
+            .btn-hero-secondary {
+                width: 100%;
+                justify-content: center;
+            }
             .navbar {
                 padding: 20px 30px;
             }
-            .main-content {
-                padding: 40px 30px;
-            }
-            .welcome-section h1 {
-                font-size: 32px;
-            }
             .templates-section {
-                padding: 0 40px;
+                padding: 60px 30px;
+            }
+            .templates-section h2 {
+                font-size: 32px;
             }
             .footer {
                 padding: 40px 30px 20px;
@@ -704,12 +1058,11 @@
 </head>
 <body>
     <div class="home-page">
-        <!-- Navbar -->
+       <!-- Navbar -->
         <nav class="navbar">
-            <a href="{% url 'home' %}" class="logo">Resume Builder</a>
+            <a href="{% url 'home' %}" class="logo">CareerCraft</a>
             <div class="nav-right">
                 <span class="user-name">Hi, {{ request.user.first_name|default:request.user.username }}!</span>
-                <a href="{% url 'builder' %}" class="btn-nav">Builder</a>
                 <a href="{% url 'profile' %}" class="profile-icon">{{ request.user.first_name|first|upper }}{{ request.user.last_name|first|upper }}</a>
                 <form action="{% url 'account_logout' %}" method="post" style="display: inline;">
                     {% csrf_token %}
@@ -720,179 +1073,139 @@
 
         <!-- Main Content -->
         <div class="main-content">
-            <!-- Welcome Section -->
-            <div class="welcome-section">
-                <h1>UNLOCK YOUR CAREER'S POTENTIAL.<br>DESIGN YOUR FUTURE!</h1>
-                <p>Select from 5 professionally designed templates to create a resume that stands out</p>
-            </div>
+            <!-- Hero Section -->
+            <section class="hero-section">
+                <!-- Animated Background Shapes -->
+                <div class="hero-bg-shapes">
+                    <div class="hero-shape hero-shape-1"></div>
+                    <div class="hero-shape hero-shape-2"></div>
+                    <div class="hero-shape hero-shape-3"></div>
+                </div>
 
-            <!-- Templates Section -->
-            <div class="templates-section">
-                <h2>5 Modern Resume Templates</h2>
-                <div class="carousel-container">
-                    <button class="carousel-arrow prev" onclick="moveCarousel(-1)">
-                        <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
-                    </button>
+                <!-- Hero Content -->
+                <div class="hero-content">
+                    <!-- Title -->
+                    <h1 class="hero-title">
+                        Build Your Perfect Resume<br>
+                        in <span class="hero-title-accent">Minutes</span>
+                    </h1>
 
-                    <div class="templates-carousel" id="templatesCarousel">
-                        <!-- Template 1 -->
-                        <div class="template-card">
-                            <div class="template-preview template-1">
-                                <div class="mini-header">
-                                    <div class="mini-name">JOHN DOE</div>
-                                    <div class="mini-title">Software Engineer</div>
-                                </div>
-                                <div class="mini-section"></div>
-                                <div class="mini-section"></div>
-                            </div>
-                            <h3>Classic Professional</h3>
-                            <p>Clean and timeless design perfect for traditional industries like finance, law, and healthcare</p>
-                            <a href="{% url 'builder' %}?template=classic" class="btn-select">Use This Template</a>
-                        </div>
+                    <!-- Subtitle -->
+                    <p class="hero-subtitle">
+                        Create a professional, job-winning resume that stands out. 
+                        Choose from 5+ ATS-friendly templates and land your dream job faster.
+                    </p>
 
-                        <!-- Template 2 -->
-                        <div class="template-card">
-                            <div class="template-preview template-2">
-                                <div class="mini-sidebar"></div>
-                                <div class="mini-content">
-                                    <div class="mini-name">JANE SMITH</div>
-                                    <div class="mini-bar"></div>
-                                    <div class="mini-bar"></div>
-                                    <div class="mini-bar"></div>
-                                </div>
-                            </div>
-                            <h3>Modern Split</h3>
-                            <p>Two-column layout with a contemporary feel, ideal for tech and creative roles</p>
-                            <a href="{% url 'builder' %}?template=modern" class="btn-select">Use This Template</a>
-                        </div>
-
-                        <!-- Template 3 -->
-                        <div class="template-card">
-                            <div class="template-preview template-3">
-                                <div class="mini-header-alt">
-                                    <div class="mini-name">ALEX CHEN</div>
-                                </div>
-                                <div class="mini-body">
-                                    <div class="mini-line"></div>
-                                    <div class="mini-line"></div>
-                                    <div class="mini-line"></div>
-                                    <div class="mini-line"></div>
-                                </div>
-                            </div>
-                            <h3>Minimalist</h3>
-                            <p>Simple and elegant design that lets your experience speak for itself</p>
-                            <a href="{% url 'builder' %}?template=minimalist" class="btn-select">Use This Template</a>
-                        </div>
-
-                        <!-- Template 4 -->
-                        <div class="template-card">
-                            <div class="template-preview template-4">
-                                <div class="mini-accent"></div>
-                                <div class="mini-main">
-                                    <div class="mini-name">SARAH LEE</div>
-                                    <div class="mini-dots">
-                                        <span></span><span></span><span></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <h3>Creative Accent</h3>
-                            <p>Bold colors and unique layout for designers, marketers, and creatives</p>
-                            <a href="{% url 'builder' %}?template=creative" class="btn-select">Use This Template</a>
-                        </div>
-
-                        <!-- Template 5 -->
-                        <div class="template-card">
-                            <div class="template-preview template-5">
-                                <div class="mini-top">
-                                    <div class="mini-avatar"></div>
-                                    <div class="mini-name">MIKE ROSS</div>
-                                </div>
-                                <div class="mini-grid">
-                                    <div></div><div></div>
-                                    <div></div><div></div>
-                                </div>
-                            </div>
-                            <h3>Executive</h3>
-                            <p>Premium design with sophisticated styling for senior-level positions</p>
-                            <a href="{% url 'builder' %}?template=executive" class="btn-select">Use This Template</a>
-                        </div>
+                    <!-- CTA Buttons -->
+                    <div class="hero-cta-group">
+                        <a href="{% url 'builder' %}" class="btn-hero-primary">
+                            Start Building Now
+                            <svg class="hero-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </a>
+                        <a href="#templates" class="btn-hero-secondary">
+                            View Templates
+                        </a>
                     </div>
 
-                    <button class="carousel-arrow next" onclick="moveCarousel(1)">
-                        <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
-                    </button>
+                    <!-- Features -->
+                    <div class="hero-features">
+                        <div class="hero-feature-item">
+                            <div class="hero-feature-check">✓</div>
+                            <span>ATS-Friendly Templates</span>
+                        </div>
+                        <div class="hero-feature-item">
+                            <div class="hero-feature-check">✓</div>
+                            <span>Professional Designs</span>
+                        </div>
+                        <div class="hero-feature-item">
+                            <div class="hero-feature-check">✓</div>
+                            <span>Easy to Use</span>
+                        </div>
+                        <div class="hero-feature-item">
+                            <div class="hero-feature-check">✓</div>
+                            <span>Free to Start</span>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </section>
 
-            <!-- Profession-Specific Templates Section -->
-            <div class="templates-section profession-section">
-                <h2>Profession-Specific Resume Builders</h2>
-                <p class="section-subtitle">Choose a builder tailored to your career path with pre-filled skills and industry-specific fields</p>
+            <!-- Benefits Section -->
+            <div class="templates-section">
+                <h2>Why Choose Resume Builder?</h2>
 
                 <div class="profession-grid">
-                    <!-- Full Stack Developer -->
+                    <!-- Benefit 1 -->
                     <div class="profession-card">
                         <div class="profession-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">⚡</div>
-                        <h3>Full Stack Developer</h3>
-                        <p>Tech-focused resume with modern split layout. Includes programming languages, frameworks, and project showcases.</p>
+                        <h3>Lightning Fast</h3>
+                        <p>Build your resume in minutes with our intuitive interface. Pre-filled suggestions help you complete each section quickly.</p>
                         <div class="profession-tags">
-                            <span>React</span>
-                            <span>Node.js</span>
-                            <span>Python</span>
+                            <span>Quick Setup</span>
+                            <span>Auto-Fill</span>
+                            <span>Instant Preview</span>
                         </div>
-                        <a href="{% url 'builder_fullstack' %}" class="btn-select">Build Resume</a>
                     </div>
 
-                    <!-- 3D Generalist -->
+                    <!-- Benefit 2 -->
                     <div class="profession-card">
-                        <div class="profession-icon" style="background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);">🎨</div>
-                        <h3>3D Generalist</h3>
-                        <p>Creative resume with colorful accent design. Features software skills, portfolio highlights, and specializations.</p>
+                        <div class="profession-icon" style="background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);">🎯</div>
+                        <h3>ATS Optimized</h3>
+                        <p>Our templates are designed to pass Applicant Tracking Systems. Get past the bots and reach human recruiters.</p>
                         <div class="profession-tags">
-                            <span>Maya</span>
-                            <span>Blender</span>
-                            <span>ZBrush</span>
+                            <span>ATS-Friendly</span>
+                            <span>Industry Standard</span>
+                            <span>Keyword Ready</span>
                         </div>
-                        <a href="{% url 'builder_3d' %}" class="btn-select">Build Resume</a>
                     </div>
 
-                    <!-- Data Scientist -->
+                    <!-- Benefit 3 -->
                     <div class="profession-card">
-                        <div class="profession-icon" style="background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);">📊</div>
-                        <h3>Data Scientist</h3>
-                        <p>Professional resume with classic layout. Highlights ML frameworks, statistical analysis, and research publications.</p>
+                        <div class="profession-icon" style="background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);">🎨</div>
+                        <h3>Professional Designs</h3>
+                        <p>Choose from 5+ stunning templates crafted by design experts. Stand out from the competition with style.</p>
                         <div class="profession-tags">
-                            <span>Python</span>
-                            <span>TensorFlow</span>
-                            <span>SQL</span>
+                            <span>Modern</span>
+                            <span>Clean</span>
+                            <span>Professional</span>
                         </div>
-                        <a href="{% url 'builder_data' %}" class="btn-select">Build Resume</a>
                     </div>
 
-                    <!-- UX/UI Designer -->
+                    <!-- Benefit 4 -->
                     <div class="profession-card">
                         <div class="profession-icon" style="background: linear-gradient(135deg, #9b59b6 0%, #e74c3c 100%);">✨</div>
-                        <h3>UX/UI Designer</h3>
-                        <p>Elegant resume with minimalist design. Features design tools, case studies, and user research expertise.</p>
+                        <h3>Expert Guidance</h3>
+                        <p>Get AI-powered suggestions for your industry. Learn what hiring managers want to see in your field.</p>
                         <div class="profession-tags">
-                            <span>Figma</span>
-                            <span>Sketch</span>
-                            <span>Adobe XD</span>
+                            <span>AI Tips</span>
+                            <span>Best Practices</span>
+                            <span>Industry Insights</span>
                         </div>
-                        <a href="{% url 'builder_ux' %}" class="btn-select">Build Resume</a>
                     </div>
 
-                    <!-- Executive -->
+                    <!-- Benefit 5 -->
                     <div class="profession-card">
-                        <div class="profession-icon" style="background: linear-gradient(135deg, #1a1a2e 0%, #c9a227 100%);">👔</div>
-                        <h3>Executive</h3>
-                        <p>Premium resume with sophisticated styling. Includes leadership metrics, board positions, and strategic achievements.</p>
+                        <div class="profession-icon" style="background: linear-gradient(135deg, #1a1a2e 0%, #c9a227 100%);">📱</div>
+                        <h3>Multi-Format Export</h3>
+                        <p>Download your resume in PDF, DOCX, or TXT formats. Perfect for online applications and email submissions.</p>
                         <div class="profession-tags">
-                            <span>Leadership</span>
-                            <span>Strategy</span>
-                            <span>P&L</span>
+                            <span>PDF</span>
+                            <span>Word</span>
+                            <span>Text</span>
                         </div>
-                        <a href="{% url 'builder_executive' %}" class="btn-select">Build Resume</a>
+                    </div>
+
+                    <!-- Benefit 6 -->
+                    <div class="profession-card">
+                        <div class="profession-icon" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">💼</div>
+                        <h3>Career Resources</h3>
+                        <p>Access resume tips, cover letter guides, and interview preparation materials to boost your job search.</p>
+                        <div class="profession-tags">
+                            <span>Cover Letters</span>
+                            <span>Interview Prep</span>
+                            <span>Job Search</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -909,7 +1222,7 @@
         <footer class="footer">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <h3>Resume Builder</h3>
+                    <h3>CareerCraft</h3>
                     <p>Create stunning, professional resumes in minutes with our easy-to-use builder. Stand out from the crowd and land your dream job.</p>
                     <div class="footer-social">
                         <a href="#" aria-label="Facebook">f</a>
@@ -947,7 +1260,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>2025 Resume Builder. All rights reserved.</p>
+                <p>2025 CareerCraft. All rights reserved.</p>
                 <div class="footer-bottom-links">
                     <a href="#">Privacy</a>
                     <a href="#">Terms</a>
