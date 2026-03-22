@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>{{ form_title }} - Resume Builder</title>
+    <title>{{ form_title }} - CareerCraft</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Google Fonts - DM Sans -->
@@ -160,7 +160,7 @@
 <body>
     <!-- Top Navigation -->
     <nav class="top-nav">
-        <a href="{% url 'home' %}" class="logo">Resume Builder</a>
+        <a href="{% url 'home' %}" class="logo">CareerCraft</a>
         <div class="nav-right">
             <a href="{% url 'home' %}">Templates</a>
             <a href="{% url 'profile' %}" class="profile-icon">{{ request.user.first_name|first|upper }}{{ request.user.last_name|first|upper }}</a>

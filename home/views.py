@@ -48,7 +48,7 @@ def builder_fullstack(request):
             'Real-time Chat Application', 'API Gateway Service'
         ],
         'template_type': 'modern',
-        'form_title': 'Full Stack Developer Resume Builder'
+        'form_title': 'Full Stack Developer CareerCraft'
     }
     return render(request, 'builder_fullstack.html', context)
 
@@ -68,7 +68,7 @@ def builder_3d_generalist(request):
             'Animation Reel', 'VFX Simulation'
         ],
         'template_type': 'creative',
-        'form_title': '3D Generalist Resume Builder'
+        'form_title': '3D Generalist CareerCraft'
     }
     return render(request, 'builder_3d.html', context)
 
@@ -88,7 +88,7 @@ def builder_data_scientist(request):
             'Computer Vision Project', 'Time Series Forecasting'
         ],
         'template_type': 'classic',
-        'form_title': 'Data Scientist Resume Builder'
+        'form_title': 'Data Scientist CareerCraft'
     }
     return render(request, 'builder_data.html', context)
 
@@ -108,7 +108,7 @@ def builder_ux_designer(request):
             'Dashboard Interface Design', 'User Research Study'
         ],
         'template_type': 'minimalist',
-        'form_title': 'UX/UI Designer Resume Builder'
+        'form_title': 'UX/UI Designer CareerCraft'
     }
     return render(request, 'builder_ux.html', context)
 
@@ -128,7 +128,7 @@ def builder_executive(request):
             'Digital Transformation', 'Market Expansion'
         ],
         'template_type': 'executive',
-        'form_title': 'Executive Resume Builder'
+        'form_title': 'Executive CareerCraft'
     }
     return render(request, 'builder_executive.html', context)
 

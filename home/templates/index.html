@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>CareerCraft - Resume Builder</title>
+    <title>CareerCraft</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Google Fonts - DM Sans -->
@@ -385,6 +385,7 @@
     <nav class="top-nav">
         <a href="{% url 'home' %}" class="logo">CareerCraft</a>
         <div class="nav-right">
+            <a href="{% url 'home' %}">Dashboard</a>
             <a href="{% url 'home' %}">Templates</a>
             <a href="{% url 'profile' %}" class="profile-icon">{{ request.user.first_name|first|upper }}{{ request.user.last_name|first|upper }}</a>
         </div>
@@ -392,7 +393,7 @@
 
     <div class="app-container">
         <div class="app-header">
-            <h1>Resume Builder</h1>
+            <h1>CareerCraft</h1>
             <p class="text-white">Create a clean, professional resume in minutes</p>
         </div>
 
