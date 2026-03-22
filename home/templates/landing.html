@@ -3,15 +3,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>CareerCraft - Create Professional Resumes</title>
+    <title>CareerCraft - Build Your Professional Future</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Google Fonts - DM Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
+        :root {
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --bg-glass: rgba(255, 255, 255, 0.08);
+            --border-glass: rgba(255, 255, 255, 0.15);
+            --text-muted: rgba(255, 255, 255, 0.7);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -20,434 +29,369 @@
 
         body, html {
             font-family: 'DM Sans', sans-serif;
+            scroll-behavior: smooth;
+            color: #fff;
+            overflow-x: hidden;
         }
 
         .landing-page {
             min-height: 100vh;
-            background-image: url("{% static 'img/bg.jpg' %}");
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("{% static 'img/bg.jpg' %}");
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             background-attachment: fixed;
-            display: flex;
-            flex-direction: column;
         }
 
         /* Navbar */
         .navbar {
-            padding: 20px 60px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            padding: 24px 60px;
+            background: rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-glass);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
         .logo {
-            font-size: 28px;
-            font-weight: 700;
+            font-size: 26px;
+            font-weight: 800;
             color: #fff;
             text-decoration: none;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .nav-links {
             display: flex;
-            gap: 30px;
+            gap: 32px;
             align-items: center;
         }
 
-        .nav-links a {
-            color: #fff;
+        .nav-link-item {
+            color: var(--text-muted);
             text-decoration: none;
             font-weight: 500;
-            transition: opacity 0.3s;
-        }
-
-        .nav-links a:hover {
-            opacity: 0.8;
-        }
-
-        .btn-nav {
-            padding: 10px 24px;
-            border-radius: 50px;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: #fff;
-            text-decoration: none;
-            font-weight: 600;
+            font-size: 15px;
             transition: all 0.3s;
         }
 
-        .btn-nav:hover {
-            background: rgba(255, 255, 255, 0.25);
+        .nav-link-item:hover {
             color: #fff;
+        }
+
+        .btn-nav-outline {
+            padding: 10px 24px;
+            border-radius: 12px;
+            border: 1px solid var(--border-glass);
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .btn-nav-outline:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-nav-primary {
+            padding: 10px 24px;
+            border-radius: 12px;
+            background: var(--primary);
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-nav-primary:hover {
+            background: var(--primary-hover);
+            transform: translateY(-1px);
         }
 
         /* Hero Section */
         .hero {
-            flex: 1;
+            padding: 45px 60px 100px;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 60px;
             text-align: center;
+            position: relative;
         }
 
         .hero-content {
-            max-width: 800px;
+            max-width: 900px;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            background: rgba(99, 102, 241, 0.15);
+            color: #818cf8;
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            display: inline-block;
+            border: 1px solid rgba(99, 102, 241, 0.2);
         }
 
         .hero h1 {
-            font-size: 64px;
-            font-weight: 700;
-            color: #fff;
+            font-size: clamp(40px, 8vw, 72px);
+            font-weight: 800;
             margin-bottom: 24px;
-            line-height: 1.2;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, #818cf8 0%, #c084fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .hero p {
             font-size: 20px;
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 40px;
+            color: var(--text-muted);
+            margin-bottom: 48px;
             line-height: 1.6;
+            max-width: 700px;
+            margin-inline: auto;
         }
 
-        .btn-primary {
-            padding: 16px 40px;
-            border-radius: 50px;
-            background: #fff;
-            color: #333;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 18px;
-            display: inline-block;
-            transition: all 0.3s;
-            border: none;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            color: #333;
-        }
-
-        .btn-large {
-            padding: 18px 48px;
-            font-size: 20px;
-        }
-
-        /* Templates Section */
-        .templates-section {
-            padding: 100px 60px;
-            background: rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(10px);
-        }
-
-        .templates-container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .templates-section h2 {
-            text-align: center;
-            color: #fff;
-            font-size: 42px;
-            font-weight: 700;
-            margin-bottom: 16px;
-        }
-
-        .templates-subtitle {
-            text-align: center;
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 18px;
-            margin-bottom: 60px;
-        }
-
-        .templates-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 30px;
-            margin-bottom: 50px;
-        }
-
-        .template-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 16px;
-            padding: 24px;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .template-card:hover {
-            transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .template-preview {
-            width: 100%;
-            height: 280px;
-            background: #fff;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            overflow: hidden;
-            position: relative;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Template 1 - Classic */
-        .template-1 .mini-header {
-            background: #2c3e50;
-            color: #fff;
-            padding: 20px;
-            text-align: center;
-        }
-        .template-1 .mini-name {
-            font-size: 14px;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-        .template-1 .mini-title {
-            font-size: 10px;
-            opacity: 0.9;
-            margin-top: 4px;
-        }
-        .template-1 .mini-section {
-            height: 40px;
-            margin: 15px;
-            background: #ecf0f1;
-            border-radius: 4px;
-        }
-
-        /* Template 2 - Modern Split */
-        .template-2 {
+        .hero-actions {
             display: flex;
-        }
-        .template-2 .mini-sidebar {
-            width: 35%;
-            background: #34495e;
-            height: 100%;
-        }
-        .template-2 .mini-content {
-            flex: 1;
-            padding: 20px;
-        }
-        .template-2 .mini-name {
-            font-size: 12px;
-            font-weight: bold;
-            color: #2c3e50;
-            margin-bottom: 15px;
-        }
-        .template-2 .mini-bar {
-            height: 8px;
-            background: #bdc3c7;
-            margin-bottom: 10px;
-            border-radius: 4px;
-        }
-
-        /* Template 3 - Minimalist */
-        .template-3 .mini-header-alt {
-            padding: 25px 20px;
-            border-bottom: 2px solid #3498db;
-        }
-        .template-3 .mini-name {
-            font-size: 16px;
-            font-weight: 300;
-            color: #2c3e50;
-            letter-spacing: 2px;
-        }
-        .template-3 .mini-body {
-            padding: 20px;
-        }
-        .template-3 .mini-line {
-            height: 6px;
-            background: #ecf0f1;
-            margin-bottom: 12px;
-            border-radius: 3px;
-        }
-
-        /* Template 4 - Creative */
-        .template-4 {
-            display: flex;
-        }
-        .template-4 .mini-accent {
-            width: 30%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            height: 100%;
-        }
-        .template-4 .mini-main {
-            flex: 1;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
+            gap: 20px;
             justify-content: center;
-            align-items: center;
+            flex-wrap: wrap;
         }
-        .template-4 .mini-name {
-            font-size: 14px;
-            font-weight: bold;
-            color: #764ba2;
-        }
-        .template-4 .mini-dots {
+
+        .btn-hero-primary {
+            padding: 18px 40px;
+            border-radius: 14px;
+            background: var(--primary);
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 18px;
+            transition: all 0.3s;
             display: flex;
-            gap: 6px;
-            margin-top: 15px;
-        }
-        .template-4 .mini-dots span {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #667eea;
-        }
-
-        /* Template 5 - Executive */
-        .template-5 .mini-top {
-            background: #1a1a2e;
-            padding: 25px;
-            text-align: center;
-        }
-        .template-5 .mini-avatar {
-            width: 50px;
-            height: 50px;
-            background: #fff;
-            border-radius: 50%;
-            margin: 0 auto 10px;
-        }
-        .template-5 .mini-name {
-            color: #fff;
-            font-size: 12px;
-            font-weight: 600;
-            letter-spacing: 1px;
-        }
-        .template-5 .mini-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+            align-items: center;
             gap: 10px;
-            padding: 15px;
-        }
-        .template-5 .mini-grid div {
-            height: 60px;
-            background: #f8f9fa;
-            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
         }
 
-        .template-card h3 {
+        .btn-hero-primary:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.5);
+        }
+
+        .btn-hero-secondary {
+            padding: 18px 40px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.05);
             color: #fff;
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 10px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 18px;
+            transition: all 0.3s;
+            border: 1px solid var(--border-glass);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            backdrop-filter: blur(10px);
         }
 
-        .template-card p {
-            color: rgba(255, 255, 255, 0.7);
+        .btn-hero-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Stats Section */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 80px;
+            max-width: 800px;
+            margin-inline: auto;
+        }
+
+        .stat-item h4 {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+
+        .stat-item p {
             font-size: 14px;
-            line-height: 1.5;
-        }
-
-        .templates-cta {
-            text-align: center;
-            margin-top: 40px;
+            color: var(--text-muted);
+            margin: 0;
         }
 
         /* Features Section */
-        .features {
-            padding: 80px 60px;
-            background: rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(10px);
-        }
-
-        .features-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .features h2 {
-            text-align: center;
-            color: #fff;
-            font-size: 36px;
-            font-weight: 700;
-            margin-bottom: 60px;
+        .features-section {
+            padding: 120px 60px;
+            background: rgba(0, 0, 0, 0.1);
         }
 
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .feature-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 40px 30px;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: transform 0.3s;
+            padding: 40px;
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 32px;
+            transition: all 0.3s;
         }
 
         .feature-card:hover {
-            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: scale(1.02);
         }
 
         .feature-icon {
-            width: 60px;
-            height: 60px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(168, 85, 247, 0.2));
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 28px;
+            color: #818cf8;
+            margin-bottom: 24px;
         }
 
         .feature-card h3 {
-            color: #fff;
-            font-size: 22px;
-            font-weight: 600;
-            margin-bottom: 12px;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 16px;
         }
 
         .feature-card p {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 15px;
+            color: var(--text-muted);
             line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Testimonials */
+        .testimonials-section {
+            padding: 120px 60px;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .testimonial-card {
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 24px;
+            padding: 32px;
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .testimonial-text {
+            font-size: 20px;
+            font-style: italic;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        .author-img {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: #e2e8f0;
+        }
+
+        .author-info h5 {
+            font-size: 16px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .author-info p {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin: 0;
         }
 
         /* Footer */
         .footer {
-            padding: 30px 60px;
+            padding: 60px;
+            border-top: 1px solid var(--border-glass);
             text-align: center;
-            color: rgba(255, 255, 255, 0.7);
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.5);
         }
 
-        /* Responsive */
+        .footer-logo {
+            margin-bottom: 24px;
+            justify-content: center;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+        }
+
+        .footer-copy {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 14px;
+        }
+
+        /* Mobile Responsive */
         @media (max-width: 768px) {
-            .navbar {
-                padding: 20px 30px;
-            }
-
-            .hero {
-                padding: 40px 30px;
-            }
-
-            .hero h1 {
-                font-size: 40px;
-            }
-
-            .hero p {
-                font-size: 18px;
-            }
-
-            .features {
-                padding: 60px 30px;
-            }
+            .navbar { padding: 20px 30px; }
+            .nav-links { display: none; }
+            .hero { padding: 80px 30px; }
+            .hero h1 { font-size: 48px; }
+            .stats-grid { grid-template-columns: 1fr; gap: 24px; }
+            .templates-section, .features-section, .testimonials-section { padding: 80px 30px; }
+            .section-header h2 { font-size: 32px; }
         }
     </style>
 </head>
@@ -455,123 +399,94 @@
     <div class="landing-page">
         <!-- Navbar -->
         <nav class="navbar">
-            <a href="{% url 'landing' %}" class="logo">CareerCraft</a>
+            <a href="{% url 'landing' %}" class="logo">
+                <div class="logo-icon"><i data-lucide="pen-tool" width="18" height="18"></i></div>
+                CareerCraft
+            </a>
             <div class="nav-links">
-                <a href="{% url 'login' %}">Sign In</a>
-                <a href="{% url 'signup' %}" class="btn-nav">Get Started</a>
+                <a href="{% url 'login' %}" class="btn-nav-outline">Sign In</a>
+                <a href="{% url 'signup' %}" class="btn-nav-primary">Get Started</a>
             </div>
         </nav>
 
         <!-- Hero Section -->
         <section class="hero">
             <div class="hero-content">
-                <h1>Craft Your Career Success Story</h1>
-                <p>Build a professional, job-winning resume in minutes with CareerCraft. Our AI-powered builder helps you create stunning resumes that land interviews.</p>
-                <a href="{% url 'signup' %}" class="btn-primary">Start Building for Free</a>
-            </div>
-        </section>
-
-        <!-- Templates Section -->
-        <section class="templates-section">
-            <div class="templates-container">
-                <h2>Choose From 5 Professional Templates</h2>
-                <p class="templates-subtitle">Stand out with modern, eye-catching designs tailored for every industry</p>
-                <div class="templates-grid">
-                    <div class="template-card">
-                        <div class="template-preview template-1">
-                            <div class="mini-header">
-                                <div class="mini-name">JOHN DOE</div>
-                                <div class="mini-title">Software Engineer</div>
-                            </div>
-                            <div class="mini-section"></div>
-                            <div class="mini-section"></div>
-                        </div>
-                        <h3>Classic Professional</h3>
-                        <p>Clean and timeless design perfect for traditional industries</p>
-                    </div>
-                    <div class="template-card">
-                        <div class="template-preview template-2">
-                            <div class="mini-sidebar"></div>
-                            <div class="mini-content">
-                                <div class="mini-name">JANE SMITH</div>
-                                <div class="mini-bar"></div>
-                                <div class="mini-bar"></div>
-                            </div>
-                        </div>
-                        <h3>Modern Split</h3>
-                        <p>Two-column layout with a contemporary feel</p>
-                    </div>
-                    <div class="template-card">
-                        <div class="template-preview template-3">
-                            <div class="mini-header-alt">
-                                <div class="mini-name">ALEX CHEN</div>
-                            </div>
-                            <div class="mini-body">
-                                <div class="mini-line"></div>
-                                <div class="mini-line"></div>
-                                <div class="mini-line"></div>
-                            </div>
-                        </div>
-                        <h3>Minimalist</h3>
-                        <p>Simple and elegant for a sophisticated look</p>
-                    </div>
-                    <div class="template-card">
-                        <div class="template-preview template-4">
-                            <div class="mini-accent"></div>
-                            <div class="mini-main">
-                                <div class="mini-name">SARAH LEE</div>
-                                <div class="mini-dots">
-                                    <span></span><span></span><span></span>
-                                </div>
-                            </div>
-                        </div>
-                        <h3>Creative Accent</h3>
-                        <p>Bold colors for creative professionals</p>
-                    </div>
-                    <div class="template-card">
-                        <div class="template-preview template-5">
-                            <div class="mini-top">
-                                <div class="mini-avatar"></div>
-                                <div class="mini-name">MIKE ROSS</div>
-                            </div>
-                            <div class="mini-grid">
-                                <div></div><div></div>
-                            </div>
-                        </div>
-                        <h3>Executive</h3>
-                        <p>Premium design for senior positions</p>
-                    </div>
+                <h1>Elevate Your Career with a <span>Powerful Resume</span></h1>
+                <p>Join over 50,000+ professionals who have landed their dream jobs using CareerCraft's modern, ATS-optimized templates.</p>
+                <div class="hero-actions">
+                    <a href="{% url 'signup' %}" class="btn-hero-primary">
+                        Build Your Resume Now
+                        <i data-lucide="arrow-right" width="20" height="20"></i>
+                    </a>
                 </div>
-                <div class="templates-cta">
-                    <a href="{% url 'signup' %}" class="btn-primary btn-large">Get Started - It's Free!</a>
+                
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <h4>50k+</h4>
+                        <p>Resumes Created</p>
+                    </div>
+                    <div class="stat-item">
+                        <h4>98%</h4>
+                        <p>ATS Pass Rate</p>
+                    </div>
+                    <div class="stat-item">
+                        <h4>4.9/5</h4>
+                        <p>User Rating</p>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- Features Section -->
-        <section class="features">
-            <div class="features-container">
-                <h2>Why Job Seekers Love CareerCraft</h2>
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon">⚡</div>
-                        <h3>Quick & Easy</h3>
-                        <p>Build your resume in minutes with our intuitive step-by-step process. No design skills needed.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">🎯</div>
-                        <h3>ATS-Friendly</h3>
-                        <p>Our templates are optimized to pass Applicant Tracking Systems and get you noticed.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">📱</div>
-                        <h3>Mobile Responsive</h3>
-                        <p>Create and edit your resume on any device - desktop, tablet, or mobile.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">💾</div>
-                        <h3>Auto-Save</h3>
-                        <p>Your progress is automatically saved. Come back anytime to continue editing.</p>
+        <section id="features" class="features-section">
+            <div class="section-header">
+                <h2>Engineered for Success</h2>
+                <p>Everything you need to build a resume that actually gets you hired.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><i data-lucide="zap"></i></div>
+                    <h3>Lightning Fast</h3>
+                    <p>Generate a professional resume in under 5 minutes with our streamlined editor.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i data-lucide="check-circle"></i></div>
+                    <h3>ATS Optimized</h3>
+                    <p>Templates designed specifically to pass through automated screening systems.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i data-lucide="layout"></i></div>
+                    <h3>Real-time Preview</h3>
+                    <p>See exactly how your resume looks as you type with our instant preview engine.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i data-lucide="shield-check"></i></div>
+                    <h3>Privacy First</h3>
+                    <p>Your data is encrypted and secure. You have full control over your information.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i data-lucide="download"></i></div>
+                    <h3>One-Click Export</h3>
+                    <p>Export your resume to PDF format instantly with perfect formatting every time.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i data-lucide="users"></i></div>
+                    <h3>Expert Guidance</h3>
+                    <p>Access professional tips and pre-written phrases tailored to your specific industry.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="testimonials-section">
+            <div class="testimonial-card">
+                <p class="testimonial-text">"I was struggling to get interviews for months. Within a week of using CareerCraft's Modern Sidebar template, I landed three interviews at top tech firms!"</p>
+                <div class="testimonial-author">
+                    <div class="author-img" style="background: url('https://i.pravatar.cc/100?img=32'); background-size: cover;"></div>
+                    <div class="author-info">
+                        <h5>David Thompson</h5>
+                        <p>Software Engineer at Google</p>
                     </div>
                 </div>
             </div>
@@ -579,8 +494,22 @@
 
         <!-- Footer -->
         <footer class="footer">
-            <p>&copy; 2026 CareerCraft. All rights reserved.</p>
+            <div class="logo footer-logo">
+                <div class="logo-icon"><i data-lucide="pen-tool" width="18" height="18"></i></div>
+                CareerCraft
+            </div>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact Us</a>
+            </div>
+            <p class="footer-copy">&copy; 2026 CareerCraft. All rights reserved.</p>
         </footer>
     </div>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+    </script>
 </body>
 </html>
