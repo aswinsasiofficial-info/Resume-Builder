@@ -605,143 +605,185 @@
             </div>
 
             <!-- EXPERIENCE -->
-            <div class="card p-4">
-                <div class="section-title">Experience</div>
-
-                <!-- Experience 1 -->
-                <div class="row g-3 mb-4">
-                    <div class="col-12"><h6 style="color: #fff;">Experience 1</h6></div>
-                    <div class="col-md-4">
-                        <input class="form-control" name="company1" placeholder="Company name">
-                    </div>
-                    <div class="col-md-4">
-                        <input class="form-control" name="post1" placeholder="Role/Position">
-                    </div>
-                    <div class="col-md-4">
-                        <input class="form-control" name="duration1" placeholder="Duration">
-                    </div>
-                    <div class="col-md-6">
-                        <input class="form-control" name="location1" placeholder="Location">
-                    </div>
-                    <div class="col-12">
-                        <textarea class="form-control" rows="2" name="lin11" placeholder="Responsibilities"></textarea>
-                    </div>
-                    <div class="col-12">
-                        <textarea class="form-control" rows="2" name="achievements1" placeholder="Key achievements (one per line)"></textarea>
-                    </div>
+            <div class="card p-4" id="experience-section">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div class="section-title mb-0">Experience</div>
+                    <button type="button" class="btn btn-outline-primary btn-sm" onclick="addSection('experience')">
+                        <i class="fas fa-plus me-1"></i> Add Experience
+                    </button>
                 </div>
+                
+                <div id="experience-container">
+                    <!-- Experience 1 -->
+                    <div class="experience-item mb-4">
+                        <h6 style="color: #fff;">Experience 1</h6>
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <input class="form-control" name="company1" placeholder="Company name">
+                            </div>
+                            <div class="col-md-4">
+                                <input class="form-control" name="post1" placeholder="Role/Position">
+                            </div>
+                            <div class="col-md-4">
+                                <input class="form-control" name="duration1" placeholder="Duration">
+                            </div>
+                            <div class="col-md-6">
+                                <input class="form-control" name="location1" placeholder="Location">
+                            </div>
+                            <div class="col-12">
+                                <textarea class="form-control" rows="2" name="lin11" placeholder="Responsibilities"></textarea>
+                            </div>
+                            <div class="col-12">
+                                <textarea class="form-control" rows="2" name="achievements1" placeholder="Key achievements (one per line)"></textarea>
+                            </div>
+                        </div>
+                    </div>
 
-                <!-- Experience 2 -->
-                <div class="row g-3">
-                    <div class="col-12"><h6 style="color: #fff;">Experience 2 (Optional)</h6></div>
-                    <div class="col-md-4">
-                        <input class="form-control" name="company2" placeholder="Company name">
+                    <!-- Extra Experience slots (Hidden by default) -->
+                    {% for i in "2345"|make_list %}
+                    <div class="experience-item mb-4 d-none" id="experience-{{ i }}">
+                        <hr class="my-4 border-secondary">
+                        <h6 style="color: #fff;">Experience {{ i }}</h6>
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <input class="form-control" name="company{{ i }}" placeholder="Company name">
+                            </div>
+                            <div class="col-md-4">
+                                <input class="form-control" name="post{{ i }}" placeholder="Role/Position">
+                            </div>
+                            <div class="col-md-4">
+                                <input class="form-control" name="duration{{ i }}" placeholder="Duration">
+                            </div>
+                            <div class="col-md-6">
+                                <input class="form-control" name="location{{ i }}" placeholder="Location">
+                            </div>
+                            <div class="col-12">
+                                <textarea class="form-control" rows="2" name="lin{{ i }}1" placeholder="Responsibilities"></textarea>
+                            </div>
+                            <div class="col-12">
+                                <textarea class="form-control" rows="2" name="achievements{{ i }}" placeholder="Key achievements (one per line)"></textarea>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-4">
-                        <input class="form-control" name="post2" placeholder="Role/Position">
-                    </div>
-                    <div class="col-md-4">
-                        <input class="form-control" name="duration2" placeholder="Duration">
-                    </div>
-                    <div class="col-md-6">
-                        <input class="form-control" name="location2" placeholder="Location">
-                    </div>
-                    <div class="col-12">
-                        <textarea class="form-control" rows="2" name="lin21" placeholder="Responsibilities"></textarea>
-                    </div>
-                    <div class="col-12">
-                        <textarea class="form-control" rows="2" name="achievements2" placeholder="Key achievements (one per line)"></textarea>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
 
             <!-- PROJECTS -->
-            <div class="card p-4">
-                <div class="section-title">Projects</div>
-
-                <!-- Project 1 -->
-                <div class="row g-3 mb-4">
-                    <div class="col-12"><h6 style="color: #fff;">Project 1</h6></div>
-                    <div class="col-md-6">
-                        <input class="form-control" name="project1" placeholder="Project name">
-                    </div>
-                    <div class="col-md-3">
-                        <input class="form-control" name="durat1" placeholder="Duration">
-                    </div>
-                    <div class="col-md-3">
-                        <input class="form-control" name="project_tech1" placeholder="Technologies">
-                    </div>
-                    <div class="col-12">
-                        <textarea class="form-control" rows="2" name="desc1" placeholder="Description"></textarea>
-                    </div>
-                    <div class="col-12">
-                        <input class="form-control" name="project_url1" placeholder="Project URL">
-                    </div>
+            <div class="card p-4" id="projects-section">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div class="section-title mb-0">Projects</div>
+                    <button type="button" class="btn btn-outline-primary btn-sm" onclick="addSection('project')">
+                        <i class="fas fa-plus me-1"></i> Add Project
+                    </button>
                 </div>
 
-                <!-- Project 2 -->
-                <div class="row g-3">
-                    <div class="col-12"><h6 style="color: #fff;">Project 2 (Optional)</h6></div>
-                    <div class="col-md-6">
-                        <input class="form-control" name="project2" placeholder="Project name">
+                <div id="projects-container">
+                    <!-- Project 1 -->
+                    <div class="project-item mb-4">
+                        <h6 style="color: #fff;">Project 1</h6>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <input class="form-control" name="project1" placeholder="Project name">
+                            </div>
+                            <div class="col-md-3">
+                                <input class="form-control" name="durat1" placeholder="Duration">
+                            </div>
+                            <div class="col-md-3">
+                                <input class="form-control" name="project_tech1" placeholder="Technologies">
+                            </div>
+                            <div class="col-12">
+                                <textarea class="form-control" rows="2" name="desc1" placeholder="Description"></textarea>
+                            </div>
+                            <div class="col-12">
+                                <input class="form-control" name="project_url1" placeholder="Project URL">
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-3">
-                        <input class="form-control" name="durat2" placeholder="Duration">
+
+                    <!-- Extra Project slots -->
+                    {% for i in "2345"|make_list %}
+                    <div class="project-item mb-4 d-none" id="project-{{ i }}">
+                        <hr class="my-4 border-secondary">
+                        <h6 style="color: #fff;">Project {{ i }}</h6>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <input class="form-control" name="project{{ i }}" placeholder="Project name">
+                            </div>
+                            <div class="col-md-3">
+                                <input class="form-control" name="durat{{ i }}" placeholder="Duration">
+                            </div>
+                            <div class="col-md-3">
+                                <input class="form-control" name="project_tech{{ i }}" placeholder="Technologies">
+                            </div>
+                            <div class="col-12">
+                                <textarea class="form-control" rows="2" name="desc{{ i }}" placeholder="Description"></textarea>
+                            </div>
+                            <div class="col-12">
+                                <input class="form-control" name="project_url{{ i }}" placeholder="Project URL">
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-3">
-                        <input class="form-control" name="project_tech2" placeholder="Technologies">
-                    </div>
-                    <div class="col-12">
-                        <textarea class="form-control" rows="2" name="desc2" placeholder="Description"></textarea>
-                    </div>
-                    <div class="col-12">
-                        <input class="form-control" name="project_url2" placeholder="Project URL">
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
 
             <!-- EDUCATION -->
-            <div class="card p-4">
-                <div class="section-title">Education</div>
-
-                <!-- Education 1 -->
-                <div class="row g-3 mb-4">
-                    <div class="col-12"><h6 style="color: #fff;">Education 1</h6></div>
-                    <div class="col-md-5">
-                        <input class="form-control" name="degree1" placeholder="Degree">
-                    </div>
-                    <div class="col-md-5">
-                        <input class="form-control" name="college1" placeholder="Institution">
-                    </div>
-                    <div class="col-md-2">
-                        <input class="form-control" name="year1" placeholder="Year">
-                    </div>
-                    <div class="col-md-6">
-                        <input class="form-control" name="gpa1" placeholder="GPA (Optional)">
-                    </div>
-                    <div class="col-md-6">
-                        <input class="form-control" name="honors1" placeholder="Honors/Awards (Optional)">
-                    </div>
+            <div class="card p-4" id="education-section">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div class="section-title mb-0">Education</div>
+                    <button type="button" class="btn btn-outline-primary btn-sm" onclick="addSection('education')">
+                        <i class="fas fa-plus me-1"></i> Add Education
+                    </button>
                 </div>
 
-                <!-- Education 2 -->
-                <div class="row g-3">
-                    <div class="col-12"><h6 style="color: #fff;">Education 2 (Optional)</h6></div>
-                    <div class="col-md-5">
-                        <input class="form-control" name="degree2" placeholder="Degree">
+                <div id="education-container">
+                    <!-- Education 1 -->
+                    <div class="education-item mb-4">
+                        <h6 style="color: #fff;">Education 1</h6>
+                        <div class="row g-3">
+                            <div class="col-md-5">
+                                <input class="form-control" name="degree1" placeholder="Degree">
+                            </div>
+                            <div class="col-md-5">
+                                <input class="form-control" name="college1" placeholder="Institution">
+                            </div>
+                            <div class="col-md-2">
+                                <input class="form-control" name="year1" placeholder="Year">
+                            </div>
+                            <div class="col-md-6">
+                                <input class="form-control" name="gpa1" placeholder="GPA (Optional)">
+                            </div>
+                            <div class="col-md-6">
+                                <input class="form-control" name="honors1" placeholder="Honors/Awards (Optional)">
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-5">
-                        <input class="form-control" name="college2" placeholder="Institution">
+
+                    <!-- Extra Education slots -->
+                    {% for i in "2345"|make_list %}
+                    <div class="education-item mb-4 d-none" id="education-{{ i }}">
+                        <hr class="my-4 border-secondary">
+                        <h6 style="color: #fff;">Education {{ i }}</h6>
+                        <div class="row g-3">
+                            <div class="col-md-5">
+                                <input class="form-control" name="degree{{ i }}" placeholder="Degree">
+                            </div>
+                            <div class="col-md-5">
+                                <input class="form-control" name="college{{ i }}" placeholder="Institution">
+                            </div>
+                            <div class="col-md-2">
+                                <input class="form-control" name="year{{ i }}" placeholder="Year">
+                            </div>
+                            <div class="col-md-6">
+                                <input class="form-control" name="gpa{{ i }}" placeholder="GPA (Optional)">
+                            </div>
+                            <div class="col-md-6">
+                                <input class="form-control" name="honors{{ i }}" placeholder="Honors/Awards (Optional)">
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-2">
-                        <input class="form-control" name="year2" placeholder="Year">
-                    </div>
-                    <div class="col-md-6">
-                        <input class="form-control" name="gpa2" placeholder="GPA (Optional)">
-                    </div>
-                    <div class="col-md-6">
-                        <input class="form-control" name="honors2" placeholder="Honors/Awards (Optional)">
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
 
@@ -799,6 +841,20 @@
         </form>
     </div>
 
+    <script>
+        function addSection(type) {
+            // Find the first hidden item of the given type
+            for (let i = 2; i <= 5; i++) {
+                const element = document.getElementById(`${type}-${i}`);
+                if (element && element.classList.contains('d-none')) {
+                    element.classList.remove('d-none');
+                    // Scroll to the new element
+                    element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    break;
+                }
+            }
+        }
+    </script>
 </body>
 
 </html>

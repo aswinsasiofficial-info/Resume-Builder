@@ -266,6 +266,19 @@
                 <input type="hidden" name="duration3" value="{{ duration3 }}">
                 <input type="hidden" name="location3" value="{{ location3 }}">
                 <input type="hidden" name="lin31" value="{{ lin31 }}">
+                <input type="hidden" name="achievements3" value="{{ achievements3 }}">
+                <input type="hidden" name="company4" value="{{ company4 }}">
+                <input type="hidden" name="post4" value="{{ post4 }}">
+                <input type="hidden" name="duration4" value="{{ duration4 }}">
+                <input type="hidden" name="location4" value="{{ location4 }}">
+                <input type="hidden" name="lin41" value="{{ lin41 }}">
+                <input type="hidden" name="achievements4" value="{{ achievements4 }}">
+                <input type="hidden" name="company5" value="{{ company5 }}">
+                <input type="hidden" name="post5" value="{{ post5 }}">
+                <input type="hidden" name="duration5" value="{{ duration5 }}">
+                <input type="hidden" name="location5" value="{{ location5 }}">
+                <input type="hidden" name="lin51" value="{{ lin51 }}">
+                <input type="hidden" name="achievements5" value="{{ achievements5 }}">
                 <!-- Projects -->
                 <input type="hidden" name="project1" value="{{ project1 }}">
                 <input type="hidden" name="durat1" value="{{ durat1 }}">
@@ -277,6 +290,21 @@
                 <input type="hidden" name="desc2" value="{{ desc2 }}">
                 <input type="hidden" name="project_tech2" value="{{ project_tech2 }}">
                 <input type="hidden" name="project_url2" value="{{ project_url2 }}">
+                <input type="hidden" name="project3" value="{{ project3 }}">
+                <input type="hidden" name="durat3" value="{{ durat3 }}">
+                <input type="hidden" name="desc3" value="{{ desc3 }}">
+                <input type="hidden" name="project_tech3" value="{{ project_tech3 }}">
+                <input type="hidden" name="project_url3" value="{{ project_url3 }}">
+                <input type="hidden" name="project4" value="{{ project4 }}">
+                <input type="hidden" name="durat4" value="{{ durat4 }}">
+                <input type="hidden" name="desc4" value="{{ desc4 }}">
+                <input type="hidden" name="project_tech4" value="{{ project_tech4 }}">
+                <input type="hidden" name="project_url4" value="{{ project_url4 }}">
+                <input type="hidden" name="project5" value="{{ project5 }}">
+                <input type="hidden" name="durat5" value="{{ durat5 }}">
+                <input type="hidden" name="desc5" value="{{ desc5 }}">
+                <input type="hidden" name="project_tech5" value="{{ project_tech5 }}">
+                <input type="hidden" name="project_url5" value="{{ project_url5 }}">
                 <!-- Education -->
                 <input type="hidden" name="degree1" value="{{ degree1 }}">
                 <input type="hidden" name="college1" value="{{ college1 }}">
@@ -288,6 +316,21 @@
                 <input type="hidden" name="year2" value="{{ year2 }}">
                 <input type="hidden" name="gpa2" value="{{ gpa2 }}">
                 <input type="hidden" name="honors2" value="{{ honors2 }}">
+                <input type="hidden" name="degree3" value="{{ degree3 }}">
+                <input type="hidden" name="college3" value="{{ college3 }}">
+                <input type="hidden" name="year3" value="{{ year3 }}">
+                <input type="hidden" name="gpa3" value="{{ gpa3 }}">
+                <input type="hidden" name="honors3" value="{{ honors3 }}">
+                <input type="hidden" name="degree4" value="{{ degree4 }}">
+                <input type="hidden" name="college4" value="{{ college4 }}">
+                <input type="hidden" name="year4" value="{{ year4 }}">
+                <input type="hidden" name="gpa4" value="{{ gpa4 }}">
+                <input type="hidden" name="honors4" value="{{ honors4 }}">
+                <input type="hidden" name="degree5" value="{{ degree5 }}">
+                <input type="hidden" name="college5" value="{{ college5 }}">
+                <input type="hidden" name="year5" value="{{ year5 }}">
+                <input type="hidden" name="gpa5" value="{{ gpa5 }}">
+                <input type="hidden" name="honors5" value="{{ honors5 }}">
                 <!-- References -->
                 <input type="hidden" name="reference_name1" value="{{ reference_name1 }}">
                 <input type="hidden" name="reference_title1" value="{{ reference_title1 }}">
@@ -537,28 +580,64 @@
             {% endif %}
 
             <!-- EDUCATION -->
-            {% if degree1 or college1 %}
             <div class="resume-section">
                 <div class="section-title">EDUCATION</div>
+                {% if degree1 or college1 %}
                 <p><span class="bold-text">{{ degree1|default:"Degree" }}</span>{% if year1 %} <span style="float:right;">{{ year1 }}</span>{% endif %}<br>
                 {{ college1|default:"Institution" }}</p>
+                {% endif %}
+                {% if degree2 or college2 %}
+                <p><span class="bold-text">{{ degree2 }}</span>{% if year2 %} <span style="float:right;">{{ year2 }}</span>{% endif %}<br>
+                {{ college2 }}</p>
+                {% endif %}
+                {% if degree3 or college3 %}
+                <p><span class="bold-text">{{ degree3 }}</span>{% if year3 %} <span style="float:right;">{{ year3 }}</span>{% endif %}<br>
+                {{ college3 }}</p>
+                {% endif %}
+                {% if degree4 or college4 %}
+                <p><span class="bold-text">{{ degree4 }}</span>{% if year4 %} <span style="float:right;">{{ year4 }}</span>{% endif %}<br>
+                {{ college4 }}</p>
+                {% endif %}
+                {% if degree5 or college5 %}
+                <p><span class="bold-text">{{ degree5 }}</span>{% if year5 %} <span style="float:right;">{{ year5 }}</span>{% endif %}<br>
+                {{ college5 }}</p>
+                {% endif %}
             </div>
-            {% endif %}
 
             <!-- EXPERIENCE -->
-            {% if company1 or post1 %}
             <div class="resume-section">
                 <div class="section-title">EXPERIENCE</div>
+                {% if company1 or post1 %}
                 <p><span class="bold-text">{{ post1|default:"Role" }}</span>{% if duration1 %} <span style="float:right;">{{ duration1 }}</span>{% endif %}<br>
                 {{ company1|default:"Company" }}</p>
                 {% if lin11 %}<p>{{ lin11|linebreaksbr }}</p>{% endif %}
+                {% endif %}
+                {% if company2 or post2 %}
+                <p><span class="bold-text">{{ post2 }}</span>{% if duration2 %} <span style="float:right;">{{ duration2 }}</span>{% endif %}<br>
+                {{ company2 }}</p>
+                {% if lin21 %}<p>{{ lin21|linebreaksbr }}</p>{% endif %}
+                {% endif %}
+                {% if company3 or post3 %}
+                <p><span class="bold-text">{{ post3 }}</span>{% if duration3 %} <span style="float:right;">{{ duration3 }}</span>{% endif %}<br>
+                {{ company3 }}</p>
+                {% if lin31 %}<p>{{ lin31|linebreaksbr }}</p>{% endif %}
+                {% endif %}
+                {% if company4 or post4 %}
+                <p><span class="bold-text">{{ post4 }}</span>{% if duration4 %} <span style="float:right;">{{ duration4 }}</span>{% endif %}<br>
+                {{ company4 }}</p>
+                {% if lin41 %}<p>{{ lin41|linebreaksbr }}</p>{% endif %}
+                {% endif %}
+                {% if company5 or post5 %}
+                <p><span class="bold-text">{{ post5 }}</span>{% if duration5 %} <span style="float:right;">{{ duration5 }}</span>{% endif %}<br>
+                {{ company5 }}</p>
+                {% if lin51 %}<p>{{ lin51|linebreaksbr }}</p>{% endif %}
+                {% endif %}
             </div>
-            {% endif %}
 
             <!-- PROJECTS -->
-            {% if project1 %}
             <div class="resume-section">
                 <div class="section-title">PROJECTS</div>
+                {% if project1 %}
                 <p><span class="bold-text">{{ project1 }}</span>{% if durat1 %} <span style="float:right;">{{ durat1 }}</span>{% endif %}</p>
                 {% if desc1 %}
                 <ul>
@@ -569,8 +648,56 @@
                     {% endfor %}
                 </ul>
                 {% endif %}
+                {% endif %}
+                {% if project2 %}
+                <p><span class="bold-text">{{ project2 }}</span>{% if durat2 %} <span style="float:right;">{{ durat2 }}</span>{% endif %}</p>
+                {% if desc2 %}
+                <ul>
+                    {% for line in desc2.splitlines %}
+                        {% if line.strip %}
+                        <li>{{ line|cut:"- "|cut:"• " }}</li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                {% endif %}
+                {% if project3 %}
+                <p><span class="bold-text">{{ project3 }}</span>{% if durat3 %} <span style="float:right;">{{ durat3 }}</span>{% endif %}</p>
+                {% if desc3 %}
+                <ul>
+                    {% for line in desc3.splitlines %}
+                        {% if line.strip %}
+                        <li>{{ line|cut:"- "|cut:"• " }}</li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                {% endif %}
+                {% if project4 %}
+                <p><span class="bold-text">{{ project4 }}</span>{% if durat4 %} <span style="float:right;">{{ durat4 }}</span>{% endif %}</p>
+                {% if desc4 %}
+                <ul>
+                    {% for line in desc4.splitlines %}
+                        {% if line.strip %}
+                        <li>{{ line|cut:"- "|cut:"• " }}</li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                {% endif %}
+                {% if project5 %}
+                <p><span class="bold-text">{{ project5 }}</span>{% if durat5 %} <span style="float:right;">{{ durat5 }}</span>{% endif %}</p>
+                {% if desc5 %}
+                <ul>
+                    {% for line in desc5.splitlines %}
+                        {% if line.strip %}
+                        <li>{{ line|cut:"- "|cut:"• " }}</li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                {% endif %}
             </div>
-            {% endif %}
 
             <!-- SKILLS -->
             {% if prog_langs or frameworks or databases or dev_tools or web_tech %}

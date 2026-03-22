@@ -237,29 +237,74 @@
             </div>
 
             <!-- EXPERIENCE -->
-            <div class="card p-4">
-                <div class="section-title">Professional Experience</div>
-                <div class="row g-3">
-                    <div class="col-md-4">
-                        <input class="form-control" name="company1" placeholder="Studio/Company Name">
-                    </div>
-                    <div class="col-md-4">
-                        <input class="form-control" name="post1" placeholder="Role (e.g. Lead 3D Artist)">
-                    </div>
-                    <div class="col-md-4">
-                        <input class="form-control" name="duration1" placeholder="Duration">
-                    </div>
-                    <div class="col-12">
-                        <textarea class="form-control" rows="3" name="lin11" placeholder="• Created high-quality 3D assets for AAA game titles
+            <div class="card p-4" id="experience-section">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div class="section-title mb-0">Professional Experience</div>
+                    <button type="button" class="btn btn-outline-primary btn-sm" onclick="addSection('experience')">
+                        <i class="fas fa-plus me-1"></i> Add Experience
+                    </button>
+                </div>
+                
+                <div id="experience-container">
+                    <!-- Experience 1 -->
+                    <div class="experience-item mb-4">
+                        <h6 style="color: #fff;">Experience 1</h6>
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <input class="form-control" name="company1" placeholder="Studio/Company Name">
+                            </div>
+                            <div class="col-md-4">
+                                <input class="form-control" name="post1" placeholder="Role (e.g. Lead 3D Artist)">
+                            </div>
+                            <div class="col-md-4">
+                                <input class="form-control" name="duration1" placeholder="Duration">
+                            </div>
+                            <div class="col-12">
+                                <textarea class="form-control" rows="3" name="lin11" placeholder="• Created high-quality 3D assets for AAA game titles
 • Collaborated with art directors to establish visual style
 • Optimized assets for real-time rendering engines"></textarea>
+                            </div>
+                            <div class="col-12">
+                                <textarea class="form-control" rows="2" name="achievements1" placeholder="Key achievements (one per line)"></textarea>
+                            </div>
+                        </div>
                     </div>
+
+                    <!-- Extra Experience slots -->
+                    {% for i in "2345"|make_list %}
+                    <div class="experience-item mb-4 d-none" id="experience-{{ i }}">
+                        <hr class="my-4 border-secondary">
+                        <h6 style="color: #fff;">Experience {{ i }}</h6>
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <input class="form-control" name="company{{ i }}" placeholder="Company Name">
+                            </div>
+                            <div class="col-md-4">
+                                <input class="form-control" name="post{{ i }}" placeholder="Job Title">
+                            </div>
+                            <div class="col-md-4">
+                                <input class="form-control" name="duration{{ i }}" placeholder="Duration">
+                            </div>
+                            <div class="col-12">
+                                <textarea class="form-control" rows="3" name="lin{{ i }}1" placeholder="Responsibilities"></textarea>
+                            </div>
+                            <div class="col-12">
+                                <textarea class="form-control" rows="2" name="achievements{{ i }}" placeholder="Key achievements (one per line)"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
                 </div>
             </div>
 
             <!-- PORTFOLIO HIGHLIGHTS -->
-            <div class="card p-4">
-                <div class="section-title">Portfolio Highlights</div>
+            <div class="card p-4" id="projects-section">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div class="section-title mb-0">Portfolio Highlights</div>
+                    <button type="button" class="btn btn-outline-primary btn-sm" onclick="addSection('project')">
+                        <i class="fas fa-plus me-1"></i> Add Project
+                    </button>
+                </div>
                 <div class="project-suggestions">
                     <h6>💡 Portfolio Project Ideas:</h6>
                     <ul>
@@ -268,40 +313,113 @@
                         {% endfor %}
                     </ul>
                 </div>
-                <div class="portfolio-section mt-3">
-                    <div class="row g-3">
-                        <div class="col-md-6">
-                            <input class="form-control" name="project1" placeholder="Project Title">
-                        </div>
-                        <div class="col-md-3">
-                            <input class="form-control" name="durat1" placeholder="Year">
-                        </div>
-                        <div class="col-md-3">
-                            <input class="form-control" name="project_tech1" placeholder="Software Used">
-                        </div>
-                        <div class="col-12">
-                            <textarea class="form-control" rows="2" name="desc1" placeholder="Description of the project, your role, and techniques used..."></textarea>
-                        </div>
-                        <div class="col-12">
-                            <input class="form-control" name="project_url1" placeholder="ArtStation / Behance / Video Link">
+
+                <div id="projects-container">
+                    <!-- Project 1 -->
+                    <div class="portfolio-section mt-3 project-item">
+                        <h6 style="color: #fff;">Project 1</h6>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <input class="form-control" name="project1" placeholder="Project Title">
+                            </div>
+                            <div class="col-md-3">
+                                <input class="form-control" name="durat1" placeholder="Year">
+                            </div>
+                            <div class="col-md-3">
+                                <input class="form-control" name="project_tech1" placeholder="Software Used">
+                            </div>
+                            <div class="col-12">
+                                <textarea class="form-control" rows="2" name="desc1" placeholder="Description of the project, your role, and techniques used..."></textarea>
+                            </div>
+                            <div class="col-12">
+                                <input class="form-control" name="project_url1" placeholder="ArtStation / Behance / Video Link">
+                            </div>
                         </div>
                     </div>
+
+                    <!-- Extra Project slots -->
+                    {% for i in "2345"|make_list %}
+                    <div class="portfolio-section mt-3 project-item d-none" id="project-{{ i }}">
+                        <hr class="my-4 border-secondary">
+                        <h6 style="color: #fff;">Project {{ i }}</h6>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <input class="form-control" name="project{{ i }}" placeholder="Project Title">
+                            </div>
+                            <div class="col-md-3">
+                                <input class="form-control" name="durat{{ i }}" placeholder="Year">
+                            </div>
+                            <div class="col-md-3">
+                                <input class="form-control" name="project_tech{{ i }}" placeholder="Software Used">
+                            </div>
+                            <div class="col-12">
+                                <textarea class="form-control" rows="2" name="desc{{ i }}" placeholder="Description"></textarea>
+                            </div>
+                            <div class="col-12">
+                                <input class="form-control" name="project_url{{ i }}" placeholder="Link">
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
                 </div>
             </div>
 
             <!-- EDUCATION -->
-            <div class="card p-4">
-                <div class="section-title">Education & Training</div>
-                <div class="row g-3">
-                    <div class="col-md-5">
-                        <input class="form-control" name="degree1" placeholder="Degree/Certificate">
+            <div class="card p-4" id="education-section">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div class="section-title mb-0">Education & Training</div>
+                    <button type="button" class="btn btn-outline-primary btn-sm" onclick="addSection('education')">
+                        <i class="fas fa-plus me-1"></i> Add Education
+                    </button>
+                </div>
+
+                <div id="education-container">
+                    <!-- Education 1 -->
+                    <div class="education-item mb-4">
+                        <h6 style="color: #fff;">Education 1</h6>
+                        <div class="row g-3">
+                            <div class="col-md-5">
+                                <input class="form-control" name="degree1" placeholder="Degree/Certificate">
+                            </div>
+                            <div class="col-md-5">
+                                <input class="form-control" name="college1" placeholder="School/Institution">
+                            </div>
+                            <div class="col-md-2">
+                                <input class="form-control" name="year1" placeholder="Year">
+                            </div>
+                            <div class="col-md-6">
+                                <input class="form-control" name="gpa1" placeholder="GPA (Optional)">
+                            </div>
+                            <div class="col-md-6">
+                                <input class="form-control" name="honors1" placeholder="Honors/Awards (Optional)">
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-5">
-                        <input class="form-control" name="college1" placeholder="School/Institution">
+
+                    <!-- Extra Education slots -->
+                    {% for i in "2345"|make_list %}
+                    <div class="education-item mb-4 d-none" id="education-{{ i }}">
+                        <hr class="my-4 border-secondary">
+                        <h6 style="color: #fff;">Education {{ i }}</h6>
+                        <div class="row g-3">
+                            <div class="col-md-5">
+                                <input class="form-control" name="degree{{ i }}" placeholder="Degree">
+                            </div>
+                            <div class="col-md-5">
+                                <input class="form-control" name="college{{ i }}" placeholder="Institution">
+                            </div>
+                            <div class="col-md-2">
+                                <input class="form-control" name="year{{ i }}" placeholder="Year">
+                            </div>
+                            <div class="col-md-6">
+                                <input class="form-control" name="gpa{{ i }}" placeholder="GPA (Optional)">
+                            </div>
+                            <div class="col-md-6">
+                                <input class="form-control" name="honors{{ i }}" placeholder="Honors/Awards (Optional)">
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-2">
-                        <input class="form-control" name="year1" placeholder="Year">
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
 
@@ -327,6 +445,19 @@
     </div>
 
     <script>
+        function addSection(type) {
+            // Find the first hidden item of the given type
+            for (let i = 2; i <= 5; i++) {
+                const element = document.getElementById(`${type}-${i}`);
+                if (element && element.classList.contains('d-none')) {
+                    element.classList.remove('d-none');
+                    // Scroll to the new element
+                    element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    break;
+                }
+            }
+        }
+
         function addSkill(element) {
             const input = document.getElementById('software_skills');
             const currentValue = input.value;

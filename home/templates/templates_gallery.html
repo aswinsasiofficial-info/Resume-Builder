@@ -1,6 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Find Your Perfect Style - CareerCraft</title>
@@ -8,7 +9,9 @@
     <!-- Google Fonts - DM Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
+        rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -27,7 +30,8 @@
             box-sizing: border-box;
         }
 
-        body, html {
+        body,
+        html {
             font-family: 'DM Sans', sans-serif;
             background-color: var(--bg-dark);
             color: #fff;
@@ -177,28 +181,118 @@
         }
 
         /* Simplified Template Visuals */
-        .preview-lines { display: flex; flex-direction: column; gap: 8px; }
-        .line { height: 6px; background: #e2e8f0; border-radius: 4px; width: 100%; }
-        .line-short { width: 60%; }
-        .line-medium { width: 85%; }
-        .preview-header { height: 40px; background: #1e293b; margin: -20px -20px 20px; }
-        .preview-sidebar { display: flex; height: 100%; margin: -20px; }
-        .sidebar-left { width: 30%; background: #f8fafc; border-right: 1px solid #e2e8f0; }
-        .sidebar-right { width: 70%; padding: 20px; }
-        .preview-accent { height: 4px; background: #6366f1; margin-bottom: 20px; }
-        .preview-top-accent { height: 20px; background: #a78bfa; margin: -20px -20px 20px; }
-        
-        /* Shape Visuals */
-        .shape-circle { width: 24px; height: 24px; border-radius: 50%; background: #ec4899; margin-bottom: 15px; }
-        .shape-square { width: 40px; height: 40px; background: #6366f1; transform: rotate(45deg); margin: 20px auto; }
-        .shape-rect { height: 20px; background: #b45309; margin: -20px -20px 20px; }
+        .preview-lines {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
 
-        .template-info { padding: 0 8px 12px; flex-grow: 1; }
-        .template-name { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 4px; }
-        .template-desc { font-size: 13px; color: var(--text-muted); margin-bottom: 16px; line-height: 1.5; }
-        
-        .template-tags { display: flex; gap: 8px; flex-wrap: wrap; }
-        .tag { padding: 4px 12px; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--card-border); border-radius: 20px; font-size: 11px; color: var(--text-muted); }
+        .line {
+            height: 6px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            width: 100%;
+        }
+
+        .line-short {
+            width: 60%;
+        }
+
+        .line-medium {
+            width: 85%;
+        }
+
+        .preview-header {
+            height: 40px;
+            background: #1e293b;
+            margin: -20px -20px 20px;
+        }
+
+        .preview-sidebar {
+            display: flex;
+            height: 100%;
+            margin: -20px;
+        }
+
+        .sidebar-left {
+            width: 30%;
+            background: #f8fafc;
+            border-right: 1px solid #e2e8f0;
+        }
+
+        .sidebar-right {
+            width: 70%;
+            padding: 20px;
+        }
+
+        .preview-accent {
+            height: 4px;
+            background: #6366f1;
+            margin-bottom: 20px;
+        }
+
+        .preview-top-accent {
+            height: 20px;
+            background: #a78bfa;
+            margin: -20px -20px 20px;
+        }
+
+        /* Shape Visuals */
+        .shape-circle {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #ec4899;
+            margin-bottom: 15px;
+        }
+
+        .shape-square {
+            width: 40px;
+            height: 40px;
+            background: #6366f1;
+            transform: rotate(45deg);
+            margin: 20px auto;
+        }
+
+        .shape-rect {
+            height: 20px;
+            background: #b45309;
+            margin: -20px -20px 20px;
+        }
+
+        .template-info {
+            padding: 0 8px 12px;
+            flex-grow: 1;
+        }
+
+        .template-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .template-desc {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+
+        .template-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            padding: 4px 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            font-size: 11px;
+            color: var(--text-muted);
+        }
 
         /* Footer */
         .footer {
@@ -209,14 +303,29 @@
         }
 
         /* Responsive */
-        @media (max-width: 1200px) { .templates-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 1200px) {
+            .templates-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
         @media (max-width: 768px) {
-            .navbar { padding: 20px; }
-            .templates-grid { grid-template-columns: 1fr; padding: 0 20px; }
-            .hero-title { font-size: 40px; }
+            .navbar {
+                padding: 20px;
+            }
+
+            .templates-grid {
+                grid-template-columns: 1fr;
+                padding: 0 20px;
+            }
+
+            .hero-title {
+                font-size: 40px;
+            }
         }
     </style>
 </head>
+
 <body>
     <div class="gallery-page">
         <nav class="navbar">
@@ -230,16 +339,10 @@
             <section class="hero-section">
                 <h1 class="hero-title">Find Your <span>Perfect Style</span></h1>
                 <p class="hero-subtitle">
-                    Browse our collection of professionally designed, ATS-friendly templates tailored for every industry and career level.
+                    Browse our collection of professionally designed, ATS-friendly templates tailored for every industry
+                    and career level.
                 </p>
-
-                <div class="filter-tabs">
-                    <div class="filter-tab active">All Templates</div>
-                    <div class="filter-tab">Modern</div>
-                    <div class="filter-tab">Executive</div>
-                    <div class="filter-tab">Creative</div>
-                    <div class="filter-tab">Minimalist</div>
-                </div>
+                <bold>Click your Template and start building your CV!</bold>
             </section>
 
             <div class="templates-grid">
@@ -255,7 +358,7 @@
                         </div>
                     </div>
                     <div class="template-info">
-                        <div class="template-name">Executive Elite</div>
+                        <div class="template-name">Executive Design</div>
                         <div class="template-desc">Strategic builder for C-suite and senior leadership impact.</div>
                         <div class="template-tags">
                             <span class="tag">Executive</span>
@@ -279,7 +382,7 @@
                         </div>
                     </div>
                     <div class="template-info">
-                        <div class="template-name">Full-Stack Pro</div>
+                        <div class="template-name">Full-Stack Developer</div>
                         <div class="template-desc">Optimized for developers to showcase tech stack and projects.</div>
                         <div class="template-tags">
                             <span class="tag">Modern</span>
@@ -299,7 +402,7 @@
                         </div>
                     </div>
                     <div class="template-info">
-                        <div class="template-name">UX Architect</div>
+                        <div class="template-name">UX/UI Designer</div>
                         <div class="template-desc">Design-centric builder focused on portfolio and user research.</div>
                         <div class="template-tags">
                             <span class="tag">Minimalist</span>
@@ -319,7 +422,7 @@
                         </div>
                     </div>
                     <div class="template-info">
-                        <div class="template-name">Data Insights</div>
+                        <div class="template-name">Data Analyst</div>
                         <div class="template-desc">Analytical builder highlighting data viz and ML expertise.</div>
                         <div class="template-tags">
                             <span class="tag">Creative</span>
@@ -338,7 +441,7 @@
                         </div>
                     </div>
                     <div class="template-info">
-                        <div class="template-name">3D Visionary</div>
+                        <div class="template-name">3D Artist</div>
                         <div class="template-desc">Artistic layout designed for technical artists and creators.</div>
                         <div class="template-tags">
                             <span class="tag">Creative</span>
@@ -357,7 +460,7 @@
                         </div>
                     </div>
                     <div class="template-info">
-                        <div class="template-name">Creative Flow</div>
+                        <div class="template-name">Creative Design</div>
                         <div class="template-desc">Vibrant design with high impact for marketing and arts.</div>
                         <div class="template-tags">
                             <span class="tag">Creative</span>
@@ -376,7 +479,7 @@
                         </div>
                     </div>
                     <div class="template-info">
-                        <div class="template-name">Modern Horizon</div>
+                        <div class="template-name">Modern Design</div>
                         <div class="template-desc">Sleek, digital-first layout for modern career paths.</div>
                         <div class="template-tags">
                             <span class="tag">Modern</span>
@@ -385,24 +488,6 @@
                     </div>
                 </a>
 
-                <!-- Executive Gold -->
-                <a href="{% url 'builder_executive' %}" class="template-card">
-                    <div class="template-preview">
-                        <div class="shape-rect"></div>
-                        <div class="preview-lines">
-                            <div class="line"></div>
-                            <div class="line-medium"></div>
-                        </div>
-                    </div>
-                    <div class="template-info">
-                        <div class="template-name">Executive Gold</div>
-                        <div class="template-desc">Prestigious layout for boardroom-ready professionals.</div>
-                        <div class="template-tags">
-                            <span class="tag">Executive</span>
-                            <span class="tag">Formal</span>
-                        </div>
-                    </div>
-                </a>
 
                 <!-- Minimalist Pure -->
                 <a href="{% url 'builder_ux' %}" class="template-card">
@@ -415,7 +500,7 @@
                         </div>
                     </div>
                     <div class="template-info">
-                        <div class="template-name">Minimalist Pure</div>
+                        <div class="template-name">Minimalist Design</div>
                         <div class="template-desc">Stripped back design focusing entirely on your text.</div>
                         <div class="template-tags">
                             <span class="tag">Minimalist</span>
@@ -431,4 +516,5 @@
         </footer>
     </div>
 </body>
+
 </html>
