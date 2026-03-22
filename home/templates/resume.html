@@ -12,15 +12,21 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
 
     <style>
+        :root {
+            --primary-blue: #2c3e50;
+            --accent-blue: #3498db;
+        }
+
         body {
-            background-color: #f3f4f6;
-            font-family: 'DM Sans', Arial, sans-serif;
+            background-color: #f4f7f6;
+            font-family: 'DM Sans', sans-serif;
+            color: #333;
             margin: 0;
             padding: 20px;
         }
 
         .resume-wrapper {
-            max-width: 800px;
+            max-width: 850px;
             margin: 0 auto;
         }
 
@@ -36,8 +42,38 @@
 
         /* HEADER */
         .resume-header {
-            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
             margin-bottom: 20px;
+        }
+
+        .header-main-info {
+            text-align: center;
+        }
+
+        .header-photo {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            border: 2px solid #000;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff;
+        }
+
+        .header-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .header-photo i {
+            font-size: 50px;
+            color: #ccc;
         }
 
         .resume-header h1 {
@@ -97,18 +133,18 @@
 
         /* EXPORT BUTTONS */
         .export-buttons {
-            max-width: 800px;
+            max-width: 850px;
             margin: 0 auto 20px;
             padding: 20px;
             background: #fff;
             border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
             text-align: center;
         }
 
         .export-buttons h3 {
             margin: 0 0 15px 0;
-            color: #2c3e50;
+            color: var(--primary-blue);
             font-size: 18px;
         }
 
@@ -133,25 +169,10 @@
             gap: 8px;
         }
 
-        .btn-pdf {
-            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
-            color: #fff;
-        }
-
-        .btn-docx {
-            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
-            color: #fff;
-        }
-
-        .btn-txt {
-            background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
-            color: #fff;
-        }
-
-        .btn-print {
-            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
-            color: #fff;
-        }
+        .btn-pdf { background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); color: #fff; }
+        .btn-docx { background: linear-gradient(135deg, #3498db 0%, #2980b9 100%); color: #fff; }
+        .btn-txt { background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%); color: #fff; }
+        .btn-print { background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%); color: #fff; }
 
         .btn-export:hover {
             transform: translateY(-2px);
@@ -159,22 +180,10 @@
             color: #fff;
         }
 
-        .btn-export svg {
-            width: 18px;
-            height: 18px;
-        }
-
         @media print {
-            .export-buttons {
-                display: none;
-            }
-            body {
-                background: #fff;
-                padding: 0;
-            }
-            .resume-sheet {
-                box-shadow: none;
-            }
+            .export-buttons, .download-btn-container { display: none; }
+            body { background: none; padding: 0; }
+            .resume-sheet { box-shadow: none; }
         }
 
         /* DOWNLOAD BUTTON */
@@ -193,6 +202,7 @@
             background: #000;
             color: #fff;
             cursor: pointer;
+            display: none; /* Hide old single download button */
         }
 
         .download-btn:hover {
@@ -227,7 +237,18 @@
     <div class="export-buttons">
         <h3>Export Your Resume</h3>
         <div class="btn-export-group">
-            <form action="{% url 'export_pdf' %}" method="post" style="display: inline;">
+            <button onclick="generatePDF('mn')" class="btn-export btn-pdf">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                    <polyline points="10 9 9 9 8 9"></polyline>
+                </svg>
+                PDF
+            </button>
+            
+            <form action="{% url 'export_docx' %}" method="post" style="display: inline;">
                 {% csrf_token %}
                 <input type="hidden" name="template_type" value="{{ template_type|default:'classic' }}">
                 <!-- All resume data -->
@@ -350,98 +371,6 @@
                 <input type="hidden" name="award_year1" value="{{ award_year1 }}">
                 <input type="hidden" name="award2" value="{{ award2 }}">
                 <input type="hidden" name="award_year2" value="{{ award_year2 }}">
-                <button type="submit" class="btn-export btn-pdf">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                        <polyline points="14 2 14 8 20 8"></polyline>
-                        <line x1="16" y1="13" x2="8" y2="13"></line>
-                        <line x1="16" y1="17" x2="8" y2="17"></line>
-                        <polyline points="10 9 9 9 8 9"></polyline>
-                    </svg>
-                    PDF
-                </button>
-            </form>
-            
-            <form action="{% url 'export_docx' %}" method="post" style="display: inline;">
-                {% csrf_token %}
-                <input type="hidden" name="template_type" value="{{ template_type|default:'classic' }}">
-                <!-- All resume data -->
-                <input type="hidden" name="name" value="{{ name }}">
-                <input type="hidden" name="title" value="{{ title }}">
-                <input type="hidden" name="email" value="{{ email }}">
-                <input type="hidden" name="phone" value="{{ phone }}">
-                <input type="hidden" name="about" value="{{ about }}">
-                <input type="hidden" name="location" value="{{ location }}">
-                <input type="hidden" name="linkedin" value="{{ linkedin }}">
-                <input type="hidden" name="github" value="{{ github }}">
-                <input type="hidden" name="portfolio" value="{{ portfolio }}">
-                <input type="hidden" name="prog_langs" value="{{ prog_langs }}">
-                <input type="hidden" name="frameworks" value="{{ frameworks }}">
-                <input type="hidden" name="databases" value="{{ databases }}">
-                <input type="hidden" name="dev_tools" value="{{ dev_tools }}">
-                <input type="hidden" name="web_tech" value="{{ web_tech }}">
-                <input type="hidden" name="languages" value="{{ languages }}">
-                <input type="hidden" name="certifications" value="{{ certifications }}">
-                <input type="hidden" name="interests" value="{{ interests }}">
-                <!-- Experience -->
-                <input type="hidden" name="company1" value="{{ company1 }}">
-                <input type="hidden" name="post1" value="{{ post1 }}">
-                <input type="hidden" name="duration1" value="{{ duration1 }}">
-                <input type="hidden" name="location1" value="{{ location1 }}">
-                <input type="hidden" name="lin11" value="{{ lin11 }}">
-                <input type="hidden" name="achievements1" value="{{ achievements1 }}">
-                <input type="hidden" name="company2" value="{{ company2 }}">
-                <input type="hidden" name="post2" value="{{ post2 }}">
-                <input type="hidden" name="duration2" value="{{ duration2 }}">
-                <input type="hidden" name="location2" value="{{ location2 }}">
-                <input type="hidden" name="lin21" value="{{ lin21 }}">
-                <input type="hidden" name="achievements2" value="{{ achievements2 }}">
-                <input type="hidden" name="company3" value="{{ company3 }}">
-                <input type="hidden" name="post3" value="{{ post3 }}">
-                <input type="hidden" name="duration3" value="{{ duration3 }}">
-                <input type="hidden" name="location3" value="{{ location3 }}">
-                <input type="hidden" name="lin31" value="{{ lin31 }}">
-                <!-- Projects -->
-                <input type="hidden" name="project1" value="{{ project1 }}">
-                <input type="hidden" name="durat1" value="{{ durat1 }}">
-                <input type="hidden" name="desc1" value="{{ desc1 }}">
-                <input type="hidden" name="project_tech1" value="{{ project_tech1 }}">
-                <input type="hidden" name="project_url1" value="{{ project_url1 }}">
-                <input type="hidden" name="project2" value="{{ project2 }}">
-                <input type="hidden" name="durat2" value="{{ durat2 }}">
-                <input type="hidden" name="desc2" value="{{ desc2 }}">
-                <input type="hidden" name="project_tech2" value="{{ project_tech2 }}">
-                <input type="hidden" name="project_url2" value="{{ project_url2 }}">
-                <!-- Education -->
-                <input type="hidden" name="degree1" value="{{ degree1 }}">
-                <input type="hidden" name="college1" value="{{ college1 }}">
-                <input type="hidden" name="year1" value="{{ year1 }}">
-                <input type="hidden" name="gpa1" value="{{ gpa1 }}">
-                <input type="hidden" name="honors1" value="{{ honors1 }}">
-                <input type="hidden" name="degree2" value="{{ degree2 }}">
-                <input type="hidden" name="college2" value="{{ college2 }}">
-                <input type="hidden" name="year2" value="{{ year2 }}">
-                <input type="hidden" name="gpa2" value="{{ gpa2 }}">
-                <input type="hidden" name="honors2" value="{{ honors2 }}">
-                <!-- References -->
-                <input type="hidden" name="reference_name1" value="{{ reference_name1 }}">
-                <input type="hidden" name="reference_title1" value="{{ reference_title1 }}">
-                <input type="hidden" name="reference_contact1" value="{{ reference_contact1 }}">
-                <input type="hidden" name="reference_name2" value="{{ reference_name2 }}">
-                <input type="hidden" name="reference_title2" value="{{ reference_title2 }}">
-                <input type="hidden" name="reference_contact2" value="{{ reference_contact2 }}">
-                <!-- Board Positions -->
-                <input type="hidden" name="board1" value="{{ board1 }}">
-                <input type="hidden" name="board_role1" value="{{ board_role1 }}">
-                <input type="hidden" name="board_year1" value="{{ board_year1 }}">
-                <input type="hidden" name="board2" value="{{ board2 }}">
-                <input type="hidden" name="board_role2" value="{{ board_role2 }}">
-                <input type="hidden" name="board_year2" value="{{ board_year2 }}">
-                <!-- Awards -->
-                <input type="hidden" name="award1" value="{{ award1 }}">
-                <input type="hidden" name="award_year1" value="{{ award_year1 }}">
-                <input type="hidden" name="award2" value="{{ award2 }}">
-                <input type="hidden" name="award_year2" value="{{ award_year2 }}">
                 <button type="submit" class="btn-export btn-docx">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
@@ -473,6 +402,7 @@
                 <input type="hidden" name="dev_tools" value="{{ dev_tools }}">
                 <input type="hidden" name="web_tech" value="{{ web_tech }}">
                 <input type="hidden" name="languages" value="{{ languages }}">
+                <input type="hidden" name="profile_photo" value="{{ profile_photo }}">
                 <input type="hidden" name="certifications" value="{{ certifications }}">
                 <input type="hidden" name="interests" value="{{ interests }}">
                 <!-- Experience -->
@@ -493,6 +423,19 @@
                 <input type="hidden" name="duration3" value="{{ duration3 }}">
                 <input type="hidden" name="location3" value="{{ location3 }}">
                 <input type="hidden" name="lin31" value="{{ lin31 }}">
+                <input type="hidden" name="achievements3" value="{{ achievements3 }}">
+                <input type="hidden" name="company4" value="{{ company4 }}">
+                <input type="hidden" name="post4" value="{{ post4 }}">
+                <input type="hidden" name="duration4" value="{{ duration4 }}">
+                <input type="hidden" name="location4" value="{{ location4 }}">
+                <input type="hidden" name="lin41" value="{{ lin41 }}">
+                <input type="hidden" name="achievements4" value="{{ achievements4 }}">
+                <input type="hidden" name="company5" value="{{ company5 }}">
+                <input type="hidden" name="post5" value="{{ post5 }}">
+                <input type="hidden" name="duration5" value="{{ duration5 }}">
+                <input type="hidden" name="location5" value="{{ location5 }}">
+                <input type="hidden" name="lin51" value="{{ lin51 }}">
+                <input type="hidden" name="achievements5" value="{{ achievements5 }}">
                 <!-- Projects -->
                 <input type="hidden" name="project1" value="{{ project1 }}">
                 <input type="hidden" name="durat1" value="{{ durat1 }}">
@@ -504,6 +447,21 @@
                 <input type="hidden" name="desc2" value="{{ desc2 }}">
                 <input type="hidden" name="project_tech2" value="{{ project_tech2 }}">
                 <input type="hidden" name="project_url2" value="{{ project_url2 }}">
+                <input type="hidden" name="project3" value="{{ project3 }}">
+                <input type="hidden" name="durat3" value="{{ durat3 }}">
+                <input type="hidden" name="desc3" value="{{ desc3 }}">
+                <input type="hidden" name="project_tech3" value="{{ project_tech3 }}">
+                <input type="hidden" name="project_url3" value="{{ project_url3 }}">
+                <input type="hidden" name="project4" value="{{ project4 }}">
+                <input type="hidden" name="durat4" value="{{ durat4 }}">
+                <input type="hidden" name="desc4" value="{{ desc4 }}">
+                <input type="hidden" name="project_tech4" value="{{ project_tech4 }}">
+                <input type="hidden" name="project_url4" value="{{ project_url4 }}">
+                <input type="hidden" name="project5" value="{{ project5 }}">
+                <input type="hidden" name="durat5" value="{{ durat5 }}">
+                <input type="hidden" name="desc5" value="{{ desc5 }}">
+                <input type="hidden" name="project_tech5" value="{{ project_tech5 }}">
+                <input type="hidden" name="project_url5" value="{{ project_url5 }}">
                 <!-- Education -->
                 <input type="hidden" name="degree1" value="{{ degree1 }}">
                 <input type="hidden" name="college1" value="{{ college1 }}">
@@ -515,6 +473,21 @@
                 <input type="hidden" name="year2" value="{{ year2 }}">
                 <input type="hidden" name="gpa2" value="{{ gpa2 }}">
                 <input type="hidden" name="honors2" value="{{ honors2 }}">
+                <input type="hidden" name="degree3" value="{{ degree3 }}">
+                <input type="hidden" name="college3" value="{{ college3 }}">
+                <input type="hidden" name="year3" value="{{ year3 }}">
+                <input type="hidden" name="gpa3" value="{{ gpa3 }}">
+                <input type="hidden" name="honors3" value="{{ honors3 }}">
+                <input type="hidden" name="degree4" value="{{ degree4 }}">
+                <input type="hidden" name="college4" value="{{ college4 }}">
+                <input type="hidden" name="year4" value="{{ year4 }}">
+                <input type="hidden" name="gpa4" value="{{ gpa4 }}">
+                <input type="hidden" name="honors4" value="{{ honors4 }}">
+                <input type="hidden" name="degree5" value="{{ degree5 }}">
+                <input type="hidden" name="college5" value="{{ college5 }}">
+                <input type="hidden" name="year5" value="{{ year5 }}">
+                <input type="hidden" name="gpa5" value="{{ gpa5 }}">
+                <input type="hidden" name="honors5" value="{{ honors5 }}">
                 <!-- References -->
                 <input type="hidden" name="reference_name1" value="{{ reference_name1 }}">
                 <input type="hidden" name="reference_title1" value="{{ reference_title1 }}">
@@ -561,13 +534,20 @@
         <div id="mn" class="resume-sheet">
             <!-- HEADER -->
             <div class="resume-header">
-                <h1>{{ name|default:"YOUR NAME"|upper }}</h1>
-                <div class="subtitle">{{ title|default:"Professional Title" }}</div>
-                <div class="contact-info">
-                    {% if phone %}{{ phone }}{% endif %}{% if phone and email %} | {% endif %}{% if email %}{{ email }}{% endif %}{% if email and location %} | {% endif %}{% if location %}{{ location }}{% endif %}
+                {% if profile_photo %}
+                <div class="header-photo">
+                    <img src="{{ profile_photo }}" alt="Profile Photo">
                 </div>
-                <div class="contact-info">
-                    {% if linkedin %}LinkedIn : {{ linkedin }}{% endif %}{% if linkedin and github %} | {% endif %}{% if github %}GitHub : {{ github }}{% endif %}
+                {% endif %}
+                <div class="header-main-info">
+                    <h1>{{ name|default:"YOUR NAME"|upper }}</h1>
+                    <div class="subtitle">{{ title|default:"Professional Title" }}</div>
+                    <div class="contact-info">
+                        {% if phone %}{{ phone }}{% endif %}{% if phone and email %} | {% endif %}{% if email %}{{ email }}{% endif %}{% if email and location %} | {% endif %}{% if location %}{{ location }}{% endif %}
+                    </div>
+                    <div class="contact-info">
+                        {% if linkedin %}LinkedIn : {{ linkedin }}{% endif %}{% if linkedin and github %} | {% endif %}{% if github %}GitHub : {{ github }}{% endif %}
+                    </div>
                 </div>
             </div>
 

@@ -1,6 +1,11 @@
 from django.contrib import admin
 from django.urls import path, include
-from home.views import landing, home, builder, gen_resume, profile, login_view, signup_view, logout_view, builder_fullstack, builder_3d_generalist, builder_data_scientist, builder_ux_designer, builder_executive, templates_gallery, export_resume_pdf, export_resume_docx, export_resume_txt
+from home.views import (
+    landing, home, builder, gen_resume, profile, login_view, signup_view, logout_view,
+    builder_fullstack, builder_3d_generalist, builder_data_scientist, builder_ux_designer,
+    builder_executive, builder_creative_design, builder_modern_design, builder_minimalist_design,
+    templates_gallery, export_resume_pdf, export_resume_docx, export_resume_txt
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -13,6 +18,9 @@ urlpatterns = [
     path('builder/data-scientist/', builder_data_scientist, name='builder_data'),
     path('builder/ux-designer/', builder_ux_designer, name='builder_ux'),
     path('builder/executive/', builder_executive, name='builder_executive'),
+    path('builder/creative/', builder_creative_design, name='builder_creative'),
+    path('builder/modern/', builder_modern_design, name='builder_modern'),
+    path('builder/minimalist/', builder_minimalist_design, name='builder_minimalist'),
     path('resume/', gen_resume, name='resume'),
     path('export/pdf/', export_resume_pdf, name='export_pdf'),
     path('export/docx/', export_resume_docx, name='export_docx'),

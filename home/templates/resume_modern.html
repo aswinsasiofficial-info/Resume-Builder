@@ -6,455 +6,815 @@
     <title>Generated Resume - Modern</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --text-dark: #1a1a1a;
+            --text-muted: #4a5568;
+            --border-color: #e2e8f0;
+            --accent-black: #000000;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             background-color: #f3f4f6;
-            font-family: 'Inter', Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            padding: 40px 20px;
+            font-weight: 600;
         }
 
         .resume-wrapper {
-            max-width: 800px;
+            max-width: 850px;
             margin: 0 auto;
         }
 
+        /* EXPORT BUTTONS */
+        .export-buttons {
+            max-width: 850px;
+            margin: 0 auto 20px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .export-buttons h3 {
+            margin: 0 0 15px 0;
+            color: #2d3748;
+            font-size: 18px;
+        }
+
+        .btn-export-group {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-export {
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-pdf { background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); color: #fff; }
+        .btn-docx { background: linear-gradient(135deg, #3498db 0%, #2980b9 100%); color: #fff; }
+        .btn-txt { background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%); color: #fff; }
+        .btn-print { background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%); color: #fff; }
+
+        .btn-export:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+            color: #fff;
+        }
+
+        /* RESUME SHEET */
         .resume-sheet {
             background: #ffffff;
-            color: #1a1a1a;
-            display: flex;
             min-height: 1100px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            padding: 60px 50px;
+            position: relative;
         }
 
-        /* Sidebar */
-        .sidebar {
-            width: 35%;
-            background: #2d3748;
-            color: #ffffff;
-            padding: 40px 30px;
+        /* Decoration bar */
+        .decoration-bar {
+            position: absolute;
+            left: 0;
+            top: 150px;
+            width: 15px;
+            height: 100px;
+            background-color: var(--accent-black);
         }
 
-        .main-content {
-            width: 65%;
-            padding: 40px;
-        }
-
-        /* Sidebar Content */
-        .profile-section {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .profile-image {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 48px;
-            font-weight: 700;
-            color: #fff;
-        }
-
-        .sidebar h1 {
-            font-size: 24px;
-            font-weight: 700;
-            margin: 0 0 8px 0;
-            letter-spacing: 1px;
-        }
-
-        .sidebar .job-title {
-            font-size: 14px;
-            color: #a0aec0;
-            margin-bottom: 25px;
-        }
-
-        .sidebar-section {
-            margin-bottom: 30px;
-        }
-
-        .sidebar-title {
-            font-size: 12px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: #667eea;
-            margin-bottom: 15px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #667eea;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 12px;
-            font-size: 13px;
-            line-height: 1.5;
-        }
-
-        .contact-icon {
-            width: 20px;
-            margin-right: 10px;
-            color: #667eea;
-        }
-
-        .skill-tag {
-            display: inline-block;
-            background: rgba(102, 126, 234, 0.2);
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            margin: 3px;
-        }
-
-        .language-item {
+        /* HEADER */
+        .resume-header {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 10px;
-            font-size: 13px;
+            align-items: flex-start;
+            margin-bottom: 50px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 30px;
         }
 
-        .language-level {
-            color: #a0aec0;
+        .header-left {
+            flex: 1;
         }
 
-        /* Main Content */
-        .section {
-            margin-bottom: 30px;
-        }
-
-        .section-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .section-icon {
-            width: 36px;
-            height: 36px;
-            background: #667eea;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 12px;
-            color: #fff;
-            font-size: 16px;
-        }
-
-        .section-title {
-            font-size: 18px;
+        .header-left h1 {
+            font-size: 42px;
             font-weight: 700;
-            color: #2d3748;
+            line-height: 1.1;
+            margin-bottom: 10px;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
-        .experience-item, .education-item, .project-item {
-            margin-bottom: 25px;
+        .header-left .job-title {
+            font-size: 16px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--text-muted);
+        }
+
+        .header-right {
+            text-align: right;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: auto auto;
+            gap: 8px 15px;
+            align-items: center;
+        }
+
+        .contact-label {
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        /* TWO COLUMN LAYOUT */
+        .resume-body {
+            display: grid;
+            grid-template-columns: 1.8fr 1fr;
+            gap: 50px;
+        }
+
+        /* TYPOGRAPHY */
+        .section-title {
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background-color: var(--border-color);
+            margin-left: 15px;
+        }
+
+        /* LEFT COLUMN */
+        .summary-text {
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--text-muted);
+            margin-bottom: 30px;
             padding-left: 15px;
-            border-left: 3px solid #e2e8f0;
+            border-left: 2px solid var(--border-color);
+        }
+
+        .experience-item, .project-item {
+            margin-bottom: 25px;
         }
 
         .item-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
             margin-bottom: 8px;
         }
 
-        .item-title {
-            font-weight: 600;
+        .item-role {
+            font-weight: 700;
             font-size: 15px;
-            color: #2d3748;
+            text-transform: uppercase;
+            margin-bottom: 2px;
         }
 
-        .item-date {
-            font-size: 12px;
-            color: #667eea;
-            font-weight: 500;
-            background: rgba(102, 126, 234, 0.1);
-            padding: 3px 10px;
-            border-radius: 12px;
-        }
-
-        .item-subtitle {
+        .item-meta {
             font-size: 13px;
-            color: #718096;
-            margin-bottom: 8px;
+            color: var(--text-muted);
+            font-weight: 500;
         }
 
-        .item-description {
+        .item-bullets {
+            list-style: none;
+            padding-left: 5px;
+            margin-top: 10px;
+        }
+
+        .item-bullets li {
             font-size: 13px;
             line-height: 1.6;
-            color: #4a5568;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+            position: relative;
+            padding-left: 15px;
         }
 
-        .summary-text {
-            font-size: 14px;
-            line-height: 1.8;
-            color: #4a5568;
+        .item-bullets li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--text-dark);
         }
 
-        /* DOWNLOAD BUTTON */
-        .download-btn-container {
-            text-align: center;
-            margin-top: 30px;
+        /* RIGHT COLUMN */
+        .profile-photo {
+            width: 100%;
+            aspect-ratio: 1;
+            background-color: #eee;
             margin-bottom: 30px;
+            overflow: hidden;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ccc;
+            font-size: 40px;
         }
 
-        .download-btn {
-            padding: 12px 30px;
-            font-size: 16px;
-            font-weight: bold;
-            border-radius: 8px;
-            border: none;
-            background: #667eea;
-            color: #fff;
-            cursor: pointer;
+        .edu-item {
+            margin-bottom: 20px;
         }
 
-        .download-btn:hover {
-            background: #5a67d8;
+        .edu-degree {
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 2px;
+        }
+
+        .edu-school {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .edu-date {
+            font-size: 12px;
+            color: #999;
+            font-style: italic;
+        }
+
+        .skills-group {
+            margin-bottom: 25px;
+        }
+
+        .skills-group h4 {
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+
+        .skills-list {
+            list-style: none;
+        }
+
+        .skills-list li {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 5px;
+            padding-left: 12px;
+            position: relative;
+        }
+
+        .skills-list li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #cbd5e0;
         }
 
         @media print {
+            .export-buttons { display: none; }
             body { background: none; padding: 0; }
-            .resume-sheet { box-shadow: none; }
-            .download-btn-container { display: none; }
+            .resume-sheet { box-shadow: none; padding: 40px; }
         }
     </style>
 </head>
 <body>
+    <!-- Export Buttons -->
+    <div class="export-buttons">
+        <h3>Export Your Resume</h3>
+        <div class="btn-export-group">
+            <button onclick="generatePDF('mn')" class="btn-export btn-pdf">
+                <i class="fas fa-file-pdf"></i> PDF
+            </button>
+            
+            <form action="{% url 'export_docx' %}" method="post" style="display: inline;">
+                {% csrf_token %}
+                <input type="hidden" name="template_type" value="modern">
+                <input type="hidden" name="name" value="{{ name }}">
+                <input type="hidden" name="title" value="{{ title }}">
+                <input type="hidden" name="email" value="{{ email }}">
+                <input type="hidden" name="phone" value="{{ phone }}">
+                <input type="hidden" name="about" value="{{ about }}">
+                <input type="hidden" name="location" value="{{ location }}">
+                <input type="hidden" name="linkedin" value="{{ linkedin }}">
+                <input type="hidden" name="github" value="{{ github }}">
+                <input type="hidden" name="portfolio" value="{{ portfolio }}">
+                <input type="hidden" name="prog_langs" value="{{ prog_langs }}">
+                <input type="hidden" name="frameworks" value="{{ frameworks }}">
+                <input type="hidden" name="databases" value="{{ databases }}">
+                <input type="hidden" name="dev_tools" value="{{ dev_tools }}">
+                <input type="hidden" name="web_tech" value="{{ web_tech }}">
+                <input type="hidden" name="languages" value="{{ languages }}">
+                <input type="hidden" name="profile_photo" value="{{ profile_photo }}">
+                <input type="hidden" name="certifications" value="{{ certifications }}">
+                <input type="hidden" name="interests" value="{{ interests }}">
+                <!-- Experience -->
+                <input type="hidden" name="company1" value="{{ company1 }}">
+                <input type="hidden" name="post1" value="{{ post1 }}">
+                <input type="hidden" name="duration1" value="{{ duration1 }}">
+                <input type="hidden" name="location1" value="{{ location1 }}">
+                <input type="hidden" name="lin11" value="{{ lin11 }}">
+                <input type="hidden" name="achievements1" value="{{ achievements1 }}">
+                <input type="hidden" name="company2" value="{{ company2 }}">
+                <input type="hidden" name="post2" value="{{ post2 }}">
+                <input type="hidden" name="duration2" value="{{ duration2 }}">
+                <input type="hidden" name="location2" value="{{ location2 }}">
+                <input type="hidden" name="lin21" value="{{ lin21 }}">
+                <input type="hidden" name="achievements2" value="{{ achievements2 }}">
+                <input type="hidden" name="company3" value="{{ company3 }}">
+                <input type="hidden" name="post3" value="{{ post3 }}">
+                <input type="hidden" name="duration3" value="{{ duration3 }}">
+                <input type="hidden" name="location3" value="{{ location3 }}">
+                <input type="hidden" name="lin31" value="{{ lin31 }}">
+                <input type="hidden" name="achievements3" value="{{ achievements3 }}">
+                <input type="hidden" name="company4" value="{{ company4 }}">
+                <input type="hidden" name="post4" value="{{ post4 }}">
+                <input type="hidden" name="duration4" value="{{ duration4 }}">
+                <input type="hidden" name="location4" value="{{ location4 }}">
+                <input type="hidden" name="lin41" value="{{ lin41 }}">
+                <input type="hidden" name="achievements4" value="{{ achievements4 }}">
+                <input type="hidden" name="company5" value="{{ company5 }}">
+                <input type="hidden" name="post5" value="{{ post5 }}">
+                <input type="hidden" name="duration5" value="{{ duration5 }}">
+                <input type="hidden" name="location5" value="{{ location5 }}">
+                <input type="hidden" name="lin51" value="{{ lin51 }}">
+                <input type="hidden" name="achievements5" value="{{ achievements5 }}">
+                <!-- Projects -->
+                <input type="hidden" name="project1" value="{{ project1 }}">
+                <input type="hidden" name="durat1" value="{{ durat1 }}">
+                <input type="hidden" name="desc1" value="{{ desc1 }}">
+                <input type="hidden" name="project_tech1" value="{{ project_tech1 }}">
+                <input type="hidden" name="project_url1" value="{{ project_url1 }}">
+                <input type="hidden" name="project2" value="{{ project2 }}">
+                <input type="hidden" name="durat2" value="{{ durat2 }}">
+                <input type="hidden" name="desc2" value="{{ desc2 }}">
+                <input type="hidden" name="project_tech2" value="{{ project_tech2 }}">
+                <input type="hidden" name="project_url2" value="{{ project_url2 }}">
+                <input type="hidden" name="project3" value="{{ project3 }}">
+                <input type="hidden" name="durat3" value="{{ durat3 }}">
+                <input type="hidden" name="desc3" value="{{ desc3 }}">
+                <input type="hidden" name="project_tech3" value="{{ project_tech3 }}">
+                <input type="hidden" name="project_url3" value="{{ project_url3 }}">
+                <input type="hidden" name="project4" value="{{ project4 }}">
+                <input type="hidden" name="durat4" value="{{ durat4 }}">
+                <input type="hidden" name="desc4" value="{{ desc4 }}">
+                <input type="hidden" name="project_tech4" value="{{ project_tech4 }}">
+                <input type="hidden" name="project_url4" value="{{ project_url4 }}">
+                <input type="hidden" name="project5" value="{{ project5 }}">
+                <input type="hidden" name="durat5" value="{{ durat5 }}">
+                <input type="hidden" name="desc5" value="{{ desc5 }}">
+                <input type="hidden" name="project_tech5" value="{{ project_tech5 }}">
+                <input type="hidden" name="project_url5" value="{{ project_url5 }}">
+                <!-- Education -->
+                <input type="hidden" name="degree1" value="{{ degree1 }}">
+                <input type="hidden" name="college1" value="{{ college1 }}">
+                <input type="hidden" name="year1" value="{{ year1 }}">
+                <input type="hidden" name="gpa1" value="{{ gpa1 }}">
+                <input type="hidden" name="honors1" value="{{ honors1 }}">
+                <input type="hidden" name="degree2" value="{{ degree2 }}">
+                <input type="hidden" name="college2" value="{{ college2 }}">
+                <input type="hidden" name="year2" value="{{ year2 }}">
+                <input type="hidden" name="gpa2" value="{{ gpa2 }}">
+                <input type="hidden" name="honors2" value="{{ honors2 }}">
+                <input type="hidden" name="degree3" value="{{ degree3 }}">
+                <input type="hidden" name="college3" value="{{ college3 }}">
+                <input type="hidden" name="year3" value="{{ year3 }}">
+                <input type="hidden" name="gpa3" value="{{ gpa3 }}">
+                <input type="hidden" name="honors3" value="{{ honors3 }}">
+                <input type="hidden" name="degree4" value="{{ degree4 }}">
+                <input type="hidden" name="college4" value="{{ college4 }}">
+                <input type="hidden" name="year4" value="{{ year4 }}">
+                <input type="hidden" name="gpa4" value="{{ gpa4 }}">
+                <input type="hidden" name="honors4" value="{{ honors4 }}">
+                <input type="hidden" name="degree5" value="{{ degree5 }}">
+                <input type="hidden" name="college5" value="{{ college5 }}">
+                <input type="hidden" name="year5" value="{{ year5 }}">
+                <input type="hidden" name="gpa5" value="{{ gpa5 }}">
+                <input type="hidden" name="honors5" value="{{ honors5 }}">
+                <button type="submit" class="btn-export btn-docx">
+                    <i class="fas fa-file-word"></i> DOCX
+                </button>
+            </form>
+            
+            <form action="{% url 'export_txt' %}" method="post" style="display: inline;">
+                {% csrf_token %}
+                <input type="hidden" name="template_type" value="modern">
+                <input type="hidden" name="name" value="{{ name }}">
+                <input type="hidden" name="title" value="{{ title }}">
+                <input type="hidden" name="email" value="{{ email }}">
+                <input type="hidden" name="phone" value="{{ phone }}">
+                <input type="hidden" name="about" value="{{ about }}">
+                <input type="hidden" name="location" value="{{ location }}">
+                <input type="hidden" name="linkedin" value="{{ linkedin }}">
+                <input type="hidden" name="github" value="{{ github }}">
+                <input type="hidden" name="portfolio" value="{{ portfolio }}">
+                <input type="hidden" name="prog_langs" value="{{ prog_langs }}">
+                <input type="hidden" name="frameworks" value="{{ frameworks }}">
+                <input type="hidden" name="databases" value="{{ databases }}">
+                <input type="hidden" name="dev_tools" value="{{ dev_tools }}">
+                <input type="hidden" name="web_tech" value="{{ web_tech }}">
+                <input type="hidden" name="languages" value="{{ languages }}">
+                <input type="hidden" name="profile_photo" value="{{ profile_photo }}">
+                <input type="hidden" name="certifications" value="{{ certifications }}">
+                <input type="hidden" name="interests" value="{{ interests }}">
+                <!-- Experience -->
+                <input type="hidden" name="company1" value="{{ company1 }}">
+                <input type="hidden" name="post1" value="{{ post1 }}">
+                <input type="hidden" name="duration1" value="{{ duration1 }}">
+                <input type="hidden" name="location1" value="{{ location1 }}">
+                <input type="hidden" name="lin11" value="{{ lin11 }}">
+                <input type="hidden" name="achievements1" value="{{ achievements1 }}">
+                <input type="hidden" name="company2" value="{{ company2 }}">
+                <input type="hidden" name="post2" value="{{ post2 }}">
+                <input type="hidden" name="duration2" value="{{ duration2 }}">
+                <input type="hidden" name="location2" value="{{ location2 }}">
+                <input type="hidden" name="lin21" value="{{ lin21 }}">
+                <input type="hidden" name="achievements2" value="{{ achievements2 }}">
+                <input type="hidden" name="company3" value="{{ company3 }}">
+                <input type="hidden" name="post3" value="{{ post3 }}">
+                <input type="hidden" name="duration3" value="{{ duration3 }}">
+                <input type="hidden" name="location3" value="{{ location3 }}">
+                <input type="hidden" name="lin31" value="{{ lin31 }}">
+                <input type="hidden" name="achievements3" value="{{ achievements3 }}">
+                <input type="hidden" name="company4" value="{{ company4 }}">
+                <input type="hidden" name="post4" value="{{ post4 }}">
+                <input type="hidden" name="duration4" value="{{ duration4 }}">
+                <input type="hidden" name="location4" value="{{ location4 }}">
+                <input type="hidden" name="lin41" value="{{ lin41 }}">
+                <input type="hidden" name="achievements4" value="{{ achievements4 }}">
+                <input type="hidden" name="company5" value="{{ company5 }}">
+                <input type="hidden" name="post5" value="{{ post5 }}">
+                <input type="hidden" name="duration5" value="{{ duration5 }}">
+                <input type="hidden" name="location5" value="{{ location5 }}">
+                <input type="hidden" name="lin51" value="{{ lin51 }}">
+                <input type="hidden" name="achievements5" value="{{ achievements5 }}">
+                <!-- Projects -->
+                <input type="hidden" name="project1" value="{{ project1 }}">
+                <input type="hidden" name="durat1" value="{{ durat1 }}">
+                <input type="hidden" name="desc1" value="{{ desc1 }}">
+                <input type="hidden" name="project_tech1" value="{{ project_tech1 }}">
+                <input type="hidden" name="project_url1" value="{{ project_url1 }}">
+                <input type="hidden" name="project2" value="{{ project2 }}">
+                <input type="hidden" name="durat2" value="{{ durat2 }}">
+                <input type="hidden" name="desc2" value="{{ desc2 }}">
+                <input type="hidden" name="project_tech2" value="{{ project_tech2 }}">
+                <input type="hidden" name="project_url2" value="{{ project_url2 }}">
+                <input type="hidden" name="project3" value="{{ project3 }}">
+                <input type="hidden" name="durat3" value="{{ durat3 }}">
+                <input type="hidden" name="desc3" value="{{ desc3 }}">
+                <input type="hidden" name="project_tech3" value="{{ project_tech3 }}">
+                <input type="hidden" name="project_url3" value="{{ project_url3 }}">
+                <input type="hidden" name="project4" value="{{ project4 }}">
+                <input type="hidden" name="durat4" value="{{ durat4 }}">
+                <input type="hidden" name="desc4" value="{{ desc4 }}">
+                <input type="hidden" name="project_tech4" value="{{ project_tech4 }}">
+                <input type="hidden" name="project_url4" value="{{ project_url4 }}">
+                <input type="hidden" name="project5" value="{{ project5 }}">
+                <input type="hidden" name="durat5" value="{{ durat5 }}">
+                <input type="hidden" name="desc5" value="{{ desc5 }}">
+                <input type="hidden" name="project_tech5" value="{{ project_tech5 }}">
+                <input type="hidden" name="project_url5" value="{{ project_url5 }}">
+                <!-- Education -->
+                <input type="hidden" name="degree1" value="{{ degree1 }}">
+                <input type="hidden" name="college1" value="{{ college1 }}">
+                <input type="hidden" name="year1" value="{{ year1 }}">
+                <input type="hidden" name="gpa1" value="{{ gpa1 }}">
+                <input type="hidden" name="honors1" value="{{ honors1 }}">
+                <input type="hidden" name="degree2" value="{{ degree2 }}">
+                <input type="hidden" name="college2" value="{{ college2 }}">
+                <input type="hidden" name="year2" value="{{ year2 }}">
+                <input type="hidden" name="gpa2" value="{{ gpa2 }}">
+                <input type="hidden" name="honors2" value="{{ honors2 }}">
+                <input type="hidden" name="degree3" value="{{ degree3 }}">
+                <input type="hidden" name="college3" value="{{ college3 }}">
+                <input type="hidden" name="year3" value="{{ year3 }}">
+                <input type="hidden" name="gpa3" value="{{ gpa3 }}">
+                <input type="hidden" name="honors3" value="{{ honors3 }}">
+                <input type="hidden" name="degree4" value="{{ degree4 }}">
+                <input type="hidden" name="college4" value="{{ college4 }}">
+                <input type="hidden" name="year4" value="{{ year4 }}">
+                <input type="hidden" name="gpa4" value="{{ gpa4 }}">
+                <input type="hidden" name="honors4" value="{{ honors4 }}">
+                <input type="hidden" name="degree5" value="{{ degree5 }}">
+                <input type="hidden" name="college5" value="{{ college5 }}">
+                <input type="hidden" name="year5" value="{{ year5 }}">
+                <input type="hidden" name="gpa5" value="{{ gpa5 }}">
+                <input type="hidden" name="honors5" value="{{ honors5 }}">
+                <button type="submit" class="btn-export btn-txt">
+                    <i class="fas fa-file-alt"></i> TXT
+                </button>
+            </form>
+            
+            <button onclick="window.print()" class="btn-export btn-print">
+                <i class="fas fa-print"></i> Print
+            </button>
+        </div>
+    </div>
+
     <div class="resume-wrapper">
         <div id="mn" class="resume-sheet">
-            <!-- Sidebar -->
-            <div class="sidebar">
-                <div class="profile-section">
-                    <div class="profile-image">{{ name|default:"JD"|slice:":2"|upper }}</div>
-                    <h1>{{ name|default:"John Doe" }}</h1>
-                    <div class="job-title">{{ title|default:"Professional Title" }}</div>
+            <div class="decoration-bar"></div>
+            
+            <!-- HEADER -->
+            <header class="resume-header">
+                <div class="header-left">
+                    <h1>{{ name|default:"Alexander William Smith" }}</h1>
+                    <div class="job-title">{{ title|default:"Software Engineer" }}</div>
                 </div>
-
-                <!-- Contact -->
-                <div class="sidebar-section">
-                    <div class="sidebar-title">Contact</div>
-                    {% if phone %}
-                    <div class="contact-item">
-                        <span class="contact-icon">📱</span>
-                        <span>{{ phone }}</span>
+                <div class="header-right">
+                    <div class="contact-grid">
+                        {% if phone %}<span class="contact-label"></span> <span>{{ phone }}</span>{% endif %}
+                        {% if email %}<span class="contact-label"></span> <span>{{ email }}</span>{% endif %}
+                        {% if portfolio %}<span class="contact-label"></span> <span>{{ portfolio }}</span>{% endif %}
+                        {% if location %}<span class="contact-label"></span> <span>{{ location }}</span>{% endif %}
                     </div>
-                    {% endif %}
-                    {% if email %}
-                    <div class="contact-item">
-                        <span class="contact-icon">✉️</span>
-                        <span>{{ email }}</span>
-                    </div>
-                    {% endif %}
-                    {% if location %}
-                    <div class="contact-item">
-                        <span class="contact-icon">📍</span>
-                        <span>{{ location }}</span>
-                    </div>
-                    {% endif %}
-                    {% if linkedin %}
-                    <div class="contact-item">
-                        <span class="contact-icon">💼</span>
-                        <span>{{ linkedin }}</span>
-                    </div>
-                    {% endif %}
-                    {% if github %}
-                    <div class="contact-item">
-                        <span class="contact-icon">💻</span>
-                        <span>{{ github }}</span>
-                    </div>
-                    {% endif %}
-                    {% if portfolio %}
-                    <div class="contact-item">
-                        <span class="contact-icon">🌐</span>
-                        <span>{{ portfolio }}</span>
-                    </div>
-                    {% endif %}
                 </div>
+            </header>
 
-                <!-- Skills -->
-                {% if prog_langs or frameworks or databases or dev_tools or web_tech %}
-                <div class="sidebar-section">
-                    <div class="sidebar-title">Skills</div>
-                    {% if prog_langs %}
-                        {% for skill in prog_langs.split %}
-                            <span class="skill-tag">{{ skill|cut:"," }}</span>
-                        {% endfor %}
+            <div class="resume-body">
+                <!-- LEFT COLUMN -->
+                <div class="column-left">
+                    <!-- Summary -->
+                    {% if about %}
+                    <section class="section">
+                        <h2 class="section-title">Summary</h2>
+                        <div class="summary-text">{{ about }}</div>
+                    </section>
                     {% endif %}
-                    {% if frameworks %}
-                        {% for skill in frameworks.split %}
-                            <span class="skill-tag">{{ skill|cut:"," }}</span>
-                        {% endfor %}
-                    {% endif %}
-                    {% if databases %}
-                        {% for skill in databases.split %}
-                            <span class="skill-tag">{{ skill|cut:"," }}</span>
-                        {% endfor %}
-                    {% endif %}
-                    {% if dev_tools %}
-                        {% for skill in dev_tools.split %}
-                            <span class="skill-tag">{{ skill|cut:"," }}</span>
-                        {% endfor %}
-                    {% endif %}
-                </div>
-                {% endif %}
 
-                <!-- Languages -->
-                {% if languages %}
-                <div class="sidebar-section">
-                    <div class="sidebar-title">Languages</div>
-                    {% for lang in languages.splitlines %}
-                    {% if lang.strip %}
-                    <div class="language-item">
-                        <span>{{ lang|cut:"-"|cut:":"|truncatewords:1 }}</span>
-                        <span class="language-level">{{ lang|cut:"-"|cut:":"|slice:"2:" }}</span>
-                    </div>
-                    {% endif %}
-                    {% endfor %}
-                </div>
-                {% endif %}
-
-                <!-- Certifications -->
-                {% if certifications %}
-                <div class="sidebar-section">
-                    <div class="sidebar-title">Certifications</div>
-                    {% for cert in certifications.splitlines %}
-                        {% if cert.strip %}
-                        <div class="contact-item" style="margin-bottom: 8px;">
-                            <span style="color: #667eea; margin-right: 8px;">✓</span>
-                            <span style="font-size: 12px;">{{ cert|cut:"-"|cut:"•" }}</span>
+                    <!-- Work Experience -->
+                    <section class="section">
+                        <h2 class="section-title">Work Experience</h2>
+                        
+                        {% if company1 or post1 %}
+                        <div class="experience-item">
+                            <div class="item-header">
+                                <div class="item-role">{{ post1|default:"Lead Software Engineer" }}</div>
+                                <div class="item-meta">{{ company1|default:"Digital Innovations Inc" }} | {{ duration1|default:"June 2021 - Present" }}</div>
+                            </div>
+                            {% if lin11 %}
+                            <ul class="item-bullets">
+                                {% for line in lin11.splitlines %}
+                                    {% if line.strip %}
+                                    <li>{{ line|cut:"•"|cut:"-" }}</li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
                         </div>
                         {% endif %}
-                    {% endfor %}
+
+                        {% if company2 %}
+                        <div class="experience-item">
+                            <div class="item-header">
+                                <div class="item-role">{{ post2|default:"Software Engineer" }}</div>
+                                <div class="item-meta">{{ company2 }} | {{ duration2|default:"July 2018 - May 2021" }}</div>
+                            </div>
+                            {% if lin21 %}
+                            <ul class="item-bullets">
+                                {% for line in lin21.splitlines %}
+                                    {% if line.strip %}
+                                    <li>{{ line|cut:"•"|cut:"-" }}</li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
+                        </div>
+                        {% endif %}
+
+                        {% if company3 %}
+                        <div class="experience-item">
+                            <div class="item-header">
+                                <div class="item-role">{{ post3 }}</div>
+                                <div class="item-meta">{{ company3 }} | {{ duration3 }}</div>
+                            </div>
+                            {% if lin31 %}
+                            <ul class="item-bullets">
+                                {% for line in lin31.splitlines %}
+                                    {% if line.strip %}
+                                    <li>{{ line|cut:"•"|cut:"-" }}</li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
+                        </div>
+                        {% endif %}
+
+                        {% if company4 %}
+                        <div class="experience-item">
+                            <div class="item-header">
+                                <div class="item-role">{{ post4 }}</div>
+                                <div class="item-meta">{{ company4 }} | {{ duration4 }}</div>
+                            </div>
+                            {% if lin41 %}
+                            <ul class="item-bullets">
+                                {% for line in lin41.splitlines %}
+                                    {% if line.strip %}
+                                    <li>{{ line|cut:"•"|cut:"-" }}</li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
+                        </div>
+                        {% endif %}
+
+                        {% if company5 %}
+                        <div class="experience-item">
+                            <div class="item-header">
+                                <div class="item-role">{{ post5 }}</div>
+                                <div class="item-meta">{{ company5 }} | {{ duration5 }}</div>
+                            </div>
+                            {% if lin51 %}
+                            <ul class="item-bullets">
+                                {% for line in lin51.splitlines %}
+                                    {% if line.strip %}
+                                    <li>{{ line|cut:"•"|cut:"-" }}</li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
+                        </div>
+                        {% endif %}
+                    </section>
+
+                    <!-- Projects -->
+                    {% if project1 %}
+                    <section class="section">
+                        <h2 class="section-title">Projects</h2>
+                        <div class="project-item">
+                            <p style="font-size: 14px;"><span style="font-weight: 700;">{{ project1 }}:</span> {{ desc1 }} {% if project_url1 %}[<a href="{{ project_url1 }}" style="color: inherit; text-decoration: none;">link</a>]{% endif %}</p>
+                        </div>
+                        {% if project2 %}
+                        <div class="project-item">
+                            <p style="font-size: 14px;"><span style="font-weight: 700;">{{ project2 }}:</span> {{ desc2 }} {% if project_url2 %}[<a href="{{ project_url2 }}" style="color: inherit; text-decoration: none;">link</a>]{% endif %}</p>
+                        </div>
+                        {% endif %}
+                        {% if project3 %}
+                        <div class="project-item">
+                            <p style="font-size: 14px;"><span style="font-weight: 700;">{{ project3 }}:</span> {{ desc3 }} {% if project_url3 %}[<a href="{{ project_url3 }}" style="color: inherit; text-decoration: none;">link</a>]{% endif %}</p>
+                        </div>
+                        {% endif %}
+                        {% if project4 %}
+                        <div class="project-item">
+                            <p style="font-size: 14px;"><span style="font-weight: 700;">{{ project4 }}:</span> {{ desc4 }} {% if project_url4 %}[<a href="{{ project_url4 }}" style="color: inherit; text-decoration: none;">link</a>]{% endif %}</p>
+                        </div>
+                        {% endif %}
+                        {% if project5 %}
+                        <div class="project-item">
+                            <p style="font-size: 14px;"><span style="font-weight: 700;">{{ project5 }}:</span> {{ desc5 }} {% if project_url5 %}[<a href="{{ project_url5 }}" style="color: inherit; text-decoration: none;">link</a>]{% endif %}</p>
+                        </div>
+                        {% endif %}
+                    </section>
+                    {% endif %}
                 </div>
-                {% endif %}
+
+                <!-- RIGHT COLUMN -->
+                <div class="column-right">
+                    <div class="profile-photo">
+                        {% if profile_photo %}
+                        <img src="{{ profile_photo }}" alt="Profile Photo" style="width: 100%; height: 100%; object-fit: cover;">
+                        {% else %}
+                        <i class="fas fa-user"></i>
+                        {% endif %}
+                    </div>
+
+                    <!-- Education -->
+                    {% if degree1 or college1 %}
+                    <section class="section">
+                        <h2 class="section-title">Education</h2>
+                        <div class="edu-item">
+                            <div class="edu-degree">{{ degree1|default:"Master of Science" }}</div>
+                            <div class="edu-school">{{ college1|default:"Stanford University" }}</div>
+                            <div class="edu-date">{{ year1|default:"Sep 2016 - Jun 2018" }}</div>
+                        </div>
+                        {% if degree2 %}
+                        <div class="edu-item">
+                            <div class="edu-degree">{{ degree2 }}</div>
+                            <div class="edu-school">{{ college2 }}</div>
+                            <div class="edu-date">{{ year2 }}</div>
+                        </div>
+                        {% endif %}
+                        {% if degree3 %}
+                        <div class="edu-item">
+                            <div class="edu-degree">{{ degree3 }}</div>
+                            <div class="edu-school">{{ college3 }}</div>
+                            <div class="edu-date">{{ year3 }}</div>
+                        </div>
+                        {% endif %}
+                        {% if degree4 %}
+                        <div class="edu-item">
+                            <div class="edu-degree">{{ degree4 }}</div>
+                            <div class="edu-school">{{ college4 }}</div>
+                            <div class="edu-date">{{ year4 }}</div>
+                        </div>
+                        {% endif %}
+                        {% if degree5 %}
+                        <div class="edu-item">
+                            <div class="edu-degree">{{ degree5 }}</div>
+                            <div class="edu-school">{{ college5 }}</div>
+                            <div class="edu-date">{{ year5 }}</div>
+                        </div>
+                        {% endif %}
+                    </section>
+                    {% endif %}
+
+                    <!-- Skills -->
+                    <section class="section">
+                        <h2 class="section-title">Skills</h2>
+                        
+                        {% if prog_langs %}
+                        <div class="skills-group">
+                            <h4>Professional Skills</h4>
+                            <ul class="skills-list">
+                                {% for skill in prog_langs.split %}
+                                {% if skill.strip %}
+                                <li>{{ skill|cut:"," }}</li>
+                                {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        {% endif %}
+
+                        {% if frameworks %}
+                        <div class="skills-group">
+                            <h4>Digital Tools</h4>
+                            <ul class="skills-list">
+                                {% for skill in frameworks.split %}
+                                {% if skill.strip %}
+                                <li>{{ skill|cut:"," }}</li>
+                                {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        {% endif %}
+
+                        {% if databases %}
+                        <div class="skills-group">
+                            <h4>Soft Skills</h4>
+                            <ul class="skills-list">
+                                {% for skill in databases.split %}
+                                {% if skill.strip %}
+                                <li>{{ skill|cut:"," }}</li>
+                                {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        {% endif %}
+
+                        {% if dev_tools %}
+                        <div class="skills-group">
+                            <h4>Technical Literacy</h4>
+                            <ul class="skills-list">
+                                {% for skill in dev_tools.split %}
+                                {% if skill.strip %}
+                                <li>{{ skill|cut:"," }}</li>
+                                {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        {% endif %}
+
+                        {% if languages %}
+                        <div class="skills-group">
+                            <h4>Languages</h4>
+                            <ul class="skills-list">
+                                {% for lang in languages.splitlines %}
+                                {% if lang.strip %}
+                                <li>{{ lang|cut:"-"|cut:"•" }}</li>
+                                {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        {% endif %}
+                    </section>
+                </div>
             </div>
-
-            <!-- Main Content -->
-            <div class="main-content">
-                <!-- Summary -->
-                {% if about %}
-                <div class="section">
-                    <div class="section-header">
-                        <div class="section-icon">👤</div>
-                        <div class="section-title">Profile</div>
-                    </div>
-                    <p class="summary-text">{{ about }}</p>
-                </div>
-                {% endif %}
-
-                <!-- Experience -->
-                {% if company1 or post1 %}
-                <div class="section">
-                    <div class="section-header">
-                        <div class="section-icon">💼</div>
-                        <div class="section-title">Experience</div>
-                    </div>
-                    <div class="experience-item">
-                        <div class="item-header">
-                            <div class="item-title">{{ post1|default:"Position" }}</div>
-                            <div class="item-date">{{ duration1|default:"Date" }}</div>
-                        </div>
-                        <div class="item-subtitle">{{ company1|default:"Company" }}</div>
-                        {% if lin11 %}<p class="item-description">{{ lin11|linebreaksbr }}</p>{% endif %}
-                    </div>
-                    {% if company2 %}
-                    <div class="experience-item">
-                        <div class="item-header">
-                            <div class="item-title">{{ post2|default:"Position" }}</div>
-                            <div class="item-date">{{ duration2|default:"Date" }}</div>
-                        </div>
-                        <div class="item-subtitle">{{ company2 }}</div>
-                        {% if lin21 %}<p class="item-description">{{ lin21|linebreaksbr }}</p>{% endif %}
-                    </div>
-                    {% endif %}
-                </div>
-                {% endif %}
-
-                <!-- Projects -->
-                {% if project1 %}
-                <div class="section">
-                    <div class="section-header">
-                        <div class="section-icon">🚀</div>
-                        <div class="section-title">Projects</div>
-                    </div>
-                    <div class="project-item">
-                        <div class="item-header">
-                            <div class="item-title">{{ project1 }}</div>
-                            <div class="item-date">{{ durat1|default:"" }}</div>
-                        </div>
-                        {% if desc1 %}<p class="item-description">{{ desc1|linebreaksbr }}</p>{% endif %}
-                        {% if project_url1 %}
-                        <p style="font-size: 12px; color: #667eea; margin-top: 5px;">🔗 {{ project_url1 }}</p>
-                        {% endif %}
-                    </div>
-                    {% if project2 %}
-                    <div class="project-item">
-                        <div class="item-header">
-                            <div class="item-title">{{ project2 }}</div>
-                            <div class="item-date">{{ durat2|default:"" }}</div>
-                        </div>
-                        {% if desc2 %}<p class="item-description">{{ desc2|linebreaksbr }}</p>{% endif %}
-                        {% if project_url2 %}
-                        <p style="font-size: 12px; color: #667eea; margin-top: 5px;">🔗 {{ project_url2 }}</p>
-                        {% endif %}
-                    </div>
-                    {% endif %}
-                </div>
-                {% endif %}
-
-                <!-- Education -->
-                {% if degree1 or college1 %}
-                <div class="section">
-                    <div class="section-header">
-                        <div class="section-icon">🎓</div>
-                        <div class="section-title">Education</div>
-                    </div>
-                    <div class="education-item">
-                        <div class="item-header">
-                            <div class="item-title">{{ degree1|default:"Degree" }}</div>
-                            <div class="item-date">{{ year1|default:"" }}</div>
-                        </div>
-                        <div class="item-subtitle">{{ college1|default:"Institution" }}</div>
-                        {% if gpa1 %}<p class="item-description">GPA: {{ gpa1 }}</p>{% endif %}
-                    </div>
-                    {% if degree2 %}
-                    <div class="education-item">
-                        <div class="item-header">
-                            <div class="item-title">{{ degree2 }}</div>
-                            <div class="item-date">{{ year2|default:"" }}</div>
-                        </div>
-                        <div class="item-subtitle">{{ college2 }}</div>
-                        {% if gpa2 %}<p class="item-description">GPA: {{ gpa2 }}</p>{% endif %}
-                    </div>
-                    {% endif %}
-                </div>
-                {% endif %}
-
-                <!-- Interests -->
-                {% if interests %}
-                <div class="section">
-                    <div class="section-header">
-                        <div class="section-icon">⭐</div>
-                        <div class="section-title">Interests</div>
-                    </div>
-                    <p class="item-description">{{ interests }}</p>
-                </div>
-                {% endif %}
-            </div>
-        </div>
-
-        <div class="download-btn-container">
-            <button onclick="generatePDF('mn')" class="download-btn">Download PDF</button>
         </div>
     </div>
 
@@ -462,11 +822,11 @@
     <script>
         function generatePDF(containerId) {
             const element = document.getElementById(containerId);
-            const name = document.querySelector('.sidebar h1')?.textContent?.trim() || 'Resume';
+            const name = "{{ name|default:'Resume' }}";
             html2pdf().from(element).set({
                 margin: 0,
                 filename: name.replace(/\s+/g, '_') + '_Resume.pdf',
-                html2canvas: { scale: 2 },
+                html2canvas: { scale: 2, useCORS: true },
                 jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
             }).save();
         }

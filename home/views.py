@@ -6,6 +6,9 @@ from django.contrib.auth.decorators import login_required
 from django.template.loader import get_template
 from django.conf import settings
 import os
+import base64
+import io
+from docx.shared import Inches
 
 
 def landing(request):
@@ -134,10 +137,80 @@ def builder_executive(request):
 
 
 @login_required
+def builder_creative_design(request):
+    """Render the resume builder form tailored for Creative Designers."""
+    context = {
+        'profession': 'Creative Designer',
+        'suggested_skills': [
+            'Graphic Design', 'Branding', 'Typography', 'Illustration', 'Layout Design',
+            'Adobe Creative Suite', 'Canva', 'Print Design', 'Digital Art', 'Color Theory'
+        ],
+        'suggested_projects': [
+            'Brand Identity Package', 'Digital Marketing Campaign', 'Editorial Layout',
+            'Logo Design Portfolio', 'UI Visual Design'
+        ],
+        'template_type': 'creative',
+        'form_title': 'Creative Design CareerCraft'
+    }
+    return render(request, 'builder_creative.html', context)
+
+
+@login_required
+def builder_modern_design(request):
+    """Render the resume builder form tailored for Modern Professionals."""
+    context = {
+        'profession': 'Modern Professional',
+        'suggested_skills': [
+            'Project Management', 'Agile Methodologies', 'Digital Transformation',
+            'Data Analysis', 'Remote Collaboration', 'Tech Literacy', 'Adaptability',
+            'Problem Solving', 'Strategic Thinking', 'Process Optimization'
+        ],
+        'suggested_projects': [
+            'Digital Workflow Overhaul', 'Cross-functional Team Lead', 'Market Analysis Report',
+            'New Product Launch', 'Remote Operations Setup'
+        ],
+        'template_type': 'modern',
+        'form_title': 'Modern Design CareerCraft'
+    }
+    return render(request, 'builder_modern.html', context)
+
+
+@login_required
+def builder_minimalist_design(request):
+    """Render the resume builder form tailored for Minimalist/Clean layouts."""
+    context = {
+        'profession': 'Minimalist Professional',
+        'suggested_skills': [
+            'Communication', 'Critical Thinking', 'Organization', 'Efficiency',
+            'Documentation', 'Research', 'Collaboration', 'Attention to Detail',
+            'Writing', 'Presentation'
+        ],
+        'suggested_projects': [
+            'Process Documentation', 'Research Initiative', 'Internal Communications',
+            'Resource Management', 'Audit & Compliance'
+        ],
+        'template_type': 'minimalist',
+        'form_title': 'Minimalist Design CareerCraft'
+    }
+    return render(request, 'builder_minimalist.html', context)
+
+
+@login_required
 def gen_resume(request):
     """Generate and display the resume page."""
     if request.method == 'POST':
         template_type = request.POST.get('template_type', 'classic')
+
+        # Handle profile photo
+        profile_photo_url = None
+        if request.FILES.get('profile_photo'):
+            image = request.FILES.get('profile_photo')
+            try:
+                # Convert image to base64 data URI
+                encoded_image = base64.b64encode(image.read()).decode('utf-8')
+                profile_photo_url = f"data:{image.content_type};base64,{encoded_image}"
+            except Exception as e:
+                print(f"Error processing image: {e}")
 
         context = {
             # Template type
@@ -148,6 +221,7 @@ def gen_resume(request):
             'email': request.POST.get('email', ''),
             'phone': request.POST.get('phone', ''),
             'about': request.POST.get('about', ''),
+            'profile_photo': profile_photo_url,
             # Contact extras
             'location': request.POST.get('location', ''),
             'linkedin': request.POST.get('linkedin', ''),
@@ -224,7 +298,7 @@ def export_resume_pdf(request):
         }
         template_name = template_map.get(template_type, 'resume.html')
         template = get_template(template_name)
-        html = template.render(context)
+        html = template.render(context, request)
         
         # Note: For production, you'll need to install weasyprint or xhtml2pdf
         # Example with weasyprint:
@@ -257,6 +331,18 @@ def export_resume_docx(request):
             doc.add_heading(context.get('name', ''), 0)
             if context.get('title'):
                 doc.add_paragraph(context.get('title'), style='Subtitle')
+
+            # Add Profile Photo if exists
+            profile_photo_data = context.get('profile_photo')
+            if profile_photo_data and profile_photo_data.startswith('data:image'):
+                try:
+                    # Extract the base64 part
+                    header_str, encoded = profile_photo_data.split(",", 1)
+                    image_data = base64.b64decode(encoded)
+                    image_stream = io.BytesIO(image_data)
+                    doc.add_picture(image_stream, width=Inches(1.2))
+                except Exception as e:
+                    print(f"Error adding picture to docx: {e}")
             
             # Contact info
             contact_parts = []
@@ -281,7 +367,7 @@ def export_resume_docx(request):
                 doc.add_paragraph(context.get('about'))
             
             # Experience
-            for i in range(1, 4):
+            for i in range(1, 6):
                 company = context.get(f'company{i}', '')
                 if company:
                     post = context.get(f'post{i}', '')
@@ -313,7 +399,7 @@ def export_resume_docx(request):
                                 doc.add_paragraph(achievement.strip(), style='List Bullet')
             
             # Projects
-            for i in range(1, 3):
+            for i in range(1, 6):
                 project = context.get(f'project{i}', '')
                 if project:
                     desc = context.get(f'desc{i}', '')
@@ -332,7 +418,7 @@ def export_resume_docx(request):
                         doc.add_paragraph(f'URL: {url}')
             
             # Education
-            for i in range(1, 3):
+            for i in range(1, 6):
                 degree = context.get(f'degree{i}', '')
                 if degree:
                     college = context.get(f'college{i}', '')
@@ -489,7 +575,7 @@ def export_resume_txt(request):
             lines.append('')
         
         # Experience
-        for i in range(1, 4):
+        for i in range(1, 6):
             company = context.get(f'company{i}', '')
             if company:
                 post = context.get(f'post{i}', '')
@@ -514,7 +600,7 @@ def export_resume_txt(request):
                             lines.append(f'  • {achievement.strip()}')
         
         # Projects
-        for i in range(1, 3):
+        for i in range(1, 6):
             project = context.get(f'project{i}', '')
             if project:
                 lines.append('')
@@ -530,7 +616,7 @@ def export_resume_txt(request):
                     lines.append(f'URL: {context.get(f"project_url{i}")}')
         
         # Education
-        for i in range(1, 3):
+        for i in range(1, 6):
             degree = context.get(f'degree{i}', '')
             if degree:
                 lines.append('')
@@ -602,6 +688,7 @@ def get_resume_context(post_data):
         'email': post_data.get('email', ''),
         'phone': post_data.get('phone', ''),
         'about': post_data.get('about', ''),
+        'profile_photo': post_data.get('profile_photo', ''),
         'location': post_data.get('location', ''),
         'linkedin': post_data.get('linkedin', ''),
         'github': post_data.get('github', ''),

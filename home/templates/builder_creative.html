@@ -67,7 +67,7 @@
         .profession-badge {
             display: inline-block;
             padding: 8px 20px;
-            background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+            background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
             border-radius: 50px;
             color: #fff;
             font-size: 14px;
@@ -84,17 +84,17 @@
 
         .skill-tag {
             padding: 6px 14px;
-            background: rgba(255, 107, 107, 0.2);
-            border: 1px solid rgba(255, 107, 107, 0.4);
+            background: rgba(236, 72, 153, 0.2);
+            border: 1px solid rgba(236, 72, 153, 0.4);
             border-radius: 20px;
             font-size: 12px;
-            color: #ffadad;
+            color: #f9a8d4;
             cursor: pointer;
             transition: all 0.3s;
         }
 
         .skill-tag:hover {
-            background: rgba(255, 107, 107, 0.4);
+            background: rgba(236, 72, 153, 0.4);
             color: #fff;
         }
 
@@ -129,15 +129,15 @@
         }
 
         .project-suggestions li:before {
-            content: "🎨 ";
+            content: "✨ ";
             margin-right: 8px;
         }
 
-        .portfolio-section {
-            background: linear-gradient(135deg, rgba(255, 107, 107, 0.1) 0%, rgba(254, 202, 87, 0.1) 100%);
+        .creative-section {
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
             border-radius: 12px;
             padding: 20px;
-            border: 1px solid rgba(255, 107, 107, 0.2);
+            border: 1px solid rgba(236, 72, 153, 0.2);
         }
     </style>
 </head>
@@ -154,9 +154,9 @@
 
     <div class="app-container">
         <div class="app-header">
-            <span class="profession-badge">🎨 {{ profession }}</span>
+            <span class="profession-badge">✨ {{ profession }}</span>
             <h1>{{ form_title }}</h1>
-            <p class="text-white">Showcase your creative portfolio and technical artistry</p>
+            <p class="text-white">Unleash your creative potential and artistic vision</p>
         </div>
 
         <form action="{% url 'resume' %}" method="post" enctype="multipart/form-data">
@@ -171,7 +171,7 @@
                         <input class="form-control" name="name" placeholder="Full name" required>
                     </div>
                     <div class="col-md-6">
-                        <input class="form-control" name="title" placeholder="e.g. Senior 3D Generalist" required>
+                        <input class="form-control" name="title" placeholder="e.g. Senior Creative Director" required>
                     </div>
                     <div class="col-md-6">
                         <input class="form-control" name="email" placeholder="Email address" required>
@@ -190,17 +190,17 @@
                         <input class="form-control" name="linkedin" placeholder="LinkedIn URL">
                     </div>
                     <div class="col-md-6">
-                        <input class="form-control" name="portfolio" placeholder="ArtStation / Portfolio Website" required>
+                        <input class="form-control" name="portfolio" placeholder="Behance / Dribbble / Portfolio URL" required>
                     </div>
                     <div class="col-12">
-                        <textarea class="form-control" rows="3" name="about" placeholder="Versatile 3D Generalist with expertise in modeling, texturing, and animation..."></textarea>
+                        <textarea class="form-control" rows="3" name="about" placeholder="Visionary Creative Designer with 8+ years of experience in branding, digital art, and visual storytelling..."></textarea>
                     </div>
                 </div>
             </div>
 
-            <!-- SOFTWARE & SKILLS -->
+            <!-- CREATIVE SKILLS -->
             <div class="card p-4">
-                <div class="section-title">Software & Technical Skills</div>
+                <div class="section-title">Creative Skills</div>
                 <p class="text-white-50 mb-3" style="font-size: 13px;">Click to add to your skills:</p>
                 <div class="suggested-skills">
                     {% for skill in suggested_skills %}
@@ -209,33 +209,20 @@
                 </div>
                 <div class="row g-3 mt-3">
                     <div class="col-md-6">
-                        <label class="form-label">3D Software</label>
-                        <input class="form-control" name="prog_langs" id="software_skills" placeholder="e.g. Maya, Blender, ZBrush, Houdini">
+                        <label class="form-label">Design Software</label>
+                        <input class="form-control" name="prog_langs" id="creative_skills" placeholder="e.g. Photoshop, Illustrator, InDesign">
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">Rendering Engines</label>
-                        <input class="form-control" name="frameworks" placeholder="e.g. Arnold, V-Ray, Octane, Cycles">
+                        <label class="form-label">Visual Arts</label>
+                        <input class="form-control" name="frameworks" placeholder="e.g. Illustration, Typography, Color Theory">
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">Texturing & Compositing</label>
-                        <input class="form-control" name="databases" placeholder="e.g. Substance Painter, Nuke, Photoshop">
+                        <label class="form-label">Digital Tools</label>
+                        <input class="form-control" name="databases" placeholder="e.g. Figma, Canva, Procreate">
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">Game Engines</label>
-                        <input class="form-control" name="dev_tools" placeholder="e.g. Unity, Unreal Engine 5">
-                    </div>
-                </div>
-            </div>
-
-            <!-- SPECIALIZATIONS -->
-            <div class="card p-4">
-                <div class="section-title">Specializations</div>
-                <div class="row g-3">
-                    <div class="col-md-6">
-                        <input class="form-control" name="specialization1" placeholder="Primary Specialization (e.g. Character Modeling)">
-                    </div>
-                    <div class="col-md-6">
-                        <input class="form-control" name="specialization2" placeholder="Secondary Specialization (e.g. Environment Design)">
+                        <label class="form-label">Other Skills</label>
+                        <input class="form-control" name="dev_tools" placeholder="e.g. Motion Graphics, Photography">
                     </div>
                 </div>
             </div>
@@ -255,18 +242,18 @@
                         <h6 style="color: #fff;">Experience 1</h6>
                         <div class="row g-3">
                             <div class="col-md-4">
-                                <input class="form-control" name="company1" placeholder="Studio/Company Name">
+                                <input class="form-control" name="company1" placeholder="Agency/Company Name">
                             </div>
                             <div class="col-md-4">
-                                <input class="form-control" name="post1" placeholder="Role (e.g. Lead 3D Artist)">
+                                <input class="form-control" name="post1" placeholder="Role (e.g. Art Director)">
                             </div>
                             <div class="col-md-4">
                                 <input class="form-control" name="duration1" placeholder="Duration">
                             </div>
                             <div class="col-12">
-                                <textarea class="form-control" rows="3" name="lin11" placeholder="• Created high-quality 3D assets for AAA game titles
-• Collaborated with art directors to establish visual style
-• Optimized assets for real-time rendering engines"></textarea>
+                                <textarea class="form-control" rows="3" name="lin11" placeholder="• Led creative direction for global branding projects
+• Developed innovative visual concepts for digital campaigns
+• Mentored junior designers and established design standards"></textarea>
                             </div>
                             <div class="col-12">
                                 <textarea class="form-control" rows="2" name="achievements1" placeholder="Key achievements (one per line)"></textarea>
@@ -301,16 +288,16 @@
                 </div>
             </div>
 
-            <!-- PORTFOLIO HIGHLIGHTS -->
+            <!-- CREATIVE PROJECTS -->
             <div class="card p-4" id="projects-section">
                 <div class="d-flex justify-content-between align-items-center mb-4">
-                    <div class="section-title mb-0">Portfolio Highlights</div>
+                    <div class="section-title mb-0">Creative Projects</div>
                     <button type="button" class="btn btn-outline-primary btn-sm" onclick="addSection('project')">
                         <i class="fas fa-plus me-1"></i> Add Project
                     </button>
                 </div>
                 <div class="project-suggestions">
-                    <h6>💡 Portfolio Project Ideas:</h6>
+                    <h6>💡 Project Ideas:</h6>
                     <ul>
                         {% for project in suggested_projects %}
                         <li>{{ project }}</li>
@@ -320,7 +307,7 @@
 
                 <div id="projects-container">
                     <!-- Project 1 -->
-                    <div class="portfolio-section mt-3 project-item">
+                    <div class="creative-section mt-3 project-item">
                         <h6 style="color: #fff;">Project 1</h6>
                         <div class="row g-3">
                             <div class="col-md-6">
@@ -330,20 +317,20 @@
                                 <input class="form-control" name="durat1" placeholder="Year">
                             </div>
                             <div class="col-md-3">
-                                <input class="form-control" name="project_tech1" placeholder="Software Used">
+                                <input class="form-control" name="project_tech1" placeholder="Medium">
                             </div>
                             <div class="col-12">
-                                <textarea class="form-control" rows="2" name="desc1" placeholder="Description of the project, your role, and techniques used..."></textarea>
+                                <textarea class="form-control" rows="2" name="desc1" placeholder="Description of the project and your creative process..."></textarea>
                             </div>
                             <div class="col-12">
-                                <input class="form-control" name="project_url1" placeholder="ArtStation / Behance / Video Link">
+                                <input class="form-control" name="project_url1" placeholder="Project Link">
                             </div>
                         </div>
                     </div>
 
                     <!-- Extra Project slots -->
                     {% for i in "2345"|make_list %}
-                    <div class="portfolio-section mt-3 project-item d-none" id="project-{{ i }}">
+                    <div class="creative-section mt-3 project-item d-none" id="project-{{ i }}">
                         <hr class="my-4 border-secondary">
                         <h6 style="color: #fff;">Project {{ i }}</h6>
                         <div class="row g-3">
@@ -354,7 +341,7 @@
                                 <input class="form-control" name="durat{{ i }}" placeholder="Year">
                             </div>
                             <div class="col-md-3">
-                                <input class="form-control" name="project_tech{{ i }}" placeholder="Software Used">
+                                <input class="form-control" name="project_tech{{ i }}" placeholder="Medium">
                             </div>
                             <div class="col-12">
                                 <textarea class="form-control" rows="2" name="desc{{ i }}" placeholder="Description"></textarea>
@@ -371,7 +358,7 @@
             <!-- EDUCATION -->
             <div class="card p-4" id="education-section">
                 <div class="d-flex justify-content-between align-items-center mb-4">
-                    <div class="section-title mb-0">Education & Training</div>
+                    <div class="section-title mb-0">Education</div>
                     <button type="button" class="btn btn-outline-primary btn-sm" onclick="addSection('education')">
                         <i class="fas fa-plus me-1"></i> Add Education
                     </button>
@@ -391,12 +378,6 @@
                             <div class="col-md-2">
                                 <input class="form-control" name="year1" placeholder="Year">
                             </div>
-                            <div class="col-md-6">
-                                <input class="form-control" name="gpa1" placeholder="GPA (Optional)">
-                            </div>
-                            <div class="col-md-6">
-                                <input class="form-control" name="honors1" placeholder="Honors/Awards (Optional)">
-                            </div>
                         </div>
                     </div>
 
@@ -415,28 +396,9 @@
                             <div class="col-md-2">
                                 <input class="form-control" name="year{{ i }}" placeholder="Year">
                             </div>
-                            <div class="col-md-6">
-                                <input class="form-control" name="gpa{{ i }}" placeholder="GPA (Optional)">
-                            </div>
-                            <div class="col-md-6">
-                                <input class="form-control" name="honors{{ i }}" placeholder="Honors/Awards (Optional)">
-                            </div>
                         </div>
                     </div>
                     {% endfor %}
-                </div>
-            </div>
-
-            <!-- AWARDS & RECOGNITION -->
-            <div class="card p-4">
-                <div class="section-title">Awards & Recognition</div>
-                <div class="row g-3">
-                    <div class="col-md-8">
-                        <input class="form-control" name="award1" placeholder="Award Name / Competition">
-                    </div>
-                    <div class="col-md-4">
-                        <input class="form-control" name="award_year1" placeholder="Year">
-                    </div>
                 </div>
             </div>
 
@@ -463,7 +425,7 @@
         }
 
         function addSkill(element) {
-            const input = document.getElementById('software_skills');
+            const input = document.getElementById('creative_skills');
             const currentValue = input.value;
             const skill = element.textContent;
             if (currentValue) {
@@ -471,7 +433,7 @@
             } else {
                 input.value = skill;
             }
-            element.style.background = 'rgba(255, 107, 107, 0.6)';
+            element.style.background = 'rgba(236, 72, 153, 0.6)';
         }
     </script>
 </body>

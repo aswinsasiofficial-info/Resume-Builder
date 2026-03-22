@@ -397,8 +397,9 @@
             <p class="text-white">Create a clean, professional resume in minutes</p>
         </div>
 
-        <form action="{% url 'resume' %}" method="post">
+        <form action="{% url 'resume' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
+            <input type="hidden" name="template_type" value="{{ template_type|default:'classic' }}">
 
             <!-- TEMPLATE SELECTION -->
             <div class="card template-card-custom">
@@ -539,21 +540,26 @@
 
                 <div class="row g-3">
                     <div class="col-md-6">
-                        <input class="form-control" name="name" placeholder="Full name">
+                        <input class="form-control" name="name" placeholder="Full name" required>
                     </div>
                     <div class="col-md-6">
-                        <input class="form-control" name="title" placeholder="Professional title">
+                        <input class="form-control" name="title" placeholder="Professional Title" required>
                     </div>
 
                     <div class="col-md-6">
-                        <input class="form-control" name="email" placeholder="Email address">
+                        <input class="form-control" name="email" placeholder="Email address" required>
                     </div>
                     <div class="col-md-6">
                         <input class="form-control" name="phone" placeholder="Phone number">
                     </div>
 
                     <div class="col-12">
-                        <input class="form-control" name="location" placeholder="Address">
+                        <label class="form-label text-white-50 small mb-1">Profile Photo</label>
+                        <input type="file" class="form-control" name="profile_photo" accept="image/*">
+                    </div>
+
+                    <div class="col-12">
+                        <input class="form-control" name="location" placeholder="Location">
                     </div>
 
                     <div class="col-md-4">
