@@ -50,7 +50,7 @@ def builder_fullstack(request):
             'E-commerce Platform', 'Social Media Dashboard', 'Task Management App',
             'Real-time Chat Application', 'API Gateway Service'
         ],
-        'template_type': 'modern',
+        'template_type': 'fullstack',
         'form_title': 'Full Stack Developer CareerCraft'
     }
     return render(request, 'builder_fullstack.html', context)
@@ -273,6 +273,9 @@ def gen_resume(request):
             'minimalist': 'resume_minimalist.html',
             'creative': 'resume_creative.html',
             'executive': 'resume_executive.html',
+            'fullstack': 'resume_fullstack.html',
+            'ux': 'resume_ux.html',
+            'data': 'resume_data.html',
         }
 
         template_name = template_map.get(template_type, 'resume.html')
@@ -295,6 +298,9 @@ def export_resume_pdf(request):
             'minimalist': 'resume_minimalist.html',
             'creative': 'resume_creative.html',
             'executive': 'resume_executive.html',
+            'fullstack': 'resume_fullstack.html',
+            'ux': 'resume_ux.html',
+            'data': 'resume_data.html',
         }
         template_name = template_map.get(template_type, 'resume.html')
         template = get_template(template_name)

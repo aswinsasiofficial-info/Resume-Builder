@@ -161,7 +161,7 @@
 
         <form action="{% url 'resume' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            <input type="hidden" name="template_type" value="{{ template_type }}">
+            <input type="hidden" name="template_type" value="data">
 
             <!-- PROFILE -->
             <div class="card p-4">
@@ -200,8 +200,8 @@
 
             <!-- TECHNICAL SKILLS -->
             <div class="card p-4">
-                <div class="section-title">Technical Skills & Tools</div>
-                <p class="text-white-50 mb-3" style="font-size: 13px;">Click to add to your skills:</p>
+                <div class="section-title">Data & Technical Skills</div>
+                <p class="text-white-50 mb-3" style="font-size: 13px;">Click to add suggested skills:</p>
                 <div class="suggested-skills">
                     {% for skill in suggested_skills %}
                     <span class="skill-tag" onclick="addSkill(this)">{{ skill }}</span>
@@ -209,20 +209,20 @@
                 </div>
                 <div class="row g-3 mt-3">
                     <div class="col-md-6">
-                        <label class="form-label">Programming Languages</label>
-                        <input class="form-control" name="prog_langs" id="prog_langs" placeholder="e.g. Python, R, SQL, Scala">
+                        <label class="form-label">Data Analysis</label>
+                        <input class="form-control" name="prog_langs" id="prog_langs" placeholder="e.g. Python, R, SQL, Excel">
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">ML/DL Frameworks</label>
-                        <input class="form-control" name="frameworks" placeholder="e.g. TensorFlow, PyTorch, Scikit-learn">
+                        <label class="form-label">Libraries & Tools</label>
+                        <input class="form-control" name="frameworks" placeholder="e.g. Pandas, NumPy, Scikit-learn">
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">Data Tools & Visualization</label>
-                        <input class="form-control" name="databases" placeholder="e.g. Pandas, Tableau, Power BI, Spark">
+                        <label class="form-label">Databases</label>
+                        <input class="form-control" name="databases" placeholder="e.g. MySQL, PostgreSQL, MongoDB">
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">Cloud & Big Data</label>
-                        <input class="form-control" name="dev_tools" placeholder="e.g. AWS, Azure, Hadoop, Kafka">
+                        <label class="form-label">Visualization</label>
+                        <input class="form-control" name="dev_tools" placeholder="e.g. Tableau, Power BI, Matplotlib">
                     </div>
                 </div>
             </div>

@@ -161,7 +161,7 @@
 
         <form action="{% url 'resume' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            <input type="hidden" name="template_type" value="{{ template_type }}">
+            <input type="hidden" name="template_type" value="ux">
 
             <!-- PROFILE -->
             <div class="card p-4">
@@ -203,8 +203,8 @@
 
             <!-- DESIGN SKILLS -->
             <div class="card p-4">
-                <div class="section-title">Design Skills</div>
-                <p class="text-white-50 mb-3" style="font-size: 13px;">Click to add to your skills:</p>
+                <div class="section-title">Design & Technical Skills</div>
+                <p class="text-white-50 mb-3" style="font-size: 13px;">Click to add suggested skills:</p>
                 <div class="suggested-skills">
                     {% for skill in suggested_skills %}
                     <span class="skill-tag" onclick="addSkill(this)">{{ skill }}</span>
@@ -213,19 +213,19 @@
                 <div class="row g-3 mt-3">
                     <div class="col-md-6">
                         <label class="form-label">Design Tools</label>
-                        <input class="form-control" name="prog_langs" id="design_tools" placeholder="e.g. Figma, Sketch, Adobe XD">
+                        <input class="form-control" name="prog_langs" id="design_tools" placeholder="e.g. Figma, Adobe XD, Sketch">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">UX Methodologies</label>
+                        <input class="form-control" name="frameworks" placeholder="e.g. User Research, Wireframing, Personas">
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Prototyping</label>
-                        <input class="form-control" name="frameworks" placeholder="e.g. InVision, Principle, Framer">
+                        <input class="form-control" name="databases" placeholder="e.g. Interactive Prototypes, InVision">
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">Research Methods</label>
-                        <input class="form-control" name="databases" placeholder="e.g. User Interviews, Usability Testing, A/B Testing">
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label">Technical Skills</label>
-                        <input class="form-control" name="dev_tools" placeholder="e.g. HTML/CSS, Design Systems, Accessibility">
+                        <label class="form-label">Collaboration</label>
+                        <input class="form-control" name="dev_tools" placeholder="e.g. Zeplin, Miro, Jira">
                     </div>
                 </div>
             </div>
