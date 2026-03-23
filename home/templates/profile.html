@@ -23,7 +23,7 @@
 
         .profile-page {
             min-height: 100vh;
-            background-image: url("{% static 'img/bg.jpg' %}");
+            background-image: url("{% static 'img/bg-4.jpg' %}");
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -241,8 +241,7 @@
         <nav class="navbar">
             <a href="{% url 'home' %}" class="logo">CareerCraft</a>
             <div class="nav-right">
-                <a href="{% url 'home' %}">Templates</a>
-                <a href="{% url 'builder' %}">Builder</a>
+                <a href="{% url 'home' %}">Dashboard</a>
                 <a href="{% url 'profile' %}">
                     <div class="profile-icon">{{ request.user.first_name|first|upper }}{{ request.user.last_name|first|upper }}</div>
                 </a>

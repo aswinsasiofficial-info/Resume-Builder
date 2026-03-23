@@ -32,12 +32,6 @@ def templates_gallery(request):
 
 
 @login_required
-def builder(request):
-    """Render the resume builder form."""
-    return render(request, 'index.html')
-
-
-@login_required
 def builder_fullstack(request):
     """Render the resume builder form tailored for Full Stack Developers."""
     context = {
@@ -280,7 +274,7 @@ def gen_resume(request):
 
         template_name = template_map.get(template_type, 'resume.html')
         return render(request, template_name, context)
-    return render(request, 'index.html')
+    return redirect('templates_gallery')
 
 
 @login_required
@@ -317,7 +311,7 @@ def export_resume_pdf(request):
         # For now, return HTML that can be printed as PDF
         response = HttpResponse(html, content_type='text/html')
         return response
-    return redirect('builder')
+    return redirect('templates_gallery')
 
 
 @login_required
@@ -535,9 +529,9 @@ def export_resume_docx(request):
             
         except ImportError:
             messages.error(request, 'DOCX export requires python-docx package. Install with: pip install python-docx')
-            return redirect('builder')
+            return redirect('templates_gallery')
     
-    return redirect('builder')
+    return redirect('templates_gallery')
 
 
 @login_required
@@ -683,7 +677,7 @@ def export_resume_txt(request):
         response['Content-Disposition'] = f'attachment; filename="{name}_resume.txt"'
         return response
     
-    return redirect('builder')
+    return redirect('templates_gallery')
 
 
 def get_resume_context(post_data):

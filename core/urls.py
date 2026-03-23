@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path, include
 from home.views import (
-    landing, home, builder, gen_resume, profile, login_view, signup_view, logout_view,
+    landing, home, gen_resume, profile, login_view, signup_view, logout_view,
     builder_fullstack, builder_3d_generalist, builder_data_scientist, builder_ux_designer,
     builder_executive, builder_creative_design, builder_modern_design, builder_minimalist_design,
     templates_gallery, export_resume_pdf, export_resume_docx, export_resume_txt
@@ -12,7 +12,6 @@ urlpatterns = [
     path('', landing, name='landing'),
     path('home/', home, name='home'),
     path('templates/', templates_gallery, name='templates_gallery'),
-    path('builder/', builder, name='builder'),
     path('builder/fullstack/', builder_fullstack, name='builder_fullstack'),
     path('builder/3d-generalist/', builder_3d_generalist, name='builder_3d'),
     path('builder/data-scientist/', builder_data_scientist, name='builder_data'),
